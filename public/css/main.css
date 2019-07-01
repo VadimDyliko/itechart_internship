@@ -4,7 +4,7 @@
 }
 body{
   background: url('../img/background.png');
-  background-repeat: repeat-y;
+  background-repeat: repeat-x;
   /* margin-top: -60px; */
 }
 .wrapper{
@@ -298,6 +298,9 @@ body{
   padding-left: 30px;
   padding-right: 30px;
 }
+.search-form{
+  height: 40px;
+}
 .search-form__text-input{
   padding-left: 10px;
   border: none;
@@ -308,6 +311,7 @@ body{
   float: left;
 }
 .search-form__search-button{
+  overflow: hidden;
   width: 40px;
   height: 40px;
   background: white;
@@ -491,4 +495,12 @@ footer{
   width: 870px;
   height: 60px;
   background-color: #ff6647;
+  text-align: center;
+}
+.copyright{
+  padding-top: 20px;
+  color: #ffffff;
+  font-family: Oswald;
+  font-size: 15px;
+  text-transform: uppercase;
 }
