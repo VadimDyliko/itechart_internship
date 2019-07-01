@@ -8,7 +8,8 @@ body{
   /* margin-top: -60px; */
 }
 .wrapper{
-  max-width: 1920px;
+  position: relative;
+  width: 1920px;
   margin: 0 auto;
 }
 .head__site-name{
@@ -17,7 +18,7 @@ body{
   width: 220px;
   height: 118px;
   margin-top: 70px;
-  margin-left: 545px;
+  margin-left: 200px;
 }
 .head__site-name-text{
     /* Style for "sitename" */
@@ -34,7 +35,7 @@ body{
 .content-wrapper{
   max-width: 1170px;
   display: grid;
-  grid-template-columns: 170px 700px 270px;
+  grid-template-columns: 170px 700px 330px;
 }
 .left-side-bar{
   height: 1815px;
@@ -160,6 +161,7 @@ body{
   font-size: 54px;
   font-weight: 400;
   text-transform: uppercase;
+  line-height: 60px;
 }
 .slider__image{
   margin-top: 29px;
@@ -242,5 +244,98 @@ body{
   font-size: 13px;
   font-weight: 300;
   line-height: 20px;
+}
 
+
+
+
+
+.reviews{
+
+}
+.review__user-avatar{
+  float: left;
+}
+.review__user-name{
+  margin-top: 10px;
+  margin-bottom: 12px;
+  color: #ff6647;
+  font-family: Oswald;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.review__text{
+  color: #8f8f8f;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 20px;
+}
+
+
+
+
+
+
+
+.right-side-bar{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.search-form__text-input{
+  border: none;
+  color: white;
+  width: 230px;
+  height: 40px;
+  background-color: #ff6647;
+  float: left;
+}
+.search-form__search-button{
+  width: 40px;
+  height: 40px;
+  background: white;
+  color: #ff6647;
+  border: none;
+}
+.contact-me{
+  padding-left: 20px;
+  width: 250px;
+  height: 178px;
+  background-color: #ff6647;
+}
+.contact-me__title{
+  color: #ffffff;
+  font-family: Oswald;
+  font-size: 32px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.contact-me__email{
+  /* Style for "myname@sit" */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 240px;
+  height: 17px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  border-bottom: 1px white solid;
+  border-top: 1px white solid;
+}
+.contact-me__phone-image{
+  float: left;
+}
+.contact-me__phone{
+  margin-left: 38px;
+  width: 113px;
+  height: 30px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
 }
