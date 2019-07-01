@@ -9,7 +9,7 @@ body{
 }
 .wrapper{
   position: relative;
-  width: 1920px;
+  width: 1170px;
   margin: 0 auto;
 }
 .head__site-name{
@@ -285,9 +285,10 @@ body{
   padding-right: 30px;
 }
 .search-form__text-input{
+  padding-left: 10px;
   border: none;
   color: white;
-  width: 230px;
+  width: 220px;
   height: 40px;
   background-color: #ff6647;
   float: left;
@@ -338,4 +339,136 @@ body{
   font-family: Roboto;
   font-size: 14px;
   font-weight: 300;
+}
+
+
+
+
+
+
+
+.services{
+  background-color: #ff6647;
+}
+.services-title{
+  /* Style for "title bg" */
+  width: 270px;
+  height: 78px;
+  background-color: #ffffff;
+}
+.services-title__title{
+  padding-top: 20px;
+  margin-left: 20px;
+  color: #ff6647;
+  font-family: Oswald;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.services-title__sub-title{
+  margin-left: 20px;
+  color: #ff6647;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+.services-list{
+  width: 230px;
+  list-style: none;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.services-list__item{
+  border-bottom: 1px solid white;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 40px;
+}
+.services-list__item:last-child{
+  border-bottom: none;
+}
+
+
+
+
+
+
+
+.send-message-title{
+  /* Style for "title bg" */
+  width: 270px;
+  height: 78px;
+  background-color: #ffffff;
+}
+.send-message-title__title{
+  padding-top: 20px;
+  margin-left: 20px;
+  color: #ff6647;
+  font-family: Oswald;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.send-message-title__sub-title{
+  margin-left: 20px;
+  color: #ff6647;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+.send-message-form{
+  padding-bottom: 15px;
+  padding-top: 15px;
+  background-color: #ff6647;
+  padding-left: 20px;
+}
+.send-message-form__name-input{
+  /* Style for "input" */
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 220px;
+  height: 35px;
+  border: 1px solid #ff7154;
+  background-color: #ef4b2a;
+}
+.send-message-form__mail-input{
+  /* Style for "input" */
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 220px;
+  height: 35px;
+  border: 1px solid #ff7154;
+  background-color: #ef4b2a;
+}
+.send-message-form__message-input{
+  /* Style for "input" */
+  color: white;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 220px;
+  height: 105px;
+  border: 1px solid #ff7154;
+  background-color: #ef4b2a;
+}
+.send-message-form__submit-button{
+  /* Style for "input" */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 80px;
+  height: 35px;
+  border: 1px solid #ff7154;
+  background-color: #ef4b2a;
+  color: white;
+}
+input[type="text"]::-webkit-input-placeholder {
+ color: white;
+}
+input[type="text"]::-moz-placeholder {
+ color: white;
 }
