@@ -140,14 +140,21 @@ body{
 .content{
   height: 1815px;
   background: rgb(255, 255, 255);
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.article{
+  padding-top: 40px;
 }
 .article__text--orange{
   color: #ff6647;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 300;
+  margin-bottom: 15px;
 }
 .article__title{
+  height: 113px;
   color: #79828c;
   font-family: Oswald;
   font-size: 54px;
@@ -155,6 +162,8 @@ body{
   text-transform: uppercase;
 }
 .slider__image{
+  margin-top: 29px;
+  margin-bottom: 40px;
   background: url('../img/Banner.png');
   width: 640px;
   height: 384px;
@@ -174,9 +183,64 @@ body{
   line-height: 20px;
 }
 .article__more-button{
+  margin-top: 30px;
   width: 100px;
   height: 36px;
   background-color: #ff6647;
   border: none;
   color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.users{
+  display: grid;
+  grid-template-columns: 370px 270px;
+}
+.users__cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+.users__about{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.users__about-title{
+  color: #79828c;
+  font-family: Oswald;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.users__about-text--orange{
+  color: #ff6647;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+}
+.users__about-text{
+    /* Style for "Praesent e" */
+  /* width: 239px;
+  height: 317px; */
+  color: #8f8f8f;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 20px;
+
 }
