@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>None</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/main.css">
   </head>
@@ -44,9 +45,24 @@
           <div class="article">
             <p class="article__text--orange">Lorem ipsum dolo</p>
             <h2 class="article__title">praesent dapib <br/> cursus fau cibus Nor</h2>
-            <div class="article-slider">
-              <div class="slider__image"></div>
-            </div>
+              <div class="article-slider">
+                <input id="img_1" class="slide_img" checked="checked" name="slide_img" type="radio" />
+                <input id="img_2" class="slide_img" name="slide_img" type="radio" />
+                <input id="img_3" class="slide_img" name="slide_img" type="radio" />
+                <div id="arrow_next">
+                  <label for="img_1"><div class="article-slider__btn slider__right"></div></i></label>
+                  <label for="img_2"><div class="article-slider__btn slider__right"></div></label>
+                  <label for="img_3"><div class="article-slider__btn slider__right"></div></label>
+                </div>
+                <div id="arrow_prev">
+                  <label for="img_1"><div class="article-slider__btn slider__left"></div></label>
+                  <label for="img_2"><div class="article-slider__btn slider__left"></div></label>
+                  <label for="img_3"><div class="article-slider__btn slider__left"></div></label>
+                </div>
+                <div id="first" class="slides"><img src="public/img/Banner.png" alt="" /></div>
+                <div id="second" class="slides"><img src="public/img/user2.png" alt="" /></div>
+                <div id="third" class="slides"><img src="public/img/user3.png" alt="" /></div>
+              </div>
             <h4 class="article__sub-title">Integer vitae libero ac risus egestas place</h4>
             <p class="article__text--orange">Morbi interdum mollis sapien</p>
             <p class="article__text-content">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.</p>
@@ -90,7 +106,7 @@
               <p class="users__about-text">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.</p>
               <p class="users__about-text">Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse com</p>
               <p class="users__about-text">Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus</p>
-              <button class="users__archives-button" type="button" name="readMore">Archives</button>
+              <button class="users__archives-button" type="button" name="readMore">ARCHIVES</button>
             </div>
           </div>
           <div class="line"></div>
@@ -150,7 +166,7 @@
             <form class="send-message-form" action="index.html" method="post">
               <input class="send-message-form__name-input" type="text" name="name" placeholder="your name">
               <input class="send-message-form__mail-input" type="text" name="mail" placeholder="your mail">
-              <input class="send-message-form__message-input" type="text" name="message" placeholder="your message">
+              <textarea class="send-message-form__message-input" type="text" name="message" placeholder="your message"></textarea>
               <button class="send-message-form__submit-button" type="submit" name="submit">SUBMIT</button>
             </form>
           </div>
@@ -163,5 +179,45 @@
       <img class="footer-shadow" src="public/img/footerFold.png" alt="footer-shadow">
     </div>
     <script type="text/javascript" src="public/js/menuTogle.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="slider-container">
+  <input id="img_1" class="slide_img" checked="checked" name="slide_img" type="radio" />
+  <input id="img_2" class="slide_img" name="slide_img" type="radio" />
+  <input id="img_3" class="slide_img" name="slide_img" type="radio" />
+  <div id="arrow_next">
+    <label for="img_1"><i class="fa fa-angle-right" aria-hidden="true"></i></label>
+    <label for="img_2"><i class="fa fa-angle-right" aria-hidden="true"></i></label>
+    <label for="img_3"><i class="fa fa-angle-right" aria-hidden="true"></i></label>
+  </div>
+  <div id="arrow_prev">
+    <label for="img_1"><i class="fa fa-angle-left" aria-hidden="true"></i></label>
+    <label for="img_2"><i class="fa fa-angle-left" aria-hidden="true"></i></label>
+    <label for="img_3"><i class="fa fa-angle-left" aria-hidden="true"></i></label>
+  </div>
+  <div id="first" class="slides"><img src="public/img/Banner.png" alt="" /></div>
+  <div id="second" class="slides"><img src="public/img/user2.png" alt="" /></div>
+  <div id="third" class="slides"><img src="public/img/user3.png" alt="" /></div>
+</div> -->
+
+
+
+
+
   </body>
 </html>
