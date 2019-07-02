@@ -4,17 +4,16 @@
 }
 body{
   background: url('../img/background.png');
-  background-repeat: repeat-x;
-  /* margin-top: -60px; */
+  background-repeat: repeat;
 }
 .wrapper{
+  overflow: hidden;
   position: relative;
-  width: 1170px;
+  max-width: 1170px;
   margin: 0 auto;
 }
 .head__site-name{
   background: url('../img/sitename.png');
-  /* border: 1px red solid; */
   width: 220px;
   height: 118px;
   margin-top: 70px;
@@ -43,16 +42,11 @@ body{
   height: 174px;
   background: #ff6647;
 }
-.profile__avatar-image{
-  /* margin: 13px 15px; */
-}
 .profile__discription{
-    /* height: 152px; */
   width: 170px;
   background: rgb(255, 255, 255);
 }
 .profile__name{
-  /* Style for "John doe" */
   padding-left: 89px;
   padding-top: 32px;
   padding-bottom: 8px;
@@ -63,11 +57,9 @@ body{
   font-size: 23px;
   font-weight: 400;
   text-transform: uppercase;
-  /* Text style for "John doe" */
   letter-spacing: -0.44px;
 }
 .profile__signature{
-  /* Style for "sitam orei" */
   padding-left: 22px;
   padding-top: 6px;
   width: 148px;
@@ -76,15 +68,12 @@ body{
   font-family: Roboto;
   font-size: 14px;
   font-weight: 300;
-  /* Text style for "sitam orei" */
-  /* letter-spacing: 0.28px; */
 }
 .profile__social{
   padding-top: 8px;
   padding-left: 92px;
 }
 .profile__social-facebook{
-  /* margin-left: 90px; */
   display: inline-block;
   width: 23px;
   height: 23px;
@@ -107,15 +96,14 @@ body{
 }
 .navigation{
   padding-top: 22px;
-  /* float: right; */
 }
 .navigation__list{
   list-style: none;
 }
 .navigation__item{
+  cursor: pointer;
   text-align: right;
   border-bottom: 1px #79828c solid;
-  /* Style for "Home about" */
   width: 100%;
   color: #79828c;
   font-family: Oswald;
@@ -123,7 +111,10 @@ body{
   font-weight: 400;
   line-height: 36px;
 }
-
+.navigation__item:hover{
+  color: #ff6647;
+  border-color: #ff6647;
+}
 
 
 .line{
@@ -131,8 +122,6 @@ body{
   height: 1px;
   background: #79828c;
   margin: 0 auto;
-  /* margin-top: 39px;
-  margin-bottom: 39px; */
 }
 
 
@@ -162,6 +151,7 @@ body{
   font-weight: 400;
   text-transform: uppercase;
   line-height: 62px;
+  letter-spacing: -0.5px;
 }
 .slider__image{
   margin-top: 34px;
@@ -186,6 +176,7 @@ body{
   line-height: 20px;
 }
 .article__more-button{
+  cursor: pointer;
   margin-top: 30px;
   width: 100px;
   height: 36px;
@@ -221,6 +212,44 @@ body{
   grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
 }
+.user-card__avatar{
+  width: 170px;
+  height: 162px;
+  overflow: hidden;
+}
+.user1{
+  background: url('../img/user1.png');
+}
+.user2{
+  background: url('../img/user2.png');
+}
+.user3{
+  background: url('../img/user3.png');
+}
+.user4{
+  background: url('../img/user4.png');
+}
+.user-card__signature{
+  width: 170px;
+  height: 39px;
+  background-color: #f3f3f3;
+}
+.user-card__text{
+  color: #8f8f8f;
+  font-family: Roboto;
+  font-size: 11px;
+  float: left;
+  padding-left: 10px;
+  padding-top: 12px;
+}
+.user-card__photo-button{
+  cursor: pointer;
+  float: right;
+  width: 40px;
+  height: 39px;
+  background-color: #bcbcbc;
+  background: url('../img/cameraBtn.png');
+}
 .users__about{
   padding-left: 30px;
   padding-right: 30px;
@@ -241,9 +270,6 @@ body{
   font-weight: 300;
 }
 .users__about-text{
-    /* Style for "Praesent e" */
-  /* width: 239px;
-  height: 317px; */
   color: #8f8f8f;
   font-family: Roboto;
   font-size: 14px;
@@ -251,13 +277,14 @@ body{
   line-height: 20px;
 }
 .users__archives-button{
-    margin-top: 40px;
-    width: 100px;
-    height: 36px;
-    background-color: #ff6647;
-    border: none;
-    color: rgb(255, 255, 255);
-  }
+  cursor: pointer;
+  margin-top: 40px;
+  width: 100px;
+  height: 36px;
+  background-color: #ff6647;
+  border: none;
+  color: rgb(255, 255, 255);
+}
 
 
 
@@ -311,6 +338,7 @@ body{
   float: left;
 }
 .search-form__search-button{
+  cursor: pointer;
   overflow: hidden;
   width: 40px;
   height: 40px;
@@ -333,7 +361,6 @@ body{
   text-transform: uppercase;
 }
 .contact-me__email{
-  /* Style for "myname@sit" */
   margin-top: 10px;
   margin-bottom: 15px;
   padding-top: 7px;
@@ -348,6 +375,7 @@ body{
   border-top: 1px white solid;
 }
 .contact-me__phone-image{
+  cursor: pointer;
   float: left;
 }
 .contact-me__phone{
@@ -370,7 +398,6 @@ body{
   background-color: #ff6647;
 }
 .services-title{
-  /* Style for "title bg" */
   width: 270px;
   height: 78px;
   background-color: #ffffff;
@@ -399,6 +426,7 @@ body{
   padding-bottom: 18px;
 }
 .services-list__item{
+  cursor: pointer;
   border-bottom: 1px solid white;
   color: #ffffff;
   font-family: Roboto;
@@ -417,7 +445,6 @@ body{
 
 
 .send-message-title{
-  /* Style for "title bg" */
   width: 270px;
   height: 78px;
   background-color: #ffffff;
@@ -445,7 +472,6 @@ body{
   padding-left: 20px;
 }
 .send-message-form__name-input{
-  /* Style for "input" */
   padding-left: 10px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -455,7 +481,6 @@ body{
   background-color: #ef4b2a;
 }
 .send-message-form__mail-input{
-  /* Style for "input" */
   padding-left: 10px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -465,7 +490,6 @@ body{
   background-color: #ef4b2a;
 }
 .send-message-form__message-input{
-  /* Style for "input" */
   color: white;
   padding-left: 10px;
   margin-top: 4px;
@@ -476,7 +500,7 @@ body{
   background-color: #ef4b2a;
 }
 .send-message-form__submit-button{
-  /* Style for "input" */
+  cursor: pointer;
   margin-top: 5px;
   margin-bottom: 5px;
   width: 80px;
@@ -503,4 +527,124 @@ footer{
   font-family: Oswald;
   font-size: 15px;
   text-transform: uppercase;
+}
+
+
+.mobile-menu-btn{
+  display: none;
+  color: #ff6647;
+  text-align: center;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+
+
+
+@media screen and (max-width: 1190px){
+  .head__site-name{
+    background: #ff6647;
+    width: 100%;
+    height: auto;
+    margin: 0 0 15px 0;
+  }
+  .head__site-name-text{
+    margin-left: 100px;
+    padding-top: 0;
+  }
+  .mobile-menu-btn{
+    display: block;
+    width: 63px;
+    height: 63px;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .left-side-bar{
+    position: absolute;
+    left: -400px;
+    transition: 0.5s;
+  }
+  .left-side-bar--show{
+    width: 50%;
+    left: 0px;
+    border-right: 4px #ff6647 solid;
+    padding-right: 40px;
+  }
+  .content-wrapper{
+    grid-template-columns: 700px 330px;
+  }
+  footer{
+    width: 100%;
+    border-top: 5px white solid;
+  }
+  .footer-shadow{
+    display: none;
+  }
+}
+@media screen and (max-width: 1025px){
+  .content-wrapper{
+    grid-template-columns: 1fr;
+  }
+  .head__site-name{
+    margin: 0;
+  }
+  .right-side-bar{
+    padding: 0px;
+  }
+  .box-shadow{
+    display: none;
+  }
+  .search-form{
+    border: 2px white solid;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+  }
+  .contact-me{
+    text-align: center;
+    padding-left: 0;
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+  }
+  .contact-me__email{
+    width: 100%;
+  }
+  .contact-me__phone{
+    margin-left: 0;
+  }
+  .contact-me__phone-image{
+    float: none;
+    display: inline;
+  }
+  .services{
+    text-align: center;
+  }
+  .services-title{
+    width: 100%;
+    text-align: center;
+  }
+  .services-list{
+    width: 100%;
+    margin-left: 0px;
+  }
+  .send-message-title{
+    width: 100%;
+    text-align: center;
+  }
+  .send-message-form{
+    padding-left: 0px;
+    text-align: center;
+  }
+  .send-message-form__name-input{
+    width: 90%;
+  }
+  .send-message-form__mail-input{
+    width: 90%;
+  }
+  .send-message-form__message-input{
+    width: 90%;
+  }
 }
