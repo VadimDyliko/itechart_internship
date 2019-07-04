@@ -1,6 +1,7 @@
 *{
   padding: 0;
   margin: 0;
+  outline: none;
 }
 body{
   background: url('../img/background.png');
@@ -65,7 +66,6 @@ body{
   padding-left: 89px;
   padding-top: 32px;
   padding-bottom: 8px;
-  width: 83px;
   height: 20px;
   color: #ff6647;
   font-family: Oswald;
@@ -130,17 +130,12 @@ body{
   color: #ff6647;
   border-color: #ff6647;
 }
-
-
 .line{
   width: 640px;
   height: 1px;
   background: #79828c;
   margin: 0 auto;
 }
-
-
-
 .content{
   height: 1815px;
   background: rgb(255, 255, 255);
@@ -239,7 +234,6 @@ body{
   border-radius: 50%;
   cursor: pointer;
 }
-
 #img_1:checked ~ #arrow_next label:nth-child(2),
 #img_2:checked ~ #arrow_next label:nth-child(3),
 #img_3:checked ~ #arrow_next label:nth-child(1)
@@ -267,16 +261,11 @@ body{
 }
 .slider__left{
   background: url('../img/sliderLeft.png');
-  /* top: 352px;
-  left: 585px; */
 }
 .slider__right{
   background: url('../img/sliderRight.png');
-  /* top: 352px;
-  left: 608px; */
 }
 .slider__image{
-  /* margin-bottom: 35px; */
   background: url('../img/Banner.png');
   width: 640px;
   height: 384px;
@@ -308,23 +297,6 @@ body{
   font-family: Oswald;
   font-size: 15px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .users{
   padding-top: 39px;
   padding-bottom: 35px;
@@ -411,10 +383,6 @@ body{
   font-family: Oswald;
   font-size: 15px;
 }
-
-
-
-
 .review{
   margin-top: 35px;
   margin-bottom: 30px;
@@ -440,13 +408,6 @@ body{
   font-style: italic;
   line-height: 20px;
 }
-
-
-
-
-
-
-
 .right-side-bar{
   padding-left: 30px;
   padding-right: 30px;
@@ -514,13 +475,6 @@ body{
   font-size: 15px;
   font-weight: 300;
 }
-
-
-
-
-
-
-
 .services{
   margin-top: -4px;
   background-color: #ff6647;
@@ -565,13 +519,6 @@ body{
 .services-list__item:last-child{
   border-bottom: none;
 }
-
-
-
-
-
-
-
 .send-message-title{
   width: 270px;
   height: 78px;
@@ -600,7 +547,7 @@ body{
   padding-left: 20px;
 }
 .send-message-form__name-input{
-  color: #ffa694;
+  color: white;
   font-family: Roboto;
   font-size: 12px;
   font-weight: 300;
@@ -613,7 +560,7 @@ body{
   background-color: #ef4b2a;
 }
 .send-message-form__mail-input{
-  color: #ffa694;
+  color: white;
   font-family: Roboto;
   font-size: 12px;
   font-weight: 300;
@@ -626,7 +573,7 @@ body{
   background-color: #ef4b2a;
 }
 .send-message-form__message-input{
-  color: #ffa694;
+  color: white;
   font-family: Roboto;
   font-size: 12px;
   font-weight: 300;
@@ -675,8 +622,6 @@ footer{
   font-size: 15px;
   text-transform: uppercase;
 }
-
-
 .mobile-menu-btn{
   display: none;
   color: #ff6647;
@@ -684,11 +629,11 @@ footer{
   font-size: 50px;
   cursor: pointer;
 }
-
-
-
-
 @media screen and (max-width: 1190px){
+  .content-wrapper{
+    width: 1030px;
+    margin: 0 auto;
+  }
   .head__site-name{
     background: #ff6647;
     width: 100%;
@@ -718,13 +663,27 @@ footer{
     width: 50%;
     left: 0px;
     border-right: 4px #ff6647 solid;
-    padding-right: 40px;
     z-index: 5;
   }
-  /* .wrapper{
-    width: 1030px;
+  .navigation{
+    padding-right: 40px;
+  }
+  .profile__discription{
     margin: 0 auto;
-  } */
+    text-align: center;
+  }
+  .profile__name{
+    padding-left: 0;
+  }
+  .profile__signature{
+    padding-left: 0;
+  }
+  .profile__social{
+    padding-left: 0;
+  }
+  .profile__avatar-wrapper{
+    width: 100%;
+  }
   .content-wrapper{
     grid-template-columns: 700px 330px;
   }
@@ -739,6 +698,7 @@ footer{
 @media screen and (max-width: 1025px){
   .content-wrapper{
     grid-template-columns: 1fr;
+    width: 100%;
   }
   .head__site-name{
     margin: 0;
@@ -804,30 +764,49 @@ footer{
     width: 90%;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media only screen
   and (min-device-width: 320px)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
+    .head__site-name-text{
+      height: 85px;
+    }
     .content-wrapper{
       grid-template-columns: 1fr;
+      width: 100%;
     }
     .head__site-name{
       margin: 0;
+    }
+    .users{
+      grid-template-columns: 1fr;
+    }
+    .user-card{
+      justify-self: center;
+    }
+    .content{
+      height: auto;
+    }
+    .article__text-content{
+      font-size: 30px;
+      line-height: normal;
+    }
+    .article__sub-title{
+      font-size: 50px;
+    }
+    .article__text--orange{
+      font-size: 30px;
+    }
+
+    .users__about-title{
+      font-size: 50px;
+    }
+    .users__about-text--orange{
+      font-size: 30px;
+    }
+    .users__about-text{
+      font-size: 30px;
+      line-height: normal;
     }
     .right-side-bar{
       padding: 0px;
@@ -836,23 +815,48 @@ footer{
       display: none;
     }
     .search-form{
-      border: 2px white solid;
+      width: 50%;
+      border: none;
+      border-left: 2px white solid;
       position: absolute;
-      top: 10px;
+      height: 85px;
+      top: 0px;
       right: 5px;
+    }
+    .search-form__text-input{
+      width: 80%;
+      height: 85px;
+      font-size: 40px;
+    }
+    .search-form__search-button{
+      width: 85px;
+      height: 85px;
     }
     .contact-me{
       text-align: center;
       padding-left: 0;
       width: 100%;
-      height: 200px;
+      height: auto;
       margin: 0 auto;
+    }
+    .contact-me__title{
+      font-size: 55px;
     }
     .contact-me__email{
       width: 100%;
+      font-size: 30px;
+      height: auto;
     }
     .contact-me__phone{
       margin-left: 0;
+      font-size: 30px;
+      height: auto;
+    }
+    .services-title{
+      height: auto;
+    }
+    .send-message-title{
+      height: auto;
     }
     .contact-me__phone-image{
       float: none;
@@ -878,12 +882,72 @@ footer{
       text-align: center;
     }
     .send-message-form__name-input{
-      width: 90%;
+      width: 95%;
+      height: 80px;
+      font-size: 40px;
     }
     .send-message-form__mail-input{
-      width: 90%;
+      width: 95%;
+      height: 80px;
+      font-size: 40px;
     }
     .send-message-form__message-input{
-      width: 90%;
+      width: 95%;
+      height: 280px;
+      font-size: 40px;
+    }
+    .article__more-button{
+      width: 100%;
+      height: 80px;
+      font-size: 50px;
+    }
+    .users__archives-button{
+      width: 100%;
+      height: 80px;
+      font-size: 50px;
+    }
+    .send-message-form__submit-button{
+      width: 100%;
+      height: 80px;
+      font-size: 50px;
+    }
+    .mobile-menu-btn{
+      height: 85px;
+      width: 85px;
+    }
+    .navigation__item{
+      font-size: 40px;
+      line-height: normal;
+    }
+    .profile__name{
+      font-size: 50px;
+      width: auto;
+      height: auto;
+    }
+    .profile__signature{
+      width: auto;
+      height: auto;
+      font-size: 20px;
+    }
+    .profile__social-linkedin{
+      height: 50px;
+      width: 50px;
+      background-size: cover;
+    }
+    .profile__social-facebook{
+      height: 50px;
+      width: 50px;
+      background-size: cover;
+    }
+    .profile__social-twitter{
+      height: 50px;
+      width: 50px;
+      background-size: cover;
+    }
+    .copyright{
+      font-size: 30px;
+    }
+    footer{
+      height: auto;
     }
   }
