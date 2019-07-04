@@ -772,6 +772,9 @@ footer{
     float: none;
     display: inline;
   }
+  .users{
+    justify-content: center;
+  }
   .services{
     text-align: center;
   }
