@@ -1,16 +1,18 @@
 import React from 'react';
 import './CityRandomizer.css';
+import GetDataBtn from './GetDataBtn/GetDataBtn'
+import LastGeneratedPair from './LastGeneratedPair/LastGeneratedPair'
+import AllGeneratedPairs from './AllGeneratedPairs/AllGeneratedPairs'
 
 class CityRandomizer extends React.Component {
   state={
     adjectives: [],
     cities: [],
-    currentAdjective: '',
-    currentCity: '',
     lastGeneratedPair: 'none',
     generatedPairs: [],
-    maxValueGeneratedPairs: 10,
+    maxValueGeneratedPairs: 0,
     valueOfGeneratedPairs: 0,
+    isBtnEnable: true
   }
 
 
@@ -20,7 +22,6 @@ class CityRandomizer extends React.Component {
 
 
   getData=()=>{
-    console.log('fetch to API');
     fetch('https://gp-js-test.herokuapp.com/api')
       .then((response)=>response.json())
       .then((data)=>{
@@ -29,28 +30,39 @@ class CityRandomizer extends React.Component {
           cities: data.cities
         })
       })
+      .then(()=>this.setMaxValueOfPairs())
+  }
+
+
+  setMaxValueOfPairs=()=>{
+    this.setState({maxValueGeneratedPairs: ((this.state.cities.length+this.state.adjectives.length)/2).toFixed(0)})
+  }
+
+
+  isCountOfPairsValid=()=>{
+    if (this.state.valueOfGeneratedPairs+1<this.state.maxValueGeneratedPairs) return true;
+    return false;
   }
 
 
   generatePair=()=>{
-    let adjective = this.getRandomValue(this.state.adjectives)
-    let city = this.getRandomValue(this.state.cities)
-    this.appendNewPair(adjective, city)
+      let adjective = this.getRandomValue(this.state.adjectives);
+      let city = this.getRandomValue(this.state.cities);
+      this.appendNewPair(adjective, city);
   }
 
 
   getRandomValue=(arr)=>{
     if (Array.isArray(arr)){
       let randomItem = arr[Math.floor(Math.random() * arr.length)];
-      console.log(randomItem);
-        
-
-
-
-
-      return (randomItem)
+      let arrString = this.state.generatedPairs.join(' ');
+      let regExpRandomItem = new RegExp(randomItem, 'i');
+      if (arrString.search(regExpRandomItem)>(-1)){
+        return (this.getRandomValue(arr));
+      } else {
+        return randomItem[0].toUpperCase() + randomItem.slice(1);
+      }
     }else{
-      console.log(typeof arr);
       throw new Error('Bad argument for getRandomValue function');
     }
   }
@@ -60,68 +72,17 @@ class CityRandomizer extends React.Component {
     let newPair = `${adjective} ${city}`;
     let pairs = [...this.state.generatedPairs];
     pairs.push(newPair);
-    this.setState({generatedPairs: pairs, valueOfGeneratedPairs: this.state.valueOfGeneratedPairs+1, lastGeneratedPair: newPair});
+    this.setState({generatedPairs: pairs, valueOfGeneratedPairs: this.state.valueOfGeneratedPairs+1, lastGeneratedPair: newPair, isBtnEnable: (this.isCountOfPairsValid())?true:false});
   }
-  // generaePair=()=>{
-  //   console.log('fetch to API');
-  //   fetch('https://gp-js-test.herokuapp.com/api')
-  //     .then((response)=>response.json())
-  //     .then((data)=>{
-  //       this.setState({
-  //         adjectives: data.adjectives,
-  //         cities: data.cities
-  //       })
-  //     })
-  //     .then(()=>this.getRandomValue(this.state.adjectives))
-  //     .then((randomAdjective)=>this.setState({currentAdjective: randomAdjective}))
-  //     .then(()=>this.getRandomValue(this.state.cities))
-  //     .then((randomCity)=>this.setState({currentCity: randomCity}))
-  //     .then(()=>this.appendNewPair())
-  //     .catch((err)=>console.log(err))
-  // }
 
-  // getRandomValue=(arr)=>{
-  //     if (Array.isArray(arr)){
-  //       let randomItem = arr[Math.floor(Math.random() * arr.length)];
-  //       let someArr = this.state.generatedPairs.join(' ').split(' ');
-  //       if(!someArr.some((item, i)=>{
-  //         if (item===randomItem) return true;
-  //         return false;
-  //       })) {
-  //         return randomItem;
-  //       } else {
-  //         console.log(randomItem);
-  //         this.generaePair();
-  //         throw new Error('There is not valid item, doing get request to the API');
-  //       }
-  //     } else {
-  //       throw new Error('Bad argument for getRandomValue function');
-  //     };
-  // }
-
-  // appendNewPair=()=>{
-  //   if (this.state.valueOfGeneratedPairs < this.state.maxValueGeneratedPairs){
-  //     let newPair = `${this.state.currentAdjective} ${this.state.currentCity}`;
-  //     let pairs = [...this.state.generatedPairs];
-  //     pairs.push(newPair);
-  //     this.setState({generatedPairs: pairs, valueOfGeneratedPairs: this.state.valueOfGeneratedPairs+1});
-  //   } else {
-  //     return
-  //   }
-  // }
 
   render(){
     return(
       <div className="city-randomizer">
-        <button className="city-randomizer__get-data-button" onClick={this.generatePair}>Generate pair</button>
-        <input className="city-randomizer__last-gerated-pair" type="text" value={this.state.lastGeneratedPair} readOnly></input>
-        <textarea className="city-randomizer__all-generated-pairs" defaultValue={
-            this.state.generatedPairs.map((item,i)=>{
-              return `\n${i+1}) ${item}`
-            })
-
-          }></textarea>
-        <p>{this.state.valueOfGeneratedPairs}/{this.state.maxValueGeneratedPairs}</p>
+        <GetDataBtn isBtnEnable={this.state.isBtnEnable} action={this.generatePair}/>
+        <LastGeneratedPair lastPair={this.state.lastGeneratedPair}/>
+        <p>{this.state.valueOfGeneratedPairs}/{this.state.maxValueGeneratedPairs} pairs</p>
+        <AllGeneratedPairs generatedPairs={this.state.generatedPairs}/>
       </div>
     )
   }

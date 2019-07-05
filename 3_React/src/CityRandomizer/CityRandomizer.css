@@ -1,33 +1,5 @@
 .city-randomizer{
+  padding-top: 50px;
   width: 250px;
   margin: 0 auto;
-}
-.city-randomizer__get-data-button{
-  height: 20px;
-  width: 100px;
-  margin: 5px;
-  border: none;
-  border-radius: 10px;
-  background:rgb(169, 200, 97);
-  color: white;
-  transition: 0.5s;
-  cursor: pointer;
-}
-.city-randomizer__get-data-button:hover{
-  background:rgb(113, 140, 48);
-}
-.city-randomizer__last-gerated-pair{
-  margin: 5px;
-  width: 200px;
-  height: 20px;
-  border: none;
-  border-radius: 10px;
-}
-.city-randomizer__all-generated-pairs{
-  resize: none;
-  margin: 5px;
-  width: 200px;
-  height: 800px;
-  border: none;
-  border-radius: 10px;
 }
