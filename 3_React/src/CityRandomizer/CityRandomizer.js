@@ -4,7 +4,7 @@ import GetDataBtn from './GetDataBtn/GetDataBtn'
 import LastGeneratedPair from './LastGeneratedPair/LastGeneratedPair'
 import AllGeneratedPairs from './AllGeneratedPairs/AllGeneratedPairs'
 
-class CityRandomizer extends React.Component {
+class CityRandomizer extends React.PureComponent {
   state={
     adjectives: [],
     cities: [],
@@ -23,14 +23,10 @@ class CityRandomizer extends React.Component {
 
   getData=()=>{
     fetch('https://gp-js-test.herokuapp.com/api')
-      .then((response)=>response.json())
-      .then((data)=>{
-        this.setState({
-          adjectives: data.adjectives,
-          cities: data.cities
-        })
-      })
-      .then(()=>this.setMaxValueOfPairs())
+    .then((response)=>response.json())
+    .then((data)=>{
+      this.setState({adjectives: data.adjectives,cities: data.cities},()=>{this.setMaxValueOfPairs()})
+    })
   }
 
 
@@ -40,15 +36,14 @@ class CityRandomizer extends React.Component {
 
 
   isCountOfPairsValid=()=>{
-    if (this.state.valueOfGeneratedPairs+1<this.state.maxValueGeneratedPairs) return true;
-    return false;
+    return this.state.valueOfGeneratedPairs+1<this.state.maxValueGeneratedPairs
   }
 
 
   generatePair=()=>{
-      let adjective = this.getRandomValue(this.state.adjectives);
-      let city = this.getRandomValue(this.state.cities);
-      this.appendNewPair(adjective, city);
+    let adjective = this.getRandomValue(this.state.adjectives);
+    let city = this.getRandomValue(this.state.cities);
+    this.appendNewPair(adjective, city);
   }
 
 
