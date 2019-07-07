@@ -1,6 +1,3 @@
-//var testArr = [1,3,7,4,6,7,8,1,2,5,7,8,90,1];
-//var testArr = [11, 9, 3, 2, 8]
-
 var arrayProcessingTool = {
   subSumOn2: function(arr){
     d
@@ -62,17 +59,17 @@ var arrayProcessingTool = {
   selectionTask: function(arr) {
     var sequenceArr = [arr[0]], temporaryArr = [arr[0]];
     for (let i = 1; i < arr.length; i++) {
-        if (arr[i] >= arr[i-1]) {
-            temporaryArr.push(arr[i]);
-        } else {
-            if (temporaryArr.length > sequenceArr.length) {
-                sequenceArr = temporaryArr;
-            }
-            temporaryArr = [arr[i]];
+      if (arr[i] >= arr[i-1]) {
+        temporaryArr.push(arr[i]);
+      } else {
+        if (temporaryArr.length > sequenceArr.length) {
+          sequenceArr = temporaryArr;
         }
+        temporaryArr = [arr[i]];
+      }
     }
     if (temporaryArr.length > sequenceArr.length) {
-        sequenceArr = temporaryArr;
+      sequenceArr = temporaryArr;
     }
     return sequenceArr;
   }
