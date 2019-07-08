@@ -1,13 +1,46 @@
 *{
   padding: 0;
   margin: 0;
+  outline: none;
 }
 body{
   background-color: rgb(53, 56, 68);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 section{
+  text-align: center;
   padding: 20px;
+  border: 1px solid rgb(176, 232, 96);
+  border-radius: 25px;
+  margin: 5px;
 }
 textarea{
+  border-radius: 10px;
   width: 90%;
+  background: rgb(142, 142, 142);
+  padding-left: 5px;
+}
+select{
+  border-radius: 10px;
+  border: none;
+}
+input{
+  border-radius: 10px;
+  border: none;
+  padding-left: 5px;
+  background: rgb(142, 142, 142);
+}
+.btn{
+  border: none;
+  border-radius: 10px;
+  background: rgb(128, 186, 82);
+  color: white;
+  padding: 5px 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+.btn:hover{
+  background: rgb(131, 214, 64);
 }

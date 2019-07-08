@@ -14,7 +14,6 @@ function arrayProcessingToolHandler(e,strArr) {
 }
 
 function dataFormaterHandler(e, dateInput, regExpDateInInput, regExpDateOut) {
-  console.log(e.target.innerHTML);
   if (e.target.name === 'setDate'){
     dataFormater.setDate(dateInput, regExpDateInInput, regExpDateOut)
   } else if (e.target.name === 'getDate'){
@@ -24,8 +23,7 @@ function dataFormaterHandler(e, dateInput, regExpDateInInput, regExpDateOut) {
   }
 }
 
-function textFormatterHandler(str, maxCols, maxRows, typeOfWarp) {
-  console.log(arguments);
+function textFormatterHandler(str, maxCols, maxRows, typeOfWarp){
   formatedTextOutput.value = textFormat(str, maxCols, maxRows, typeOfWarp)
 }
 
@@ -51,6 +49,6 @@ function arraySorterhandler(e, strArr) {
 }
 
 
-function binaryConverterHandler(value) {
-
+function binaryConverterHandler(value, fromCountSys, toCountSys) {
+  document.getElementById('convertedOutput').value = binaryConverter.convert(value, fromCountSys, toCountSys)
 }

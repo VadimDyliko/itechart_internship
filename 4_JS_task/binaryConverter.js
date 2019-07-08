@@ -1,8 +1,13 @@
 const binaryConverter={
-  convert: function(value, countSys) {
-    return parseFloat(value).toString(countSys)
+  convert: function(value, fromCountSys, toCountSys) {
+    try{
+      if (Array.isArray(value)){
+        value = value.join('')
+      }
+      return  parseInt(value, fromCountSys).toString(toCountSys)
+    } catch(err) {
+      return 'error'
+      console.log(err);
+    }
   }
 }
-
-console.log(binaryConverter.convert(51,2))
-console.log(binaryConverter.convert(110011,10))

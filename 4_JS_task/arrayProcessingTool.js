@@ -20,10 +20,10 @@ var arrayProcessingTool = {
 
   subSumOn: function(arr) {
     var max=0, sum = 0;
-    for (var i = 0; i < arr.length; i++) {
+    for (var i=0; i<arr.length; i++) {
       sum += arr[i];
       max = Math.max(max, sum);
-      if (sum < 0) sum = 0;
+      if (sum<0) sum = 0;
     }
     return max;
   },
@@ -60,7 +60,7 @@ var arrayProcessingTool = {
   selectionTask: function(arr) {
     var sequenceArr = [arr[0]], temporaryArr = [arr[0]];
     for (let i = 1; i < arr.length; i++) {
-      if (arr[i] >= arr[i-1]) {
+      if (arr[i]>=arr[i-1]) {
         temporaryArr.push(arr[i]);
       } else {
         if (temporaryArr.length > sequenceArr.length) {

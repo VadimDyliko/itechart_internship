@@ -1,5 +1,3 @@
-// let testStr = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-
 function textFormat(str, maxCols, maxRows, typeOfWarp) {
   var formatedStr, formatedArr, regExp, strSymbols
   strSymbols = ''
@@ -7,7 +5,7 @@ function textFormat(str, maxCols, maxRows, typeOfWarp) {
   if (maxCols!=0) strSymbols = maxCols-1
   switch (typeOfWarp) {
     case 'word':
-    regExp = new RegExp('[^]{0,'+strSymbols+'}[\\s,\\n]', 'gi')
+    regExp = new RegExp('[^]{0,'+strSymbols+'}[\\s,\\n|.]', 'gi')
     break
     case 'symbol':
     regExp = new RegExp('[^]{0,'+strSymbols+'}', 'gi')
@@ -22,7 +20,6 @@ function textFormat(str, maxCols, maxRows, typeOfWarp) {
   return formatedArr.join('\n');
 }
 
-// console.log(textFormat(testStr,80 , 2, 'suggestions'))
 
 
 
