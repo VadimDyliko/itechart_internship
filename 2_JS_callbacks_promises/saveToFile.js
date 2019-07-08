@@ -11,13 +11,13 @@ function syncAppendToFile(data) {
 
 function callbackAsyncAppendFile(data, callback) {
   fs.appendFile(__dirname+'/asyncData.txt', `${data}\n`, 'utf8', (err) => {
-  if (!err) {
-    if (callback) callback();
-    console.log('data appended async');
-  } else {
-    throw err;
-  }
-});
+    if (!err) {
+      if (callback) callback();
+      console.log('data appended async');
+    } else {
+      throw err;
+    }
+  });
 }
 
 function promiseAsyncAppendFile(data) {

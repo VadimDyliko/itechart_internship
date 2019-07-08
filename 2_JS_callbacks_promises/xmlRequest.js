@@ -18,17 +18,17 @@ function promiseAsyncRequestPosts(url) {
 }
 
 function callbackAsyncRequestPosts(url, callback) {
-    let req = new XMLHttpRequest();
-    req.open('GET', url, true);
-    req.onload = function() {
-      if (this.status === 200){
-        let posts = this.responseText;
-        callback(posts);
-      } else {
-        let err = new Error(this.statusText);
-      }
+  let req = new XMLHttpRequest();
+  req.open('GET', url, true);
+  req.onload = function() {
+    if (this.status === 200){
+      let posts = this.responseText;
+      callback(posts);
+    } else {
+      let err = new Error(this.statusText);
     }
-    req.send();
+  }
+  req.send();
 }
 
 function syncRequstPosts(url) {
