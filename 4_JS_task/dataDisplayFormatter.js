@@ -14,19 +14,23 @@ var dataFormater = {
       }
     }
     if (regExpDateOut) this.regExpDateOut = regExpDateOut
+    console.log(this.date);
   },
   getDate: function() {
+    console.log('this.regExpDateOut '+this.regExpDateOut);
     var dateOut = this.regExpDateOut
     dateOut = dateOut.replace(/(Y{4})/g, this.date.getFullYear())
     dateOut = dateOut.replace(/(MONTH)/g, this.date.toLocaleString('en', { month: 'long' }))
-    dateOut = dateOut.replace(/(M{2})/g, (this.date.getMonth()+1<10)?'0'+this.date.getMonth()+1:this.date.getMonth()+1)
-    dateOut = dateOut.replace(/(D{2})/g, (this.date.getDate()+1<10)?'0'+this.date.getDate():this.date.getDate())
+    dateOut = dateOut.replace(/(M{2})/g, (+this.date.getMonth()+1<10)?'0'+(+this.date.getMonth()+1):this.date.getMonth()+1)
+    dateOut = dateOut.replace(/(D{2})/g, (this.date.getDate()<10)?'0'+this.date.getDate():this.date.getDate())
+    console.log(dateOut);
     return dateOut
   },
   date: Date.now(),
   regExpDateOut: "DD-MONTH-YYYY",
   regExpDateIn: "DDMMYYYY",
   fromNow: function() {
+    console.log(Math.floor((Date.now()-this.date)/(1000*60*60*24*365))+' years ago');
     return (
       Math.floor((Date.now()-this.date)/(1000*60*60*24*365))+' years ago'
     )
@@ -36,10 +40,10 @@ var dataFormater = {
 
 // dataFormater.setDate("31102011")
 // console.log(dataFormater.getDate())
-//dataFormater.setDate("20130431","YYYYMMDD")
-//console.log(dataFormater.getDate())
+// dataFormater.setDate("20130431","YYYYMMDD")
+// console.log(dataFormater.getDate())
 // dataFormater.setDate("20130431","YYYYMMDD")
 // console.log(dataFormater.getDate())
 // dataFormater.setDate("20130431","YYYYMMDD","MM-DD-YYYY")
 // console.log(dataFormater.getDate())
-//console.log(dataFormater.fromNow())
+// console.log(dataFormater.fromNow())

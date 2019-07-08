@@ -1,0 +1,13 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  background-color: rgb(53, 56, 68);
+}
+section{
+  padding: 20px;
+}
+textarea{
+  width: 90%;
+}

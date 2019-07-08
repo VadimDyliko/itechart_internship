@@ -1,110 +1,42 @@
-function Calculator() {
-  var methods = {
-    "-": function(a, b) {
-      return a - b;
-    },
-    "+": function(a, b) {
-      return a + b;
+var stringCalculator={
+  calc: function(mathStr) {
+    var mathArr = mathStr.match(/(\d){1,}|(\+)|(\/)|(\*)|(\-)/g);
+    mathArr = mathArr.map(function(item) {
+      if (item.match(/(\d)+/)) return +item
+      return item
+    })
+    console.log(mathArr);
+    var ops = [{'^': (a, b) => Math.pow(a, b)},
+               {'*': (a, b) => a * b, '/': (a, b) => a / b},
+               {'+': (a, b) => a + b, '-': (a, b) => a - b}],
+        newCalc = [],
+        currentOp;
+    for (var i = 0; i < ops.length; i++) {
+        for (var j = 0; j < mathArr.length; j++) {
+            if (ops[i][mathArr[j]]) {
+                currentOp = ops[i][mathArr[j]];
+            } else if (currentOp) {
+                newCalc[newCalc.length - 1] =
+                    currentOp(newCalc[newCalc.length - 1], mathArr[j]);
+                currentOp = null;
+            } else {
+                newCalc.push(mathArr[j]);
+            }
+        }
+        mathArr = newCalc;
+        newCalc = [];
     }
-  };
-
-  this.calculate = function(str) {
-
-    var split = str.split(' '),
-      a = +split[0],
-      op = split[1],
-      b = +split[2]
-
-    if (!methods[op] || isNaN(a) || isNaN(b)) {
-      return NaN;
+    if (mathArr.length > 1) {
+        console.log('Error: unable to resolve calculation');
+        return mathArr;
+    } else {
+        return mathArr[0];
     }
-
-    return methods[op](a, b);
   }
-
-  this.addMethod = function(name, func) {
-    methods[name] = func;
-  };
 }
 
-
-var calc = new Calculator;
-
-calc.addMethod("*", function(a, b) {
-  return a * b;
-});
-calc.addMethod("/", function(a, b) {
-  return a / b;
-});
-calc.addMethod("**", function(a, b) {
-  return Math.pow(a, b);
-});
-
-
-console.log(calc.calculate("2 + 3"))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let stringCalculator = {
-//   sum: function(a,b) {
-//     return(
-//       parseFloat(a)+parseFloat(b)
-//     )
-//   },
-//
-//   deg: function(a,b) {
-//     return(
-//       parseFloat(a)-parseFloat(b)
-//     )
-//   },
-//
-//   sqrt: function(a) {
-//     return(
-//       Math.sqrt(parseFloat(a))
-//     )
-//   },
-//
-//   pow: function(m,n) {
-//     return(
-//       Math.pow(parseFloat(m),parseFloat(n))
-//     )
-//   },
-//
-//   sin: function(a) {
-//     return(
-//       Math.sin(parseFloat(a))
-//     )
-//   },
-//
-//   cos: function(a) {
-//     return(
-//       Math.cos(parseFloat(a))
-//     )
-//   },
-// }
-//
-// console.log(stringCalculator.pow('2',stringCalculator.pow('2','2')));
+// console.log(stringCalculator.calc('224+35/5'))
+// console.log(stringCalculator.calc('2+2'))
+// console.log(stringCalculator.calc('4+4+2'))
+// console.log(stringCalculator.calc('9/3/1'))
+// console.log(stringCalculator.calc('224+35/5'))

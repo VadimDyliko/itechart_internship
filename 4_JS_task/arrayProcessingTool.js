@@ -1,6 +1,6 @@
 var arrayProcessingTool = {
   subSumOn2: function(arr){
-    d
+    console.log(arr);
     var sum = 0, max = 0
     for(var i=0;i<arr.length;i++){
       for(var j=i;j<arr.length;j++){
@@ -13,6 +13,7 @@ var arrayProcessingTool = {
       }
       sum = 0;
     }
+    console.log(max);
     return max
   },
 

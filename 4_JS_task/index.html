@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+<body>
+  <section class="first-task">
+    <input class="first-task__input" id="arrInput" type="text" name="" value="-1, 2, 3, -9" >
+    <div class="first-task__btns" onClick="arrayProcessingToolHandler(event, arrInput)">
+      <button type="button" name="subSumOn2">subSumOn2</button>
+      <button type="button" name="subSumOn">subSumOn</button>
+      <button type="button" name="searchMediane">searchMediane</button>
+      <button type="button" name="selectionTask">selectionTask</button>
+    </div>
+    <textarea class="first-task__output" id="first-task__output" type="text" value="" name="name" rows="4" cols="25"></textarea>
+  </section>
+  <section class="second-task">
+    <input class="second-task__input" id="dateInput" type="text" name="" value="20130531" >
+    <input class="second-task__input" id="regExpDateInInput" type="text" name="" value="YYYYMMDD" >
+    <input class="second-task__input" id="regExpDateOut" type="text" name="" value="MM-DD-YYYY" >
+    <div class="second-task__btns" onclick="dataFormaterHandler(event, dateInput.value, regExpDateInInput.value, regExpDateOut.value)">
+      <button type="button" name="setDate">setDate</button>
+      <button type="button" name="getDate">getDate</button>
+      <button type="button" name="fromNow">fromNow</button>
+    </div>
+    <textarea class="second-task__output" id="second-task__output" type="text" value="" name="name" rows="4" cols="25"></textarea>
+  </section>
+  <section class="third-task">
+    <textarea class="third-task__input" id="textInput" type="text" rows="10" cols="70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+    <input class="third-task__input" id="maxColsInput" type="text" value="0" placeholder="maxColsInput">
+    <input class="third-task__input" id="maxRowsInout" type="text" value="5" placeholder="maxRowsInout">
+    <input class="third-task__input" id="typeOfWrapInput" type="text" value="word" >
+    <button type="button" name="formate" onclick="textFormatterHandler(textInput.value, maxColsInput.value, maxRowsInout.value, typeOfWrapInput.value)">Formate</button>
+    <textarea class="third-task__input" id="formatedTextOutput" type="text"rows="10" cols="70"></textarea>
+  </section>
+  <section class="fourth-task">
+    <input class="fourth-task__input" id="mathInput" type="text" value="(2+2)*28">
+    <button type="button" name="formate" onclick="stringCalculatorHandler(mathInput.value)">Calc</button>
+    <input class="fourth-task__output" id="mathOutput" type="text" placeholder="Press Calc btn">
+  </section>
+  <section class="fifth-task">
+    <input class="fifth-task__input" id="fifthArrInput" type="text" value="2,5,8,1,3,8,10,25,9">
+    <div class="fifth-task__btns" onclick="arraySorterhandler(event, fifthArrInput.value)">
+      <button type="button" name="mergeSort">mergeSort</button>
+      <button type="button" name="quickSort">quickSort</button>
+      <button type="button" name="selectionSort">selectionSort</button>
+      <button type="button" name="simpleCountingSort">simpleCountingSort</button>
+    </div>
+    <input class="fifth-task__output" id="fifthArrOutput" type="text">
+  </section>
+  <section class="sixth-task">
+    <input class="sixth-task__input" id="valueInput" type="text" value="51">
+    <input class="sixth-task__input" id="fromCalcSys" type="text" value="10">
+    <input class="sixth-task__input" id="toCalcSys" type="text" value="2">
+    <button type="button" name="formate" onclick="">Calc</button>
+    <input class="sixth-task__output" id="mathOutput" type="text" placeholder="Press Calc btn">
+  </section>
+  <script type="text/javascript" src="./arrayProcessingTool.js"></script>
+  <script type="text/javascript" src="./dataDisplayFormatter.js"></script>
+  <script type="text/javascript" src="./textFormatter.js"></script>
+  <script type="text/javascript" src="./stringCalculator.js"></script>
+  <script type="text/javascript" src="./arraySorter.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
