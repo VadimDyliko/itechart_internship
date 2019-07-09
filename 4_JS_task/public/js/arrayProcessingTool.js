@@ -1,6 +1,5 @@
 var arrayProcessingTool = {
   subSumOn2: function(arr){
-    console.log(arr);
     var sum = 0, max = 0
     for(var i=0;i<arr.length;i++){
       for(var j=i;j<arr.length;j++){
@@ -13,7 +12,6 @@ var arrayProcessingTool = {
       }
       sum = 0;
     }
-    console.log(max);
     return max
   },
 
@@ -39,13 +37,11 @@ var arrayProcessingTool = {
       if(a<b) return -1;
       if(a>b) return 1;
     })
-    console.log(minMaxArr);
-    console.log(maxMinArr);
     if (arr.length%2===0) {
       maxMediane = (minMaxArr[Math.floor(arr.length/2)]+minMaxArr[Math.floor(arr.length/2)-1])/2
       minMediane = (maxMinArr[Math.floor(arr.length/2)]+maxMinArr[Math.floor(arr.length/2)-1])/2
       return (
-        'max mediane:'+maxMediane+'\n min mediane:'+minMediane
+        ' max mediane:'+maxMediane+'\n min mediane:'+minMediane
       )
     } else {
       maxMediane = minMaxArr[Math.floor(arr.length/2)]

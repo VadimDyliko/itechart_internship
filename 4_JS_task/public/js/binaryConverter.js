@@ -1,4 +1,4 @@
-const binaryConverter={
+var binaryConverter={
   convert: function(value, fromCountSys, toCountSys) {
     try{
       if (Array.isArray(value)){

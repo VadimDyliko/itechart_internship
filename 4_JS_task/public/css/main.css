@@ -10,6 +10,7 @@ body{
   align-items: center;
 }
 section{
+  width: 95%;
   text-align: center;
   padding: 20px;
   border: 1px solid rgb(176, 232, 96);
@@ -18,19 +19,21 @@ section{
 }
 textarea{
   border-radius: 10px;
-  width: 90%;
+  width:95%;
   background: rgb(142, 142, 142);
   padding-left: 5px;
 }
 select{
   border-radius: 10px;
   border: none;
+  background: rgb(142, 142, 142);
 }
 input{
   border-radius: 10px;
   border: none;
   padding-left: 5px;
   background: rgb(142, 142, 142);
+  height: 20px;
 }
 .btn{
   border: none;
@@ -43,4 +46,46 @@ input{
 }
 .btn:hover{
   background: rgb(131, 214, 64);
+}
+.clrBtn{
+  background: rgb(207, 105, 105);
+  width: 200px;
+}
+.clrBtn:hover{
+  background: rgb(214, 64, 64);
+}
+.third-task__input-params{
+  text-align:center;
+  width: 100px;
+}
+h5{
+  margin-bottom: 15px;
+  color: rgb(175, 175, 175);
+}
+p{
+  color: rgb(175, 175, 175);
+}
+.seventh-task__input{
+  width: 50px;
+}
+.first-task__output{
+  width: 170px;
+}
+.sixth-task__input{
+  width: 50px;
+}
+.cacheResultsOutput{
+  width: 150px;
+}
+.cacheReault{
+  width: 150px;
+}
+.seventh-task__ops{
+  display: inline;
+  color: rgb(175, 175, 175);
+  padding: 0 5px;
+}
+.seventh-task__resultsOutput{
+  width: 250px;
+  margin: 10px 0;
 }
