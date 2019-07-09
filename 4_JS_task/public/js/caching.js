@@ -70,7 +70,7 @@ function Cache(maxOfChacheResults) {
     }
   }
 
-var cache = new Cache(4);
+var cache = new Cache(5);
 
 function sum(a,b) {
   return a+b

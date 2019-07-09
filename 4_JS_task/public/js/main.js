@@ -16,19 +16,19 @@ function arrayProcessingToolHandler(e,strArr) {
 
 function dataFormaterHandler(e, dateInput, regExpDateInInput, regExpDateOut) {
   if (e.target.name === 'setDate'){
-    dataFormater.setDate(dateInput, regExpDateInInput, regExpDateOut)
+    dateFormater.setDate(dateInput, regExpDateInInput, regExpDateOut)
     document.getElementById('second-task__output').value = 'date seted'
   } else if (e.target.name === 'getDate'){
-    document.getElementById('second-task__output').value = dataFormater.getDate()
+    document.getElementById('second-task__output').value = dateFormater.getDate()
   } else if (e.target.name === 'fromNow'){
-    document.getElementById('second-task__output').value = dataFormater.fromNow()
+    document.getElementById('second-task__output').value = dateFormater.fromNow()
   } else {
     return
   }
 }
 
 function textFormatterHandler(str, maxCols, maxRows, typeOfWarp){
-  formatedTextOutput.value = textFormat(str, maxCols, maxRows, typeOfWarp)
+  document.getElementById('formatedTextOutput').value = textFormat(str, maxCols, maxRows, typeOfWarp)
 }
 
 function maxColsInputHandler() {

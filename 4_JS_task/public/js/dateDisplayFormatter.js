@@ -1,4 +1,4 @@
-var dataFormater = {
+var dateFormater = {
   monthes:{
     january:1,
     february:2,
@@ -15,23 +15,22 @@ var dataFormater = {
   },
   setDate: function(dateIn, regExpDateIn, regExpDateOut) {
     if (regExpDateIn) this.regExpDateIn = regExpDateIn
+    else this.regExpDateIn = "DDMMYYYY"
     if (Number.isInteger(dateIn)){
       this.date = new Date(dateIn)
     } else {
       if (/Y{4}/.test(this.regExpDateIn) && /M{2}|MONTH/.test(this.regExpDateIn) && /D{2}/.test(this.regExpDateIn)){
         console.log(this.regExpDateIn.match(/Y{4}/));
-        var year = dateIn.substring(this.regExpDateIn.search(/Y{4}/),this.regExpDateIn.search(/Y{4}/)+4);
+        var year = (/MONTH/.test(this.regExpDateIn))?dateIn.match(/[\d]{4}/)[0]:dateIn.substring(this.regExpDateIn.search(/Y{4}/),this.regExpDateIn.search(/Y{4}/)+4);
         var month = (/MONTH/.test(this.regExpDateIn))?dateIn.match(/[^\d]{3,9}/)[0]:dateIn.substring(this.regExpDateIn.search(/M{2}/),this.regExpDateIn.search(/MM/)+2);
         if (isNaN(month)){
           month = this.monthes[month.toLowerCase()]
         }
-        // var month = dateIn.substring(this.regExpDateIn.search(/M{2}/),this.regExpDateIn.search(/MM/)+2);
         var day = dateIn.substring(this.regExpDateIn.search(/D{2}/),this.regExpDateIn.search(/DD/)+2);
-        console.log(year);
         this.date = new Date(+year, +month-1, +day);
       } else {
         this.date = new Date()
-        console.log('date seted to now');
+        console.log('date seted to "now"');
       }
     }
     if (regExpDateOut) this.regExpDateOut = regExpDateOut
