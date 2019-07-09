@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>JS ES5</title>
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+<body>
+  <section class="first-task">
+    <h5>Array procession tool<br/>Enter array of numbers and press button to use tool</h5>
+    <input class="first-task__input" id="arrInput" type="text" value="2,5,8,1,3,8,10,25,9" >
+    <div class="first-task__btns" onClick="arrayProcessingToolHandler(event, arrInput)">
+      <button class="btn" type="button" name="subSumOn2">subSumOn2</button>
+      <button class="btn" type="button" name="subSumOn">subSumOn</button>
+      <button class="btn" type="button" name="searchMediane">searchMediane</button>
+      <button class="btn" type="button" name="selectionTask">selectionTask</button>
+    </div>
+    <textarea class="first-task__output" id="first-task__output" type="text" rows="2" cols="8" readonly></textarea>
+  </section>
+  <section class="second-task">
+    <h5>Date display formatter<br/>Enter a date and regExp of input and output(optional).<br/> Use in reExp "DD" for date, "MM" or "MONTH" for month, "YYYY" for year.<br/>"DDMMYYYY" is a default format for date input.<br/>"DD-MONTH-YYYY" is a default format for date output.</h5>
+    <label>enter date:<input class="second-task__input" id="dateInput" type="text" value="20May2013" ></label>
+    <br/>
+    <label>enter regExp for parse input:<input class="second-task__input" id="regExpDateInInput" type="text" value="DDMONTHYYYY" ></label>
+      <br/>
+    <label>enter regExp for output:<input class="second-task__input" id="regExpDateOut" type="text" value="DDMONTHYYYY" ></label>
+    <div class="second-task__btns" onclick="dataFormaterHandler(event, dateInput.value, regExpDateInInput.value, regExpDateOut.value)">
+      <button class="btn" type="button" name="setDate">setDate</button>
+      <button class="btn" type="button" name="getDate">getDate</button>
+      <button class="btn" type="button" name="fromNow">fromNow</button>
+    </div>
+    <input class="second-task__output" id="second-task__output" type="text" readonly>
+  </section>
+  <section class="third-task">
+    <h5>Text formatte<br/>Enter a text set max of cols, or max of rows and type of wrap</h5>
+    <textarea class="third-task__input-text" id="textInput" type="text" rows="10" cols="70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+    <br/>
+    <p>max cols:</p>
+    <input class="third-task__input-params" id="maxColsInput" type="text" value="0" placeholder="maxColsInput" oninput="maxColsInputHandler()">
+    <p>max rows:</p>
+    <input class="third-task__input-params" id="maxRowsInput" type="text" value="6" placeholder="maxRowsInout" oninput="maxRowsInputHandler()">
+    <p>wrap by:</p>
+    <select class="third-task__input-params" id="typeOfWrapInput">
+      <option>word</option>
+      <option>symbol</option>
+      <option>suggestions</option>
+    </select>
+    <br/>
+    <button class="btn" type="button" name="formate" onclick="textFormatterHandler(textInput.value, maxColsInput.value, maxRowsInput.value, typeOfWrapInput.value)">Formate</button>
+    <textarea class="third-task__input" id="formatedTextOutput" type="text"rows="10" cols="70" readonly></textarea>
+  </section>
+  <section class="fourth-task">
+    <h5>String calculator<br/>Enter math exp and press button to calculate</h5>
+    <input class="fourth-task__input" id="mathInput" type="text" value="(2+2)*28">
+    <button class="btn" type="button" name="calc" onclick="stringCalculatorHandler(mathInput.value)">Calc</button>
+    <input class="fourth-task__output" id="mathOutput" type="text" placeholder="Press Calc btn" readonly>
+  </section>
+  <section class="fifth-task">
+    <h5>Array sorter<br/>Enter array of numbers and press method button to sort it<br>Press clear button to clear output</h5>
+    <input class="fifth-task__input" id="fifthArrInput" type="text" value="2,5,8,1,3,8,10,25,9">
+    <div class="fifth-task__btns" onclick="arraySorterhandler(event, fifthArrInput.value)">
+      <button class="btn" type="button" name="bubbleSort">bubbleSort</button>
+      <button class="btn" type="button" name="quickSort">quickSort</button>
+      <button class="btn" type="button" name="selectionSort">selectionSort</button>
+      <button class="btn" type="button" name="simpleCountingSort">simpleCountingSort</button>
+      <button class="btn" type="button" name="mergeSort">mergeSort</button>
+      <br/>
+      <button class="btn clrBtn" type="button" name="clear">Clear output</button>
+    </div>
+    <input class="fifth-task__output" id="fifthArrOutput" type="text" readonly>
+  </section>
+  <section class="sixth-task">
+    <h5>Binary convertor<br>Enter number, number system of it and for which number system to convert</h5>
+    <p>value:</p>
+    <input class="sixth-task__input" id="valueInput" type="text" value="51">
+    <br/>
+    <p>from wich number system convert:</p>
+    <input class="sixth-task__input" id="fromCalcSys" type="text" value="10">
+    <br/>
+    <p>to wich number system convert:</p>
+    <input class="sixth-task__input" id="toCalcSys" type="text" value="2">
+    <br/>
+    <button class="btn" type="button" name="convert" onclick="binaryConverterHandler(valueInput.value,fromCalcSys.value,toCalcSys.value)">Convert</button>
+    <input class="sixth-task__output" id="convertedOutput" type="text" readonly>
+  </section>
+  <section class="seventh-task">
+    <h5>Function caching</h5>
+    <br/>
+    <input class="seventh-task__input" type="text" value="5" id="maxCacheSize">
+    <button class="btn" type="button" name="maxCacheSize" onClick="setMaxOfChacheResultsHandler(maxCacheSize.value)">Clear cahce and set max size of cache for each function</button>
+    <br/>
+    <input class="seventh-task__input" type="text" value="3" id="sumInputA">
+    <p class="seventh-task__ops">+</p>
+    <input class="seventh-task__input" type="text" value="6" id="sumInputB">
+    <button class="btn" type="button" name="calcSum" onClick="cacheHandler(sum, sumInputA.value, sumInputB.value)">calcSum</button>
+    <button class="btn clrBtn" type="button" name="sum" onClick="deleteFunctionFromeCacheHandler(this.name)">Delete "sum" from cache</button>
+    <br/>
+    <input class="seventh-task__input" type="text" value="2" id="powInputA">
+    <p class="seventh-task__ops">^</p>
+    <input class="seventh-task__input" type="text" value="3" id="powInputB">
+    <button class="btn" type="button" name="pow" onClick="cacheHandler(pow, powInputA.value, powInputB.value)">calcPow</button>
+    <button class="btn clrBtn" type="button" name="pow" onClick="deleteFunctionFromeCacheHandler(this.name)">Delete "pow" from cache</button>
+    <br/>
+    <input class="seventh-task__input" type="text" value="2" id="dedInputA">
+    <p class="seventh-task__ops">-</p>
+    <input class="seventh-task__input" type="text" value="3" id="dedInputB">
+    <button class="btn" type="button" name="pow" onClick="cacheHandler(ded, dedInputA.value, powInputB.value)">calcPow</button>
+    <button class="btn clrBtn" type="button" name="ded" onClick="deleteFunctionFromeCacheHandler(this.name)">Delete "ded" from cache</button>
+    <br/>
+    <input class="seventh-task__input" type="text" value="2" id="multiInputA">
+    <p class="seventh-task__ops">*</p>
+    <input class="seventh-task__input" type="text" value="3" id="multiInputB">
+    <button class="btn" type="button" name="pow" onClick="cacheHandler(multi, multiInputA.value, powInputB.value)">calcPow</button>
+    <button class="btn clrBtn" type="button" name="multi" onClick="deleteFunctionFromeCacheHandler(this.name)">Delete "multi" from cache</button>
+    <br/>
+    <input class="seventh-task__input" type="text" value="2" id="divInputA">
+    <p class="seventh-task__ops">/</p>
+    <input class="seventh-task__input" type="text" value="3" id="divInputB">
+    <button class="btn" type="button" name="pow" onClick="cacheHandler(div, divInputA.value, powInputB.value)">calcPow</button>
+    <button class="btn clrBtn" type="button" name="div" onClick="deleteFunctionFromeCacheHandler(this.name)">Delete "div" from cache</button>
+    <br/>
+    <input class="seventh-task__resultsOutput" name="name" rows="8" cols="80" id="cacheResultsOutput" readonly>
+    <textarea name="name" rows="20" id="cacheReault" placeholder="Cache" readonly></textarea>
+  </section>
+  <script type="text/javascript" src="public/js/arrayProcessingTool.js"></script>
+  <script type="text/javascript" src="public/js/dateDisplayFormatter.js"></script>
+  <script type="text/javascript" src="public/js/textFormatter.js"></script>
+  <script type="text/javascript" src="public/js/stringCalculator.js"></script>
+  <script type="text/javascript" src="public/js/arraySorter.js"></script>
+  <script type="text/javascript" src="public/js/binaryConverter.js"></script>
+  <script type="text/javascript" src="public/js/caching.js"></script>
+  <script type="text/javascript" src="public/js/main.js"></script>
+</body>
+</html>
