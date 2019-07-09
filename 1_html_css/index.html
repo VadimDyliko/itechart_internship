@@ -1,137 +1,147 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>SITENAME</title>
-    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/css/main.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="head__site-name">
-          <h1 class="head__site-name-text">SITENAME</h1>
-        </div>
-      </header>
-      <div class="content-wrapper">
-        <div class="mobile-menu-btn" onClick="menuTogle()">&#9776;</div>
-        <div class="left-side-bar">
-          <div class="profile">
-            <div class="profile__avatar-wrapper">
-              <div class="profile__avatar">
-                <img class="profile__avatar-image" src="public/img/_avatarImage.png" alt="avatar">
-              </div>
-            </div>
-            <div class="profile__discription">
-              <h3 class="profile__name">JOHN DOE</h3>
-              <p class="profile__signature">sitam oreiontom ipsum</p>
-              <div class="profile__social">
-                <div class="profile__social-facebook"></div>
-                <div class="profile__social-twitter"></div>
-                <div class="profile__social-linkedin"></div>
-              </div>
+<head>
+  <meta charset="utf-8">
+  <title>SITENAME</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/main.css">
+</head>
+<body>
+  <figure>
+    <div class="triangles triangles__opaque-triangle"></div>
+    <div class="triangles triangles__transparent-triangle"></div>
+  </figure>
+  <div class="wrapper">
+    <header>
+      <div class="head__site-name">
+        <h1 class="head__site-name-text">SITENAME</h1>
+      </div>
+    </header>
+    <main class="content-wrapper">
+      <div class="mobile-menu-btn" onClick="menuTogle()">&#9776;</div>
+      <aside class="left-side-bar">
+        <section class="profile">
+          <div class="profile__avatar-wrapper">
+            <div class="profile__avatar">
+              <img class="profile__avatar-image" src="public/img/_avatarImage.png" alt="avatar">
             </div>
           </div>
-          <div class="navigation">
-            <ul class="navigation__list">
-              <li class="navigation__item">HOME</li>
-              <li class="navigation__item">ABOUT ME</li>
-              <li class="navigation__item">MY SERVICES</li>
-              <li class="navigation__item">MY WORK</li>
-              <li class="navigation__item">CONTACT</li>
-            </ul>
+          <section class="profile__discription">
+            <h3 class="profile__name">JOHN DOE</h3>
+            <p class="profile__signature">sitam oreiontom ipsum</p>
+            <div class="profile__social">
+              <div class="profile__social-facebook"></div>
+              <div class="profile__social-twitter"></div>
+              <div class="profile__social-linkedin"></div>
+            </div>
+          </section>
+        </section>
+        <nav class="navigation">
+          <ul class="navigation__list">
+            <li class="navigation__item">HOME</li>
+            <li class="navigation__item">ABOUT ME</li>
+            <li class="navigation__item">MY SERVICES</li>
+            <li class="navigation__item">MY WORK</li>
+            <li class="navigation__item">CONTACT</li>
+          </ul>
+        </nav>
+      </aside>
+      <section class="content">
+        <article class="article">
+          <p class="article__text--orange">Lorem ipsum dolo</p>
+          <h2 class="article__title">praesent dapib <br/> cursus fau cibus Nor</h2>
+          <div class="article-slider">
+            <input id="img_1" class="slide_img" checked="checked" name="slide_img" type="radio"/>
+            <input id="img_2" class="slide_img" name="slide_img" type="radio"/>
+            <input id="img_3" class="slide_img" name="slide_img" type="radio"/>
+            <div id="arrow_next">
+              <label for="img_1"><div class="article-slider__btn slider__right"></div></label>
+              <label for="img_2"><div class="article-slider__btn slider__right"></div></label>
+              <label for="img_3"><div class="article-slider__btn slider__right"></div></label>
+            </div>
+            <div id="arrow_prev">
+              <label for="img_1"><div class="article-slider__btn slider__left"></div></label>
+              <label for="img_2"><div class="article-slider__btn slider__left"></div></label>
+              <label for="img_3"><div class="article-slider__btn slider__left"></div></label>
+            </div>
+            <div id="first" class="slides"><img src="public/img/Banner.png" alt="" /></div>
+            <div id="second" class="slides"><img src="public/img/user2.png" alt="" /></div>
+            <div id="third" class="slides"><img src="public/img/user3.png" alt="" /></div>
           </div>
-        </div>
-        <div class="content">
-          <div class="article">
-            <p class="article__text--orange">Lorem ipsum dolo</p>
-            <h2 class="article__title">praesent dapib <br/> cursus fau cibus Nor</h2>
-              <div class="article-slider">
-                <input id="img_1" class="slide_img" checked="checked" name="slide_img" type="radio" />
-                <input id="img_2" class="slide_img" name="slide_img" type="radio" />
-                <input id="img_3" class="slide_img" name="slide_img" type="radio" />
-                <div id="arrow_next">
-                  <label for="img_1"><div class="article-slider__btn slider__right"></div></label>
-                  <label for="img_2"><div class="article-slider__btn slider__right"></div></label>
-                  <label for="img_3"><div class="article-slider__btn slider__right"></div></label>
-                </div>
-                <div id="arrow_prev">
-                  <label for="img_1"><div class="article-slider__btn slider__left"></div></label>
-                  <label for="img_2"><div class="article-slider__btn slider__left"></div></label>
-                  <label for="img_3"><div class="article-slider__btn slider__left"></div></label>
-                </div>
-                <div id="first" class="slides"><img src="public/img/Banner.png" alt="" /></div>
-                <div id="second" class="slides"><img src="public/img/user2.png" alt="" /></div>
-                <div id="third" class="slides"><img src="public/img/user3.png" alt="" /></div>
-              </div>
-            <h4 class="article__sub-title">Integer vitae libero ac risus egestas place</h4>
-            <p class="article__text--orange">Morbi interdum mollis sapien</p>
-            <p class="article__text-content">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.</p>
-            <button class="article__more-button" type="button" name="readMore">READ MORE</button>
-          </div>
-          <div class="line"></div>
-          <div class="users">
-            <div class="users__cards">
-              <div class="user-card">
-                <div class="user-card__avatar user1"></div>
-                <div class="user-card__signature">
-                  <p class="user-card__text">Sed adipiscin</p>
-                  <div class="user-card__photo-button"></div>
-                </div>
-              </div>
-              <div class="user-card">
-                <div class="user-card__avatar user2"></div>
-                <div class="user-card__signature">
-                  <p class="user-card__text">Sed adipiscin</p>
-                  <div class="user-card__photo-button"></div>
-                </div>
-              </div>
-              <div class="user-card">
-                <div class="user-card__avatar user3"></div>
-                <div class="user-card__signature">
-                  <p class="user-card__text">Sed adipiscin</p>
-                  <div class="user-card__photo-button"></div>
-                </div>
-              </div>
-              <div class="user-card">
-                <div class="user-card__avatar user4"></div>
-                <div class="user-card__signature">
-                  <p class="user-card__text">Sed adipiscin</p>
-                  <div class="user-card__photo-button"></div>
-                </div>
+          <h4 class="article__sub-title">Integer vitae libero ac risus egestas place</h4>
+          <p class="article__text--orange">Morbi interdum mollis sapien</p>
+          <p class="article__text-content">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.</p>
+          <button class="article__more-button" type="button" name="readMore">READ MORE</button>
+        </article>
+        <figure class="line"></figure>
+        <section class="users">
+          <section class="users__cards">
+            <div class="user-card">
+              <div class="user-card__avatar user1"></div>
+              <div class="user-card__signature">
+                <p class="user-card__text">Sed adipiscin</p>
+                <div class="user-card__photo-button"></div>
               </div>
             </div>
-            <div class="users__about">
-              <h4 class="users__about-title">lorem ipsum dolor</h4>
-              <p class="users__about-text--orange">Praesent elementum hendrerit tortor. Sed semper lorem at felis.</p>
-              <p class="users__about-text">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.</p>
-              <p class="users__about-text">Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse com</p>
-              <p class="users__about-text">Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus</p>
+            <div class="user-card">
+              <div class="user-card__avatar user2"></div>
+              <div class="user-card__signature">
+                <p class="user-card__text">Sed adipiscin</p>
+                <div class="user-card__photo-button"></div>
+              </div>
+            </div>
+            <div class="user-card">
+              <div class="user-card__avatar user3"></div>
+              <div class="user-card__signature">
+                <p class="user-card__text">Sed adipiscin</p>
+                <div class="user-card__photo-button"></div>
+              </div>
+            </div>
+            <div class="user-card">
+              <div class="user-card__avatar user4"></div>
+              <div class="user-card__signature">
+                <p class="user-card__text">Sed adipiscin</p>
+                <div class="user-card__photo-button"></div>
+              </div>
+            </div>
+          </section>
+          <section class="users__about">
+            <h4 class="users__about-title">lorem ipsum dolor</h4>
+            <p class="users__about-text--orange">Praesent elementum hendrerit tortor. Sed semper lorem at felis.</p>
+            <p class="users__about-text">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl.<br/>
+              Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse com<br/>
+              Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus</p>
               <button class="users__archives-button" type="button" name="readMore">ARCHIVES</button>
-            </div>
-          </div>
-          <div class="line"></div>
-          <div class="reviews">
+            </section>
+          </section>
+          <figure class="line"></figure>
+          <section class="reviews">
             <div class="review">
               <img class="review__user-avatar" src="public/img/rew1.png" alt="avatar">
-              <h5 class="review__user-name">Amenda said..</h5>
-              <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              <div class="rewiew__user-post">
+                <h5 class="review__user-name">Amenda said..</h5>
+                <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              </div>
             </div>
-            <div class="line"></div>
+            <figure class="line"></figure>
             <div class="review">
               <img class="review__user-avatar" src="public/img/rew2.png" alt="avatar">
-              <h5 class="review__user-name">Peter said..</h5>
-              <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              <div class="rewiew__user-post">
+                <h5 class="review__user-name">Peter said..</h5>
+                <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              </div>
             </div>
-            <div class="line"></div>
+            <figure class="line"></figure>
             <div class="review">
               <img class="review__user-avatar" src="public/img/rew3.png" alt="avatar">
-              <h5 class="review__user-name">Jack said..</h5>
-              <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              <div class="rewiew__user-post">
+                <h5 class="review__user-name">Jack said..</h5>
+                <p class="review__text">“ Modo ullamcorper magna.Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus ”</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="right-side-bar">
+          </section>
+        </section>
+        <aside class="right-side-bar">
           <form class="search-form" action="index.html" method="post">
             <input class="search-form__text-input" type="text" placeholder="search here..." name="searchRequest">
             <button class="search-form__search-button" type="button" name="button"><img src="public/img/searchBtn.png" alt=""> </button>
@@ -172,8 +182,8 @@
             </form>
           </div>
           <img class="box-shadow" src="public/img/fold.png" alt="box-shadow">
-        </div>
-      </div>
+        </aside>
+      </main>
       <footer>
         <p class="copyright">Copyright(c) website name. Designed by: www.alltemplateneeds.com -  Images from: www.wallcoo.net / www.photorack.net</p>
       </footer>
@@ -181,4 +191,4 @@
     </div>
     <script type="text/javascript" src="public/js/menuTogle.js"></script>
   </body>
-</html>
+  </html>

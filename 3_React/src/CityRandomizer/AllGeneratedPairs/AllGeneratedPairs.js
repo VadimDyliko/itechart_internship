@@ -8,7 +8,7 @@ const AllGeneratedPairs = (props) =>{
           return `\n${i+1}) ${item}`
         })
       }></textarea>
-  )
-}
+    )
+  }
 
 export default AllGeneratedPairs

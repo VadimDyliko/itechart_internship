@@ -1,10 +1,17 @@
 import React from 'react';
 import './GetDataBtn.css';
+import classNames from 'classnames'
 
-const GetDataBtn = (props) =>{
-  return(
-        <button className={(props.isBtnEnable)?'city-randomizer__get-data-button':'city-randomizer__get-data-button_disabled'} onClick={(props.isBtnEnable)?props.action:null}>Generate pair</button>
-  )
+class GetDataBtn extends React.PureComponent{
+  render(){
+    let btnClass = classNames({
+      'city-randomizer__get-data-button': this.props.isBtnEnable,
+      'city-randomizer__get-data-button_disabled': !this.props.isBtnEnable
+    });
+    return(
+      <button className={btnClass} onClick={(this.props.isBtnEnable)?this.props.action:null}>Generate pair</button>
+    )
+  }
 }
 
 export default GetDataBtn
