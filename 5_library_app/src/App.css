@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  align-items: center;
+}
+
+.sing-in-form{
+  width: 300px;
+  margin: 0 auto;
+}
