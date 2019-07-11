@@ -10,8 +10,8 @@ mongoose
   );
 
 const userSchema = mongoose.Schema({
-  login: String,
-  pass: String
+  email: String,
+  password: String
   //profilePicture: Buffer
 });
 

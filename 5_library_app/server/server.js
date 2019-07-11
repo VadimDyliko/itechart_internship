@@ -5,34 +5,33 @@ var passport = require("passport"),
 const bodyParser = require("body-parser");
 const { User } = require("./modules/mongo/mongo");
 const app = express();
-const jsonParser = express.json();
+//const jsonParser = express.json();
 
 app.use(express.static("public"));
 app.use(session({ secret: "cats" }));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
+  "local-login",
   new LocalStrategy(
     {
-      usernameField: "login",
-      passwordField: "pass"
+      usernameField: "email",
+      passwordField: "password"
+      //passReqToCallback: true
     },
-    function(username, password, done) {
-      console.log(username);
-      User.findOne({ username: username }, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false, { message: "Incorrect username." });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: "Incorrect password." });
-        }
+    async (req, email, password, done) => {
+      try {
+        const user = await User.findOne({ email: email });
+
+        if (!user) return done(null, falses);
+        if (!user.validPassword(password)) return done(null, false);
         return done(null, user);
-      });
+      } catch (error) {
+        done(error, false);
+      }
     }
   )
 );
@@ -46,7 +45,17 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+app.post(
+  "/login",
+  passport.authenticate("local-login", {
+    successRedirect: "/profile",
+    failureRedirect: "/login"
+  })
+);
 
+app.get("/profile", (req, res) => {
+  res.send(profile);
+});
 // app.post(
 //   "/login",
 //   passport.authenticate("local", {
@@ -54,36 +63,37 @@ passport.deserializeUser(function(id, done) {
 //     failureRedirect: "/"
 //   })
 // );
-app.get("/login", function(req, res, next) {
-  console.log(req);
-  passport.authenticate("local", function(err, user, info) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.redirect("/login");
-    }
-    req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      }
-      return res.redirect("/users/" + user.username);
-    });
-  })(req, res, next);
-});
+// app.get("/login", function(req, res, next) {
+//   console.log(req);
+//   passport.authenticate("local", function(err, user, info) {
+//     if (err) {
+//       return next(err);
+//     }
+//     if (!user) {
+//       return res.redirect("/login");
+//     }
+//     req.logIn(user, function(err) {
+//       if (err) {
+//         return next(err);
+//       }
+//       return res.redirect("/users/" + user.username);
+//     });
+//   })(req, res, next);
+// });
 // app.get("/", function(req, res) {
 //   res.send("123");
 // });
 
 app.get("/createNewUser", (req, res) => {
   let newUser = new User({
-    login: "coolMan",
-    pass: "superpsw"
+    email: "coolMan@mail.com",
+    password: "superpsw"
   });
   newUser.save().then(() => res.sendStatus(200), err => res.send(err));
 });
 
-app.post("/auth/login", jsonParser, (req, res) => {
+app.post("/auth/login", (req, res) => {
+  console.log(req.body);
   res.send("main");
 });
 
