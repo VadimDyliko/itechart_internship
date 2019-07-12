@@ -18,3 +18,9 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 module.exports = { mongoose, User };
+
+// let newUser = new User({
+//   email: "coolMan@mail.com",
+//   password: "superpsw"
+// });
+// newUser.save().then(() => res.sendStatus(200), err => res.send(err));

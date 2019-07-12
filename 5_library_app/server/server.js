@@ -1,100 +1,43 @@
 const express = require("express");
 const session = require("express-session");
-var passport = require("passport"),
-  LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
 const bodyParser = require("body-parser");
 const { User } = require("./modules/mongo/mongo");
+const token = require("./modules/services/jwt");
+require("./modules/services/passportJWT");
 const app = express();
-//const jsonParser = express.json();
 
 app.use(express.static("public"));
-app.use(session({ secret: "cats" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
-app.use(passport.session());
 
-passport.use(
-  "local-login",
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password"
-      //passReqToCallback: true
-    },
-    async (req, email, password, done) => {
-      try {
-        const user = await User.findOne({ email: email });
-
-        if (!user) return done(null, falses);
-        if (!user.validPassword(password)) return done(null, false);
-        return done(null, user);
-      } catch (error) {
-        done(error, false);
-      }
-    }
-  )
-);
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-app.post(
-  "/login",
-  passport.authenticate("local-login", {
-    successRedirect: "/profile",
-    failureRedirect: "/login"
-  })
-);
-
-app.get("/profile", (req, res) => {
-  res.send(profile);
-});
-// app.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/"
-//   })
-// );
-// app.get("/login", function(req, res, next) {
-//   console.log(req);
-//   passport.authenticate("local", function(err, user, info) {
-//     if (err) {
-//       return next(err);
-//     }
-//     if (!user) {
-//       return res.redirect("/login");
-//     }
-//     req.logIn(user, function(err) {
-//       if (err) {
-//         return next(err);
-//       }
-//       return res.redirect("/users/" + user.username);
-//     });
-//   })(req, res, next);
-// });
-// app.get("/", function(req, res) {
-//   res.send("123");
-// });
-
-app.get("/createNewUser", (req, res) => {
-  let newUser = new User({
-    email: "coolMan@mail.com",
-    password: "superpsw"
-  });
-  newUser.save().then(() => res.sendStatus(200), err => res.send(err));
-});
-
-app.post("/auth/login", (req, res) => {
+app.post("/login", (req, res) => {
   console.log(req.body);
-  res.send("main");
+  if (req.body.email && req.body.password) {
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (user) {
+        if (user.password === req.body.password) {
+          let payload = {
+            jwt: token.setToken(user._id)
+          };
+          res.json(payload);
+        } else {
+          res.sendStatus(401);
+        }
+      } else {
+        res.sendStatus(404);
+      }
+    });
+  }
+});
+
+app.get("/profile", passport.authenticate("jwt", { session: false }), function(
+  req,
+  res
+) {
+  console.log(req.user);
+  res.sendStatus(200);
 });
 
 app.listen(4000, err => {

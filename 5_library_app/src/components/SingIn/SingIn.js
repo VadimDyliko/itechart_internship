@@ -5,35 +5,28 @@ class SingIn extends React.Component {
     email: "",
     password: ""
   };
-  componentDidMount() {
-    //fetch("/").then(res => console.log(res), err => console.log(err));
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/", true);
-    xhr.send();
-    xhr.onload = data => console.log(data);
-  }
   emailHandler = e => {
     this.setState({ email: e.target.value });
   };
   passwordHandler = e => {
-    this.setState({ email: e.target.value });
+    this.setState({ password: e.target.value });
   };
   submitHandler = e => {
     let data = {
       email: this.state.email,
       password: this.state.password
     };
-    fetch("/auth/login", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    });
+    }).then(res => console.log(res.json()));
   };
   render() {
     return (
-      <form className="sing-in-form">
+      <div className="sing-in-form">
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
@@ -58,10 +51,10 @@ class SingIn extends React.Component {
             onChange={this.passwordHandler}
           ></input>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button onClick={this.submitHandler} className="btn btn-primary">
           Submit
         </button>
-      </form>
+      </div>
     );
   }
 }
