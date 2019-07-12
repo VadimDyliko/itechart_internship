@@ -1,0 +1,12 @@
+.profile{
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: rgba(247, 247, 247, 0.8);
+  transition: 0.5s;
+}
+.profile_disabled{
+  right: -800px;
+}

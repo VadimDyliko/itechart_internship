@@ -1,7 +1,8 @@
 import React from "react";
 import "./SingUp.css"
+import classnames from 'classnames'
 
-class SingUp extends React.Component {
+class SingUp extends React.PureComponent {
   state = {
     login: "",
     email: "",
@@ -37,12 +38,17 @@ class SingUp extends React.Component {
       })
       .then(token => {
         localStorage.setItem('token', token.jwt)
-      });
+      })
+      .catch(err=>console.log(err))
   }
 
   render() {
+    let singUpFormClassNames = classnames({
+      'sing-up-form': this.props.isSingUpMenuOpen,
+      'sing-up-form sing-up-form_disabled': !this.props.isSingUpMenuOpen
+    });
     return (
-      <div className="sing-up-form" style={{top: this.state.top}}>
+      <div className={singUpFormClassNames}>
         <div className="form-group">
           <p>Login</p>
           <input
@@ -76,6 +82,9 @@ class SingUp extends React.Component {
         </div>
         <button onClick={this.submitHandler} className="btn btn-primary">
           SingUp
+        </button>
+        <button onClick={this.props.clickHandler} className="btn btn-primary">
+          Close
         </button>
       </div>
     );

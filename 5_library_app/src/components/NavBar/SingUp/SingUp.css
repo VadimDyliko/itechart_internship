@@ -1,6 +1,13 @@
 .sing-up-form{
+  position: absolute;
+  top: 15px;
+  right: 30px;
   max-width: 400px;
   border-radius: 15px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.84);
+  transition: 0.5s;
+}
+.sing-up-form_disabled{
+  top: -400px;
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import "./SingIn.css";
-import { setToken } from "../../store/actions";
+import { setToken } from "../../../store/actions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import classnames from "classnames"
 
-class SingIn extends React.Component {
+class SingIn extends React.PureComponent {
   state = {
     email: "",
     password: "",
-    top: "0",
   };
 
   emailHandler = e => {
@@ -36,11 +36,16 @@ class SingIn extends React.Component {
       .then(token => {
         this.props.setToken(token.jwt);
         localStorage.setItem('token', token.jwt)
-      });
+      })
+      .catch(err=>console.log(err))
   };
   render() {
+    let singInFormClassNames = classnames({
+      'sing-in-form': this.props.isSingInMenuOpen,
+      'sing-in-form sing-in-form_disabled': !this.props.isSingInMenuOpen
+    });
     return (
-      <div className="sing-in-form" style={{top: this.state.top}}>
+      <div className={singInFormClassNames}>
         <div className="form-group">
           <label>Email address</label>
           <input
@@ -63,6 +68,9 @@ class SingIn extends React.Component {
         <button onClick={this.submitHandler} className="btn btn-primary">
           LogIn
         </button>
+        <button onClick={this.props.clickHandler} className="btn btn-primary">
+          Close
+        </button>
       </div>
     );
   }
@@ -70,13 +78,13 @@ class SingIn extends React.Component {
 
 const putStateInProps = state => {
   return {
-    token: state.token
+    token: state.token,
   };
 };
 
 const putActionsInProps = dispatch => {
   return {
-    setToken: bindActionCreators(setToken, dispatch)
+    setToken: bindActionCreators(setToken, dispatch),
   };
 };
 

@@ -21,6 +21,7 @@ passport.use(
     console.log(jwt_payload);
     User.findOne({ _id: jwt_payload.userId }, function(err, user) {
       if (err) {
+        console.log(err);
         return done(err, false);
       }
       if (user) {

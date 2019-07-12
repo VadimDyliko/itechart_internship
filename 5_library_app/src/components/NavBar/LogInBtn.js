@@ -1,10 +1,11 @@
 import React from 'react'
 
-const LogInBtn = (props) =>{
+const LogInBtn = ({clickHandler}) =>{
+
   return(
-    <div className="nav-bar__log-in-btn">
-      <button className="btn btn-primary">LogIn</button>
-    </div>
+    <>
+      <button className="btn btn-primary" onClick={clickHandler}>LogIn</button>
+    </>
   )
 }
 
