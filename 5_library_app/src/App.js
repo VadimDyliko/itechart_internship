@@ -1,5 +1,7 @@
 import React from "react";
-import SingIn from "./components/SingIn/SingIn";
+import NavBar from "./components/NavBar/NavBar";
+import Content from "./components/Content/Content";
+import Profile from "./components/Profile/Profile";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./store/reducer";
@@ -12,7 +14,9 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <SingIn />
+        <NavBar />
+        <Content/>
+        <Profile/>
       </Provider>
     </div>
   );

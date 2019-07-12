@@ -1,0 +1,7 @@
+.nav-bar{
+  width: 100vw;
+  height: 50px;
+  background: rgb(36, 19, 60);
+  position: absolute;
+  top:0;
+}

@@ -7,3 +7,12 @@
 //     data
 //   };
 // }
+export const SET_TOKEN = "SET_TOKEN";
+
+
+export function setToken(data) {
+  return {
+    type: SET_TOKEN,
+    data
+  };
+}

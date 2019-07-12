@@ -10,17 +10,48 @@ mongoose
   );
 
 const userSchema = mongoose.Schema({
+  login: String,
   email: String,
-  password: String
-  //profilePicture: Buffer
+  password: String,
+  firstName: String,
+  lastName: String,
+  age: Number,
+  booksOnHand:Array,
+  profilePicture: Buffer,
 });
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = { mongoose, User };
+const bookSchema = mongoose.Schema({
+  tittle: String,
+  year: Number,
+  bookAthour: String,
+  bookDiscription: String,
+  bookBookedBy: String,
+  bookOnHandAt:Array,
+  bookPicture: Buffer,
+});
+
+const Book = mongoose.model("Book", bookSchema);
+
+module.exports = { mongoose, User, Book };
 
 // let newUser = new User({
 //   email: "coolMan@mail.com",
-//   password: "superpsw"
+//   password: "superpsw",
+//   firstName: "First",
+//   lastName: "Last",
+//   age: "25",
+//   booksOnHand: []
 // });
 // newUser.save().then(() => res.sendStatus(200), err => res.send(err));
+
+
+
+
+
+// let newBook = new Book({
+//   tittle: 'book1',
+//   bookAthour: "me",
+// });
+// newBook.save().then(() => res.sendStatus(200), err => res.send(err));

@@ -1,28 +1,30 @@
 import React from "react";
-import "./SingIn.css";
-import { setToken } from "../../store/actions";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import "./SingUp.css"
 
-class SingIn extends React.Component {
+class SingUp extends React.Component {
   state = {
+    login: "",
     email: "",
     password: "",
-    top: "0",
   };
 
   emailHandler = e => {
     this.setState({ email: e.target.value });
   };
+  loginHandler = e => {
+    this.setState({ login: e.target.value });
+  };
   passwordHandler = e => {
     this.setState({ password: e.target.value });
   };
-  submitHandler = e => {
+
+  submitHandler = e =>{
     let data = {
+      login: this.state.login,
       email: this.state.email,
       password: this.state.password
     };
-    fetch("/login", {
+    fetch("/singup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -34,15 +36,24 @@ class SingIn extends React.Component {
         return parsedRes
       })
       .then(token => {
-        this.props.setToken(token.jwt);
         localStorage.setItem('token', token.jwt)
       });
-  };
+  }
+
   render() {
     return (
-      <div className="sing-in-form" style={{top: this.state.top}}>
+      <div className="sing-up-form" style={{top: this.state.top}}>
         <div className="form-group">
-          <label>Email address</label>
+          <p>Login</p>
+          <input
+            type="name"
+            className="form-control"
+            placeholder="Enter Login"
+            onChange={this.nameHandler}
+          ></input>
+        </div>
+        <div className="form-group">
+          <p>Email address</p>
           <input
             type="email"
             className="form-control"
@@ -50,9 +61,12 @@ class SingIn extends React.Component {
             placeholder="Enter email"
             onChange={this.emailHandler}
           ></input>
+          <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <p>Password</p>
           <input
             type="password"
             className="form-control"
@@ -61,25 +75,11 @@ class SingIn extends React.Component {
           ></input>
         </div>
         <button onClick={this.submitHandler} className="btn btn-primary">
-          LogIn
+          SingUp
         </button>
       </div>
     );
   }
 }
 
-const putStateInProps = state => {
-  return {
-    token: state.token
-  };
-};
-
-const putActionsInProps = dispatch => {
-  return {
-    setToken: bindActionCreators(setToken, dispatch)
-  };
-};
-
-export default connect(
-  putStateInProps, putActionsInProps
-)(SingIn);
+export default SingUp
