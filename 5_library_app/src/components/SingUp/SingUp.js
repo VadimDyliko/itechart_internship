@@ -49,7 +49,7 @@ class SingUp extends React.Component {
             type="name"
             className="form-control"
             placeholder="Enter Login"
-            onChange={this.nameHandler}
+            onChange={this.loginHandler}
           ></input>
         </div>
         <div className="form-group">

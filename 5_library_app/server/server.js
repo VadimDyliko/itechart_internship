@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 app.post("/singup", (req, res)=>{
+  console.log(req.body);
   if (req.body.login && req.body.email && req.body.password){
     User.findOne({email: req.body.email})
      .then((user)=>{
@@ -68,6 +69,7 @@ app.get("/profile", passport.authenticate("jwt", { session: false }), function(
 ) {
   //console.log(req.user);
   let payload = {
+    login: req.user.login,
     email: req.user.email,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
