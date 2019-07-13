@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   age: Number,
-  booksOnHand:Array,
+  booksOnHand: Array,
   profilePicture: Buffer,
 });
 
@@ -28,13 +28,17 @@ const bookSchema = mongoose.Schema({
   bookAthour: String,
   bookDiscription: String,
   bookBookedBy: String,
-  bookOnHandAt:Array,
+  bookOnHandAt: Array,
   bookPicture: Buffer,
 });
 
 const Book = mongoose.model("Book", bookSchema);
 
-module.exports = { mongoose, User, Book };
+module.exports = {
+  mongoose,
+  User,
+  Book
+};
 
 // let newUser = new User({
 //   email: "coolMan@mail.com",

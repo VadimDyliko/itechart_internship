@@ -1,58 +1,89 @@
 const express = require("express");
 const passport = require("passport");
 const bodyParser = require("body-parser");
-const { User, Book } = require("./modules/mongo/mongo");
+const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
+const {
+  User,
+  Book
+} = require("./modules/mongo/mongo");
 const token = require("./modules/services/jwt");
 require("./modules/services/passportJWT");
 const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(cookieParser())
 app.use(passport.initialize());
 
-app.post("/singup", (req, res)=>{
+app.post("/singup", upload.single('profilePicture'), (req, res) => {
   console.log(req.body);
-  if (req.body.login && req.body.email && req.body.password){
-    User.findOne({email: req.body.email})
-     .then((user)=>{
-       if (!user){
-           let newUser = new User({
-             email: req.body.email,
-             password: req.body.password,
-             login: req.body.login,
-           });
-           newUser.save()
-           .then((user)=>{
-             let payload = {
-               jwt: token.setToken(user._id)
-             };
-             res.json(payload);
-             console.log(`We got a new user ${user}`);
-           })
-       } else {
-         res.sendStatus(401)
-       }
-     })
-     .catch((err)=>{
-       console.log(err);
-       res.sendStatus(500)
-     })
+  if (req.body.login && req.body.email && req.body.password) {
+    let matchLogin = new Promise((res, rej) => {
+      User.findOne({
+          login: req.body.login
+        })
+        .then(login => res(login))
+    })
+    let matchEmail = new Promise((res, rej) => {
+      User.findOne({
+          email: req.body.login
+        })
+        .then(email => res(email))
+    })
+    Promise.all([matchLogin, matchEmail])
+      .then((values) => {
+        if (values[0] === null && values[1] === null) {
+          let newUser = new User({
+            email: req.body.email,
+            password: req.body.password,
+            login: req.body.login,
+            profilePicture: req.file.buffer,
+          });
+          newUser.save()
+            .then((user) => {
+              res.cookie('jwt', token.setToken(user._id), {
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+                httpOnly: true
+              });
+              res.sendStatus(200)
+              console.log(`We got a new user ${user}`);
+            })
+        } else {
+          console.error('we have user with such email or login');
+          res.sendStatus(401)
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500)
+      })
   } else {
+    console.error('there are note important user data');
     res.sendStatus(400)
   }
 })
 
+
 app.post("/login", (req, res) => {
+  console.log(`----->>>/login req.body:`);
   console.log(req.body);
   if (req.body.email && req.body.password) {
-    User.findOne({ email: req.body.email }, (err, user) => {
+    User.findOne({
+      email: req.body.email
+    }, (err, user) => {
       if (user) {
         if (user.password === req.body.password) {
-          let payload = {
-            jwt: token.setToken(user._id)
-          };
-          res.json(payload);
+          res.cookie('jwt', token.setToken(user._id), {
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+            httpOnly: true
+          });
+          res.sendStatus(200)
         } else {
           res.sendStatus(401);
         }
@@ -63,24 +94,39 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.get("/profile", passport.authenticate("jwt", { session: false }), function(
+app.get("/profile", passport.authenticate("jwt", {
+  session: false
+}), function(
   req,
   res
 ) {
-  //console.log(req.user);
+  console.log("--->>>/profile req.cookies: " + req.cookies);
   let payload = {
     login: req.user.login,
     email: req.user.email,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
-    booksOnHand: req.user.booksOnHand
+    booksOnHand: req.user.booksOnHand,
+    profilePicture: req.user.profilePicture
   }
   res.json(payload);
 });
 
-app.get('/books', (req, res)=>{
+app.get('/books', (req, res) => {
   Book.find()
-  .then((books)=>res.json(books))
+    .then((books) => res.json(books))
+})
+
+app.get('/logout', (req, res)=>{
+  res.clearCookie('jwt');
+  res.sendStatus(200)
+})
+
+app.get('/test', (req, res)=>{
+  User.findOne({
+      login: 'root'
+    })
+    .then((user)=>res.send(user))
 })
 
 app.listen(4000, err => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
 import "./Content.css";
 import Book from "./Book/Book"
 
@@ -27,10 +27,11 @@ class Content extends React.PureComponent {
   }
 }
 
-const putStateInProps = state => {
-  return {
-    token: state.token
-  };
-};
+// const putStateInProps = state => {
+//   return {
+//     token: state.token
+//   };
+// };
 
-export default connect(putStateInProps)(Content);
+//export default connect(putStateInProps)(Content);
+export default Content;
