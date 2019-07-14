@@ -32,8 +32,16 @@ class SingIn extends React.PureComponent {
         this.props.clickHandler()
       }
     }).then(() => {
-      fetch("/profile").then((res) => res.json()).then(data => this.props.dispatch(setUser(data)))
-    }).catch(err => console.log(err))
+      fetch("/profile")
+      .then((res) => {
+        if (res.status === 200){
+          return res.json()
+        } else {
+          // throw new Error ('did not autentificated')
+        }
+      })
+      .then(data => this.props.dispatch(setUser(data)))})
+      .catch(err => console.log(err))
   };
   render() {
     let singInFormClassNames = classnames({
@@ -49,11 +57,11 @@ class SingIn extends React.PureComponent {
         <label>Password</label>
         <input type="password" className="form-control" placeholder="Password" onChange={this.passwordHandler}></input>
       </div>
-      <button onClick={this.submitHandler} className="btn btn-primary">
+      <button type="submit" onClick={this.submitHandler} className="btn btn-primary">
         LogIn
       </button>
 
-      <button onClick={this.props.clickHandler} className="btn btn-outline-primary">
+      <button type="button" onClick={this.props.clickHandler} className="btn btn-outline-primary">
         Close
       </button>
     </div>);

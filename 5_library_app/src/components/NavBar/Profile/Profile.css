@@ -6,7 +6,17 @@
   height: 100vh;
   background: rgba(247, 247, 247, 0.8);
   transition: 0.5s;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .profile_disabled{
   right: -800px;
+}
+.profile-image{
+  margin: 15px 0;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+
 }

@@ -10,6 +10,7 @@ const initialState = {
     lastName: null,
     age: null,
     booksOnHand: [],
+    profileImage: {}
   }
 
 };

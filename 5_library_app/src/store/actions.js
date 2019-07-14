@@ -9,6 +9,7 @@ export function setUser(data = {
   lastName: null,
   age: null,
   booksOnHand: [],
+  profilePicture: {}
 }) {
   return {
     type: SET_USER,
