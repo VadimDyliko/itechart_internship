@@ -34,12 +34,15 @@ class Profile extends React.PureComponent {
       'profile profile_disabled': !this.props.isProfileOpen
     });
     return (<div className={profileClassNames}>
-      <img className="profile-image" src={this.state.img}></img>
-      <p>login: {this.props.user.login}</p>
-      <p>email: {this.props.user.email}</p>
-      <p>firstName: {this.props.user.firstName}</p>
-      <p>lastName: {this.props.user.lastName}</p>
-      <p>age: {this.props.user.age}</p>
+      <div className="profile__background-cover"></div>
+      <div className="profile__acaunt-details">
+        <img className="profile-image" src={this.state.img}></img>
+        <p>login: {this.props.user.login}</p>
+        <p>email: {this.props.user.email}</p>
+        <p>firstName: {this.props.user.firstName}</p>
+        <p>lastName: {this.props.user.lastName}</p>
+        <p>age: {this.props.user.age}</p>
+      </div>
     </div>)
   }
 }

@@ -28,8 +28,9 @@ const bookSchema = mongoose.Schema({
   bookAthour: String,
   bookDiscription: String,
   bookBookedBy: String,
-  bookOnHandAt: Array,
+  bookOnHandAt: String,
   bookPicture: Buffer,
+  comments: Array,
 });
 
 const Book = mongoose.model("Book", bookSchema);

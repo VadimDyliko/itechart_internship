@@ -73,9 +73,9 @@ app.post("/singup", upload.single('profilePicture'), (req, res) => {
 app.post("/login", (req, res) => {
   console.log(`----->>>/login req.body:`);
   console.log(req.body);
-  if (req.body.email && req.body.password) {
+  if (req.body.login && req.body.password) {
     User.findOne({
-      email: req.body.email
+      login: req.body.login
     }, (err, user) => {
       if (user) {
         if (user.password === req.body.password) {

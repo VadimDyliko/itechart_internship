@@ -10,15 +10,15 @@ class SingIn extends React.PureComponent {
     password: ""
   };
 
-  emailHandler = e => {
-    this.setState({email: e.target.value});
+  loginHandler = e => {
+    this.setState({login: e.target.value});
   };
   passwordHandler = e => {
     this.setState({password: e.target.value});
   };
   submitHandler = e => {
     let data = {
-      email: this.state.email,
+      login: this.state.login,
       password: this.state.password
     };
     fetch("/login", {
@@ -51,7 +51,7 @@ class SingIn extends React.PureComponent {
     return (<div className={singInFormClassNames}>
       <div className="form-group">
         <label>Login</label>
-        <input type="login" className="form-control" aria-describedby="emailHelp" placeholder="Enter login" onChange={this.emailHandler}></input>
+        <input type="login" className="form-control" aria-describedby="emailHelp" placeholder="Enter login" onChange={this.loginHandler}></input>
       </div>
       <div className="form-group">
         <label>Password</label>
