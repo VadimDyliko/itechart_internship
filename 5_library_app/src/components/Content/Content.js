@@ -30,6 +30,7 @@ class Content extends React.PureComponent {
                 tittle={book.tittle}
                 bookAthour={book.bookAthour}
                 _id={book._id}
+                bookPicture={book.bookPicture}
               />
             );
           })}{" "}

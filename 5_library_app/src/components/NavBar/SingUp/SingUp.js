@@ -81,6 +81,7 @@ class SingUp extends React.PureComponent {
       formData.append("password", this.state.password);
       formData.append("profilePicture", this.state.profilePicture);
       this.setState({ showSpiner: true });
+      console.log(formData);
       fetch("/singup", {
         method: "POST",
         body: formData
