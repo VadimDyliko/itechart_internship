@@ -1,4 +1,4 @@
-.sing-in-form{
+.sing-in-form {
   position: absolute;
   z-index: 15;
   right: 30px;
@@ -8,10 +8,10 @@
   background: rgba(255, 255, 255, 0.84);
   transition: 0.5s;
 }
-.sing-in-form_disabled{
+.sing-in-form_disabled {
   top: -300px;
 }
-.spinner-border{
+.spinner-border {
   height: 18px;
   width: 18px;
 }

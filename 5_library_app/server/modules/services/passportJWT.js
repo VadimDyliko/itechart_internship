@@ -4,12 +4,11 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const { User } = require("../mongo/mongo");
 
 const cookieExtractor = function(req) {
-    var token = null;
-    if (req && req.cookies)
-    {
-        token = req.cookies['jwt'];
-    }
-    return token;
+  var token = null;
+  if (req && req.cookies) {
+    token = req.cookies["jwt"];
+  }
+  return token;
 };
 const opts = {
   jwtFromRequest: cookieExtractor,
@@ -18,17 +17,21 @@ const opts = {
 
 passport.use(
   new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({ _id: jwt_payload.userId }, function(err, user) {
-      if (err) {
-        console.log(err);
-        return done(err, false);
+    User.findOne(
+      {
+        _id: jwt_payload.userId
+      },
+      function(err, user) {
+        if (err) {
+          console.log(err);
+          return done(err, false);
+        }
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
       }
-      if (user) {
-        return done(null, user);
-      } else {
-        return done(null, false);
-        // or you could create a new account
-      }
-    });
+    );
   })
 );

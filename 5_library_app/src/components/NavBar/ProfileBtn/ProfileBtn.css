@@ -1,4 +1,4 @@
-.nav-bar__profile-btn{
+.nav-bar__profile-btn {
   margin: 0 10px;
   border-radius: 50%;
   border: 2px rgba(255, 255, 255, 0.8) solid;
@@ -11,10 +11,12 @@
   align-items: center;
   justify-content: center;
 }
-.nav-bar__profile-btn:hover{
+
+.nav-bar__profile-btn:hover {
   border-color: #007bff;
 }
-.profile-btn__avatar{
+
+.profile-btn__avatar {
   height: 40px;
   width: 40px;
 }

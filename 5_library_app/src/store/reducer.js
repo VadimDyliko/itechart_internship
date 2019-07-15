@@ -1,13 +1,10 @@
-import {
-  SET_USER,
-  SET_MODAL
-} from "./actions";
+import { SET_USER, SET_MODAL } from "./actions";
 
 const initialState = {
   user: {
-    login: 'guest',
+    login: "guest",
     email: null,
-    firstName: 'Guest',
+    firstName: "Guest",
     lastName: null,
     age: null,
     booksOnHand: [],
@@ -15,10 +12,9 @@ const initialState = {
   },
   modalMessage: {
     isShow: false,
-    modalTitle: 'Title',
-    modalText: 'Text'
+    modalTitle: "Title",
+    modalText: "Text"
   }
-
 };
 
 export default function reducer(state = initialState, action) {

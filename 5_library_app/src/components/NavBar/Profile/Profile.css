@@ -1,4 +1,4 @@
-.profile{
+.profile {
   position: absolute;
   top: 50px;
   right: 0;
@@ -11,27 +11,30 @@
   flex-direction: column;
   overflow: hidden;
 }
-.profile__acaunt-details{
+
+.profile__acaunt-details {
   position: absolute;
   z-index: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.profile__background-cover{
+
+.profile__background-cover {
   background-image: url(backgroundLaytout.jpeg);
   filter: blur(3px) opacity(65%);
   width: 100%;
   height: 100%;
   position: absolute;
 }
-.profile_disabled{
+
+.profile_disabled {
   right: -800px;
 }
-.profile-image{
+
+.profile-image {
   margin: 15px 0;
   border-radius: 50%;
   width: 100px;
   height: 100px;
-
 }

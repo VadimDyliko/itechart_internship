@@ -3,7 +3,7 @@ const jwt = require("../../node_modules/jsonwebtoken");
 
 const token = {
   setToken: userId => {
-    let expDate = Date.now() + 1000*60
+    let expDate = Date.now() + 1000 * 60;
     let payload = {
       userId: userId,
       exp: expDate,
