@@ -11,3 +11,16 @@
 .sing-up-form_disabled{
   top: -430px;
 }
+.form-control__red{
+  border-color: red;
+}
+.form-control__red:focus {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 0, 0.9);
+}
+.spinner-border{
+  height: 18px;
+  width: 18px;
+}
+.custom-file{
+  overflow: hidden;
+}

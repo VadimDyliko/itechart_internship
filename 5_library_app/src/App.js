@@ -11,11 +11,22 @@ const store = createStore(reducer);
 
 class App extends React.Component {
 
+componentDidUpdate(prevProps, prevState) {
+  console.log(store.getState());
+}
+
   componentDidMount() {
-    fetch("/profile").then(res => res.json()).then(data => {
-      console.log(data);
+    fetch("/profile")
+    .then(res =>{
+      if (res.status===200){
+        return res.json()
+      }else{
+        throw new Error ('did not autentificated')
+      }
+     })
+    .then(data => {
       store.dispatch(setUser(data))
-    }).catch(err => console.log(err))
+    }).catch(err =>{console.log(err)})
   }
 
   render() {

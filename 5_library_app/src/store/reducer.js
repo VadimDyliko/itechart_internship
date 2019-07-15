@@ -1,5 +1,6 @@
 import {
-  SET_USER
+  SET_USER,
+  SET_MODAL
 } from "./actions";
 
 const initialState = {
@@ -11,6 +12,11 @@ const initialState = {
     age: null,
     booksOnHand: [],
     profileImage: {}
+  },
+  modalMessage: {
+    isShow: false,
+    modalTitle: 'Title',
+    modalText: 'Text'
   }
 
 };
@@ -20,6 +26,10 @@ export default function reducer(state = initialState, action) {
     case SET_USER:
       return Object.assign({}, state, {
         user: action.data
+      });
+    case SET_MODAL:
+      return Object.assign({}, state, {
+        modalMessage: action.data
       });
     default:
       return state;

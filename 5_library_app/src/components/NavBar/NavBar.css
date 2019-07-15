@@ -3,6 +3,7 @@
   width: 100vw;
   height: 50px;
   background: rgba(36, 19, 60, 0.8);
+  background: linear-gradient(to bottom, rgba(36, 19, 60, 1) 0%, rgba(36, 19, 60,0.80) 150%);
   position: sticky;
   top:0;
   display: flex;

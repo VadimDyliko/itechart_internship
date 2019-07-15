@@ -1,6 +1,7 @@
 import React from 'react'
 
 class LogOutBtn extends React.PureComponent{
+
   render(){
     return(
         <>
