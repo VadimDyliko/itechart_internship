@@ -1,0 +1,9 @@
+.content__books {
+  width: 90vw;
+  margin: 0;
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+  justify-items: center;
+}
