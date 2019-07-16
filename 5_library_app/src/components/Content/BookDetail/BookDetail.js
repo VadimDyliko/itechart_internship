@@ -1,5 +1,16 @@
 import React from 'react'
 import './BookDetail.css'
+import openSocket from 'socket.io-client';
+const socket = openSocket('/')
+socket.on('connect', ()=>{
+  console.log('connected to socket');
+})
+socket.on('disconnect', ()=>{
+  console.log('disconnect from socket');
+})
+socket.on('this', (data)=>{
+  console.log(data);
+})
 
 class BookDetail extends React.PureComponent {
 
@@ -14,7 +25,13 @@ class BookDetail extends React.PureComponent {
   componentDidMount() {
     console.log(window.pageYOffset);
     this.setState({top: `${window.pageYOffset+100}px`})
+    socket.emit('bookid', this.props.bookDetailId)
   }
+
+  componentWillUnmount() {
+    socket.emit('disconnect')
+  }
+
 
   render () {
     return(

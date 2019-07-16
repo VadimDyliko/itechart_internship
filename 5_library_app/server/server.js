@@ -1,3 +1,7 @@
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+//const app = express();
 const express = require("express");
 const passport = require("passport");
 const crypto = require("crypto");
@@ -9,7 +13,7 @@ const upload = multer({ storage: storage });
 const { User, Book } = require("./modules/mongo/mongo");
 const token = require("./modules/services/jwt");
 require("./modules/services/passportJWT");
-const app = express();
+
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -178,25 +182,26 @@ app.post('/bookAdd', upload.single("bookPicture"), (req,res)=>{
 
 
 
+io.on('connection', function (socket) {
+  console.log('new connection to socket');
+  io.emit('this', { will: 'be received by everyone'});
 
+  socket.on('bookid', function (id) {
+    console.log(id);
+    let book = Book.searchBy
+  });
 
-
-
-
-
-app.listen(4000, err => {
-  if (!err) {
-    console.log("<<<Server started>>>");
-  }
+  socket.on('disconnect', function () {
+    io.emit('user disconnected');
+  });
 });
 
 
 
-// 
-// const io = require('socket.io')(app);
-// io.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
+
+
+server.listen(4000, err => {
+  if (!err) {
+    console.log("<<<Server started>>>");
+  }
+});

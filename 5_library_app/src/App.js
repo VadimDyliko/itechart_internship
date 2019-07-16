@@ -36,6 +36,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Provider store={store}>
+
           <NavBar />
           <Content/>
         </Provider>
