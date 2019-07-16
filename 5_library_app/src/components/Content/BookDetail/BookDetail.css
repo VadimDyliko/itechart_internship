@@ -1,7 +1,23 @@
 .book-detail{
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
   position: absolute;
   z-index: 20;
-  width: 800px;
-  height: 80vh;
+  left: 50%;
+  margin-left: -500px;
+  width: 1000px;
+
+  display: flex;
+  flex-direction: column;
+}
+.book-datail__props{
+  display: flex;
+}
+.book-detail__cover{
+  width: 350px;
+}
+.book-detail__cover-image{
+  border-radius: 15px;
+  width: 350px;
+  height: 500px;
 }

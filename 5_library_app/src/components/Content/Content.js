@@ -5,6 +5,7 @@ import BooksList from "./BooksList/BooksList";
 import BookDetail from "./BookDetail/BookDetail";
 import ContentSpiner from "./ContentSpiner";
 
+
 class Content extends React.Component {
   state = {
     booksArr: [],

@@ -184,12 +184,27 @@ app.post('/bookAdd', upload.single("bookPicture"), (req,res)=>{
 
 io.on('connection', function (socket) {
   console.log('new connection to socket');
-  io.emit('this', { will: 'be received by everyone'});
 
-  socket.on('bookid', function (id) {
-    console.log(id);
-    let book = Book.searchBy
+  socket.on('getBookById', function (id) {
+    Book.findById(id)
+    .then((book)=>{
+      console.log(book);
+      socket.emit('getBookById', book)
+    })
+    .catch((err)=>console.log(err))
   });
+
+  socket.on('addNewComment', function(comment){
+    console.log(comment);
+    let newComment = {
+        commentAuthor: comment.commentAuthor,
+        commentText: comment.commentText,
+        commentDate: Date.now()
+    }
+    Book.findByIdAndUpdate(comment.bookId, { $push: { comments: newComment } }, function(err, book) {
+      socket.emit('addNewComment', comment.bookId)
+    })
+  })
 
   socket.on('disconnect', function () {
     io.emit('user disconnected');
