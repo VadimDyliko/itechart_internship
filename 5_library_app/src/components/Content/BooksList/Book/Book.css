@@ -16,3 +16,10 @@
   position: absolute;
   z-index: 2;
 }
+.book_large{
+  position: absolute;
+  top: 50px;
+  width: 800px;
+  height: 500px;
+  z-index: 15;
+}

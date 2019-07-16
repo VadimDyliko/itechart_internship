@@ -1,4 +1,4 @@
-import { SET_USER, SET_MODAL } from "./actions";
+import { SET_USER, SET_MODAL, SET_SEARCH } from "./actions";
 
 const initialState = {
   user: {
@@ -14,7 +14,8 @@ const initialState = {
     isShow: false,
     modalTitle: "Title",
     modalText: "Text"
-  }
+  },
+  search: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,6 +27,10 @@ export default function reducer(state = initialState, action) {
     case SET_MODAL:
       return Object.assign({}, state, {
         modalMessage: action.data
+      });
+    case SET_SEARCH:
+      return Object.assign({}, state, {
+        search: action.data
       });
     default:
       return state;

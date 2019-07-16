@@ -1,5 +1,6 @@
 export const SET_USER = "SET_USER";
 export const SET_MODAL = "SET_MODAL";
+export const SET_SEARCH = "SET_SEARCH";
 
 export function setUser(
   data = {
@@ -29,6 +30,13 @@ export function setUser(
 export function setModal(data) {
   return {
     type: SET_MODAL,
+    data
+  };
+}
+
+export function setSearch(data) {
+  return {
+    type: SET_SEARCH,
     data
   };
 }

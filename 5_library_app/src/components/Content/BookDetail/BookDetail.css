@@ -1,0 +1,7 @@
+.book-detail{
+  background: rgba(255, 255, 255, 0.82);
+  position: absolute;
+  z-index: 20;
+  width: 800px;
+  height: 80vh;
+}

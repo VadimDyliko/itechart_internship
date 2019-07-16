@@ -4,6 +4,7 @@ import "./NavBar.css";
 import { setUser } from "../../store/actions";
 import SingIn from "./SingIn/SingIn";
 import SingUp from "./SingUp/SingUp";
+import Search from "./Search/Search";
 import LogInBtn from "./LogInBtn";
 import SingUpBtn from "./SingUpBtn";
 import ModalMessage from "../ModalMessage/ModalMessage";
@@ -61,14 +62,12 @@ class NavBar extends React.PureComponent {
     let buttons =
       this.props.user.login === "guest" ? (
         <>
-          {" "}
-          <LogInBtn clickHandler={this.clickHandlerSingIn} />{" "}
-          <SingUpBtn clickHandler={this.clickHandlerSingUp} />{" "}
+          <LogInBtn clickHandler={this.clickHandlerSingIn} />
+          <SingUpBtn clickHandler={this.clickHandlerSingUp} />
         </>
       ) : (
         <>
-          {" "}
-          <LogOutBtn clickHandler={this.clickHandlerLogOut} />{" "}
+          <LogOutBtn clickHandler={this.clickHandlerLogOut} />
           <ProfileBtn
             clickHandler={this.clickHandlerProfile}
             profilePicture={this.props.user.profilePicture}
@@ -78,14 +77,14 @@ class NavBar extends React.PureComponent {
 
     return (
       <>
-        {" "}
         <nav className="nav-bar">
-          {" "}
-          {modalMessage} {buttons}{" "}
+          {modalMessage}
+          <Search/>
+          {buttons}
           <Profile
             clickHandler={this.clickHandlerProfile}
             isProfileOpen={this.state.isProfileOpen}
-          />{" "}
+          />
           <SingIn
             clickHandler={this.clickHandlerSingIn}
             isSingInMenuOpen={this.state.isSingInMenuOpen}
@@ -94,7 +93,7 @@ class NavBar extends React.PureComponent {
             clickHandler={this.clickHandlerSingUp}
             isSingUpMenuOpen={this.state.isSingUpMenuOpen}
           />
-        </nav>{" "}
+        </nav>
       </>
     );
   }

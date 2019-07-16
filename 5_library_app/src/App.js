@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./components/NavBar/NavBar";
 import Content from "./components/Content/Content";
-import BookAdder from "./components/BookAdder/BookAdder";
+//import BookAdder from "./components/BookAdder/BookAdder";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./store/reducer";

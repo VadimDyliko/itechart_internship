@@ -1,10 +1,12 @@
 import React from "react";
 import "./Book.css";
+import classnames from "classnames";
 
 class Book extends React.PureComponent{
 
   state={
-    picture: ''
+    picture: '',
+    isLarge: false,
   }
 
   componentWillMount(){
@@ -18,10 +20,23 @@ class Book extends React.PureComponent{
     }
 
   }
+
+bookLargeHandler=(e)=>{
+  this.setState({isLarge: !this.state.isLarge})
+}
+
+clickHandler=(e)=>{
+  this.props.bookDetailHandler(e, this.props._id)
+}
+
   render(){
+    let bookClassNames = classnames({
+      "book": !this.state.isLarge,
+      "book book_large": this.state.isLarge
+    });
     return (
-      <div className="book">
-        <img className="book__cover-picture" src={this.state.picture}></img>
+      <div className={bookClassNames} onClick={this.clickHandler}>
+        <img className="book__cover-picture" src={this.state.picture} alt="book-cover"></img>
         <div className="book__props">
             <p>{this.props.tittle}</p>
             <p>{this.props.bookAthour}</p>
