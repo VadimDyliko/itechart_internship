@@ -1,0 +1,13 @@
+import { combineReducers } from 'redux';
+import user from './user';
+import modalMessage from './modalMessage';
+import search from './search';
+
+
+const rootReducer = combineReducers ({
+  user,
+  modalMessage,
+  search
+})
+
+export default rootReducer

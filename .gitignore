@@ -2,3 +2,5 @@
 3_React/node_modules
 5_library_app/node_modules
 5_library_app/server/node_modules
+library_app_refactoring/node_modules
+library_app_refactoring/server/node_modules
