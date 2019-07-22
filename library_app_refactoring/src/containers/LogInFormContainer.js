@@ -8,8 +8,9 @@ import {loginUser} from '../actions'
 class LogInFormContainer extends React.PureComponent {
 
   loginSubmitHundler = (data) =>{
-    console.log(data);
+    console.log(this.props.history);
     this.props.dispatch(loginUser(data))
+      .then(()=>this.props.history.push('/'))
   }
 
   render() {

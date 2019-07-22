@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import NavBar from './NavBar'
+import Content from './Content'
 import ModalMessage from '../components/ModalMessage'
 
 import {fetchUser, setModal } from "../actions";
@@ -12,17 +14,19 @@ class App extends React.Component {
     this.props.dispatch(fetchUser())
   }
 
-  closeModalMessage() {
-    this.props.dispatch(setModal({isShow: false}))
+  closeModalMessage = () => {
+    this.props.dispatch(setModal())
   }
 
   render() {
     return (
-      <div className="App">
-          <button onClick={this.closeModalMessage}>asa</button>
-          <ModalMessage isShow={this.props.isModalShow} modalTitle={this.props.modalTitle} modalText={this.props.modalText} closeModalMessage={this.closeModalMessage}/>
-          <NavBar/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+              <NavBar/>
+              <Content/>
+              <ModalMessage isShow={this.props.isModalShow} modalTitle={this.props.modalTitle} modalText={this.props.modalText} closeModalMessage={this.closeModalMessage}/>
+        </div>
+      </BrowserRouter>
     );
   }
 }

@@ -9,6 +9,7 @@ class SingUpFormContainer extends React.PureComponent {
 
   singUpSubmitHandler = (data) =>{
     this.props.dispatch(singUpUser(data))
+      .then(()=>this.props.history.push('/'))
   }
 
   identityCheck = (e, key, target) => {

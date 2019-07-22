@@ -1,5 +1,5 @@
 const secretKey = "supersecretkey";
-const jwt = require("../../node_modules/jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const token = {
   setToken: userId => {

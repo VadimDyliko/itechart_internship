@@ -81,9 +81,6 @@ class SingUpForm extends React.PureComponent {
       <button type="submit" className="btn btn-primary">
         SingUp
       </button>
-      <button type="button" onClick={this.props.clickHandler} className="btn btn-outline-primary">
-        Close
-      </button>
     </form>);
   }
 }

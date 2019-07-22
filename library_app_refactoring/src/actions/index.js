@@ -85,7 +85,7 @@ export const singUpUser = data => dispatch =>{
   formData.append("password", data.password);
   formData.append("profilePicture", data.profilePicture);
   console.log(formData);
-  fetch("/singup", {
+  return fetch("/singup", {
     method: "POST",
     body: formData
   })
@@ -104,7 +104,7 @@ export const singUpUser = data => dispatch =>{
 }
 
 
-export function setModal(data) {
+export const setModal = (data) => {
   return {
     type: SET_MODAL,
     data
