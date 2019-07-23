@@ -4,9 +4,10 @@ const crypto = require("crypto");
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-const { User, Book } = require("../modules/mongo/mongo");
-const token = require("../modules/services/jwt");
+const { User, Book } = require("../services/mongo");
+const token = require("../services/jwt");
 const router = express.Router();
+const {secretKey} = require("../config/constants");
 
 router.post("/singup", upload.single("profilePicture"), (req, res) => {
   console.log(req.body);
@@ -44,7 +45,7 @@ router.post("/singup", upload.single("profilePicture"), (req, res) => {
                 httpOnly: true
               });
               res.sendStatus(200);
-              console.log(`We got a new user ${user}`);
+              console.log(`we got a new user ${user}`);
             });
           } else {
             console.error("we have user with such email or login");
@@ -75,7 +76,7 @@ router.post("/login", (req, res) => {
           if (
             user.password ===
             crypto
-              .createHmac("sha256", "supersecretkey")
+              .createHmac("sha256", secretKey)
               .update(req.body.password)
               .digest("hex")
           ) {
@@ -155,6 +156,7 @@ router.post('/bookAdd', upload.single("bookPicture"), (req,res)=>{
   .then(()=>res.sendStatus(200))
   .catch((err)=>console.log(err))
 })
+
 
 
 module.exports = router

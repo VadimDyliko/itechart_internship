@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import Profile from '../components/Profile'
+import Profile from '../components/Profile/Profile'
 import {logOutUser} from '../actions'
 import guestProfilePicture from '../png/person.png'
 

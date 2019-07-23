@@ -1,6 +1,6 @@
 import React from "react";
-import './Profile.css'
-import LogOutBtn from './LogOutBtn'
+import './Profile.css';
+import LogOutBtn from '../LogOutBtn';
 
 class Profile extends React.PureComponent {
 

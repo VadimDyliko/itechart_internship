@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-const {dbUrl} = require('../../config/database.js')
+const {dbUrl} = require('../config/constants.js')
 
 mongoose
   .connect(dbUrl.url)

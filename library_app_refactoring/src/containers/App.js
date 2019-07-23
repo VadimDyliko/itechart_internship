@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import NavBar from './NavBar'
-import Content from './Content'
+import NavBar from './NavBar/NavBar'
+import Content from './Content/Content'
 import ModalMessage from '../components/ModalMessage'
 
 import {fetchUser, setModal } from "../actions";
 import "./App.css";
 
-class App extends React.Component {
+class App extends React.PureComponent {
 
   componentDidMount() {
     this.props.dispatch(fetchUser())

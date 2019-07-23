@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {fetchBooks} from "../actions"
-import Home from "../components/Home"
+import Home from "../components/Home/Home"
 import Spiner from "../components/Spiner"
 
 
@@ -18,7 +18,7 @@ class HomeContainer extends React.PureComponent {
 
   bookClickHandler = bookId => {
     console.log(bookId);
-    this.props.history.push(`/book/:${bookId}/`)
+    this.props.history.push(`/book/${bookId}/`)
   }
 
   render() {

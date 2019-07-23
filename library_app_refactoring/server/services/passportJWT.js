@@ -1,7 +1,8 @@
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
-const { User } = require("../mongo/mongo");
+const { User } = require("./mongo");
+const {secretKey} = require("../config/constants")
 
 const cookieExtractor = function(req) {
   var token = null;
@@ -12,7 +13,7 @@ const cookieExtractor = function(req) {
 };
 const opts = {
   jwtFromRequest: cookieExtractor,
-  secretOrKey: "supersecretkey"
+  secretOrKey: secretKey
 };
 
 passport.use(

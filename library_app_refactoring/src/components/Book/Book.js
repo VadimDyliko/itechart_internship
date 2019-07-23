@@ -8,7 +8,7 @@ class Book extends React.PureComponent {
   }
 
   render () {
-    let {_id, tittle, year, bookAthour, bookDiscription, bookPicture, comments} =this.props.book
+    let {bookPicture} =this.props.book
     return(
       <div className="book" onClick={this.clickHandler}>
         <img src={bookPicture} className="book__cover-image" alt="cover"/>

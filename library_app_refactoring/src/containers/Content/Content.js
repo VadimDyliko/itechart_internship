@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route } from 'react-router-dom';
 import './Content.css'
-import LogInFormContainer from '../containers/LogInFormContainer'
-import SingUpFormContainer from '../containers/SingUpFormContainer'
-import ProfileContainer from '../containers/ProfileContainer'
-import HomeContainer from '../containers/HomeContainer'
+import LogInFormContainer from '../../containers/LogInFormContainer'
+import SingUpFormContainer from '../../containers/SingUpFormContainer'
+import ProfileContainer from '../../containers/ProfileContainer'
+import HomeContainer from '../../containers/HomeContainer'
+import BookDetailContainer from '../../containers/BookDetailContainer'
 
 
 class Content extends React.PureComponent {
@@ -22,7 +23,7 @@ class Content extends React.PureComponent {
     return (
         <div className = "content">
           <Route path="/home" component={HomeContainer}/>
-          <Route path="/book/:bookId/" component={LogInFormContainer}/> //replace with bookdetail component
+          <Route path="/book/:bookId/" component={BookDetailContainer}/>
           {route}
         </div>
     );

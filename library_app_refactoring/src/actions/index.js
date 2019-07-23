@@ -1,6 +1,7 @@
 import {SET_USER, SET_MODAL, SET_SEARCH, SET_BOOKS} from "../constants/actionTypes";
 import base64 from "base64-arraybuffer";
 
+
 const validateUserData = (
   data = {
     login: "Guest",
@@ -18,6 +19,7 @@ const validateUserData = (
   dispatch(setUser(data))
 }
 
+
 const setUser = data => {
   return {
     type: SET_USER,
@@ -25,9 +27,11 @@ const setUser = data => {
   };
 }
 
+
 const pictureToBase64 = (picture) => {
   return ("data:image/jpeg;base64," + base64.encode(picture.data))
 }
+
 
 export const loginUser = (data) => (dispatch) => {
   return fetch("/login", {
@@ -50,10 +54,12 @@ export const loginUser = (data) => (dispatch) => {
   })
 }
 
+
 export const logOutUser = () => dispatch => {
   return fetch("/logout")
   .then(()=>dispatch(validateUserData()))
 }
+
 
 export const fetchUser = () => dispatch => {
   fetch('/profile')
@@ -116,6 +122,7 @@ export const fetchBooks = filter => (dispatch, getState) => {
   }
 }
 
+
 const validateBooksData = books => dispatch => {
   books.forEach(book=>{
     if (book.bookPicture){
@@ -125,6 +132,7 @@ const validateBooksData = books => dispatch => {
   dispatch(setBooks(books))
 }
 
+
 const setBooks = (books) =>{
   return {
     type: SET_BOOKS,
@@ -132,12 +140,14 @@ const setBooks = (books) =>{
   };
 }
 
+
 export const setModal = (data = {isShow: false, modalTitle: "", modalText: ""}) => {
   return {
     type: SET_MODAL,
     data
   };
 }
+
 
 export function setSearch(data) {
   return {

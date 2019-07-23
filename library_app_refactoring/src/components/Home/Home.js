@@ -1,7 +1,6 @@
 import React from "react";
-import './Profile.css';
 import './Home.css';
-import Book from './Book';
+import Book from '../Book/Book';
 
 class Home extends React.PureComponent {
 
