@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-const dbUrl =
-  "mongodb+srv://libraryapp:supersecret@cluster0-vyplv.mongodb.net/users";
+const {dbUrl} = require('../../config/database.js')
 
 mongoose
-  .connect(dbUrl)
+  .connect(dbUrl.url)
   .then(
     () => console.log("<<<Successfully connected to MongoDB-Atlas>>>"),
     err => console.log(err)

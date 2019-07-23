@@ -1,38 +1,35 @@
-export const SET_USER = "SET_USER";
-export const SET_MODAL = "SET_MODAL";
-export const SET_SEARCH = "SET_SEARCH";
+import {SET_USER, SET_MODAL, SET_SEARCH, SET_BOOKS} from "../constants/actionTypes";
+import base64 from "base64-arraybuffer";
 
-export function setUser(
+const validateUserData = (
   data = {
-    login: "guest",
+    login: "Guest",
     email: null,
     firstName: "Guest",
     lastName: null,
     age: null,
     booksOnHand: [],
-    profilePicture: {}
+    profilePicture: undefined
   }
-) {
+) => dispatch => {
   if (data.profilePicture) {
     data.profilePicture = pictureToBase64(data.profilePicture)
   }
+  dispatch(setUser(data))
+}
+
+const setUser = data => {
   return {
     type: SET_USER,
     data
   };
 }
 
-const pictureToBase64 = picture =>{
-  let base64Flag = "data:image/jpeg;base64,";
-  let binary = "";
-  let bytes = [].slice.call(new Uint8Array(picture.data));
-  bytes.forEach(b => (binary += String.fromCharCode(b)));
-  let imageStr = window.btoa(binary);
-  return (base64Flag + imageStr);
+const pictureToBase64 = (picture) => {
+  return ("data:image/jpeg;base64," + base64.encode(picture.data))
 }
 
 export const loginUser = (data) => (dispatch) => {
-  console.log('login');
   return fetch("/login", {
     method: "POST",
     headers: {
@@ -42,25 +39,23 @@ export const loginUser = (data) => (dispatch) => {
   }).then(res => {
     if (res.status === 200) {
       //ok
-      console.log(200);
       dispatch(fetchUser());
     } else if (res.status === 401) {
       dispatch(setModal({isShow: true, modalTitle: "Autentification faild", modalText: "Invalid password"}));
-      //throw new Error("invalid login or password");
+      throw new Error("invalid login or password");
     } else if (res.status === 404) {
       dispatch(setModal({isShow: true, modalTitle: "Autentification faild", modalText: "There is not such user"}));
-      //throw new Error("there is not such user");
+      throw new Error("there is not such user");
     }
   })
 }
 
 export const logOutUser = () => dispatch => {
-  fetch("/logout")
-  .then(()=>dispatch(setUser()))
+  return fetch("/logout")
+  .then(()=>dispatch(validateUserData()))
 }
 
 export const fetchUser = () => dispatch => {
-  console.log('fetchUser');
   fetch('/profile')
     .then(res=>{
       if (res.status === 200) {
@@ -70,7 +65,7 @@ export const fetchUser = () => dispatch => {
       }
     })
     .then(data => {
-      dispatch(setUser(data));
+      dispatch(validateUserData(data));
     })
     .catch(err => {
       console.log(err);
@@ -95,16 +90,49 @@ export const singUpUser = data => dispatch =>{
       dispatch(fetchUser())
     } else if (res.status === 401) {
       dispatch(setModal({isShow: true, modalTitle: "Registration faild", modalText: "User is registred with such login or email"}));
-      // throw new Error("User is registred with such login or email");
+      throw new Error("User is registred with such login or email");
     } else {
       dispatch(setModal({isShow: true, modalTitle: "Registration faild", modalText: "Set valid information"}));
-      // throw new Error("Set valid information");
+      throw new Error("Set valid information");
     }
   })
 }
 
 
-export const setModal = (data) => {
+export const fetchBooks = filter => (dispatch, getState) => {
+  if (getState().books.length>0) {
+    return Promise.resolve()
+  } else {
+    return fetch("/books")
+      .then((res)=>{
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("Books load faild");
+        }
+      })
+      .then((books)=>dispatch(validateBooksData(books)))
+      .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something not ok!", modalText: err})))
+  }
+}
+
+const validateBooksData = books => dispatch => {
+  books.forEach(book=>{
+    if (book.bookPicture){
+      book.bookPicture = pictureToBase64(book.bookPicture)
+    }
+  })
+  dispatch(setBooks(books))
+}
+
+const setBooks = (books) =>{
+  return {
+    type: SET_BOOKS,
+    books
+  };
+}
+
+export const setModal = (data = {isShow: false, modalTitle: "", modalText: ""}) => {
   return {
     type: SET_MODAL,
     data

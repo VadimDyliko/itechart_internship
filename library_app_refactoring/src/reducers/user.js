@@ -1,16 +1,19 @@
+import {SET_USER} from "../constants/actionTypes";
+
 const initialState = {
+  isSingIn: false,
   login: "Guest",
   email: null,
   firstName: "Guest",
   lastName: null,
   age: null,
   booksOnHand: [],
-  profilePicture: {}
+  profilePicture: undefined
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_USER':
+    case SET_USER:
       return Object.assign({}, state, {
         login: action.data.login,
         email: action.data.email,

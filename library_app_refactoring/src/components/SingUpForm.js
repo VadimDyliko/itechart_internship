@@ -6,18 +6,16 @@ class SingUpForm extends React.PureComponent {
     login: "",
     email: "",
     password: "",
-    emailIdentity: false,
-    loginIdentity: false,
     profilePictureName: "Choose file",
   };
 
   emailHandler = e => {
     this.setState({email: e.target.value});
-    //this.props.identityCheck(e, 'email', e.target.value)
+    this.props.identityCheck(e, 'email')
   };
   loginHandler = e => {
     this.setState({login: e.target.value});
-    //this.props.identityCheck(e, 'login', e.target.value)
+    this.props.identityCheck(e, 'login')
   };
   passwordHandler = e => {
     this.setState({password: e.target.value});
@@ -51,10 +49,18 @@ class SingUpForm extends React.PureComponent {
       "sing-up-form": this.props.isSingUpMenuOpen,
       "sing-up-form sing-up-form_disabled": !this.props.isSingUpMenuOpen
     });
+    let isLoginValid = classnames({
+      "form-control is-valid": this.props.isLoginValid,
+      "form-control is-invalid": !this.props.isLoginValid
+    })
+    let isEmailValid = classnames({
+      "form-control is-valid": this.props.isEmailValid,
+      "form-control is-invalid": !this.props.isEmailValid
+    })
     return (<form className={singUpFormClassNames} onSubmit={this.submitHandler}>
       <div className="form-group">
         <p>Login</p>
-        <input type="name" className="form-control" placeholder="Enter login" onChange={this.loginHandler}></input>
+        <input type="name" className={isLoginValid} placeholder="Enter login" onChange={this.loginHandler}></input>
       </div>
       <div className="input-group mb-3">
         <div className="input-group-prepend">
@@ -69,7 +75,7 @@ class SingUpForm extends React.PureComponent {
       </div>
       <div className="form-group">
         <p>Email address</p>
-        <input type="email" className="form-control" placeholder="Enter email" onChange={this.emailHandler}></input>
+        <input type="email" className={isEmailValid} placeholder="Enter email" onChange={this.emailHandler}></input>
         <small className="form-text text-muted">
           We'll never share your email with anyone else.
         </small>

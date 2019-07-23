@@ -8,9 +8,9 @@ import {loginUser} from '../actions'
 class LogInFormContainer extends React.PureComponent {
 
   loginSubmitHundler = (data) =>{
-    console.log(this.props.history);
-    this.props.dispatch(loginUser(data))
-      .then(()=>this.props.history.push('/'))
+    this.props.onLoginUser(data)
+      .then(()=>this.props.history.push('/home'))
+      .catch((err)=>console.log(err))
   }
 
   render() {
@@ -26,4 +26,10 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps)(LogInFormContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoginUser: (data) => dispatch(loginUser(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInFormContainer);
