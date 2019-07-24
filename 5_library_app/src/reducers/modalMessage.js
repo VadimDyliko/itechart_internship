@@ -1,14 +1,19 @@
+import { SET_MODAL } from "../constants/actionTypes";
+
 const initialState = {
     isShow: false,
-    modalTitle: "Title",
-    modalText: "Text"
+    modalTitle: "modal message title",
+    modalText: "modal message text"
   }
 
   const modalMessage = (state = initialState, action) => {
     switch (action.type) {
-      case 'SET_MODAL':
+      case SET_MODAL:
+        console.log(action.data);
         return Object.assign({}, state, {
-          modalMessage: action.data
+          isShow: action.data.isShow,
+          modalTitle: action.data.modalTitle,
+          modalText: action.data.modalText
         });
       default:
         return state;

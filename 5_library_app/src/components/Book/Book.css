@@ -1,0 +1,11 @@
+.book{
+  overflow: hidden;
+  width: 150px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.57);
+  border-radius: 5px;
+}
+.book__cover-image{
+  width: 150px;
+  height: 250px;
+}

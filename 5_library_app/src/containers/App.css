@@ -4,8 +4,21 @@
 }
 .App {
   width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  font-family: 'Nunito', sans-serif;
+}
+.btn{
+  margin: 10px 0;
+  min-width: 150px;
+  color: white;
+  padding: 10px 15px;
+  background: none;
+  border: 1px white solid;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.btn:hover{
+  color: black;
+  background: rgba(255, 255, 255);
 }
