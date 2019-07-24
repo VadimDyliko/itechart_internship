@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import LogInForm from '../components/LogInForm';
+import LogInForm from '../components/LogInForm/LogInForm';
 import {loginUser} from '../actions'
 
 

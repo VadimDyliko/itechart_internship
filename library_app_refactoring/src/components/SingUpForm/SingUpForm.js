@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import './SingUpForm.css'
 
 class SingUpForm extends React.PureComponent {
   state = {
@@ -45,10 +46,6 @@ class SingUpForm extends React.PureComponent {
   }
 
   render() {
-    let singUpFormClassNames = classnames({
-      "sing-up-form": this.props.isSingUpMenuOpen,
-      "sing-up-form sing-up-form_disabled": !this.props.isSingUpMenuOpen
-    });
     let isLoginValid = classnames({
       "form-control is-valid": this.props.isLoginValid,
       "form-control is-invalid": !this.props.isLoginValid
@@ -57,36 +54,23 @@ class SingUpForm extends React.PureComponent {
       "form-control is-valid": this.props.isEmailValid,
       "form-control is-invalid": !this.props.isEmailValid
     })
-    return (<form className={singUpFormClassNames} onSubmit={this.submitHandler}>
-      <div className="form-group">
-        <p>Login</p>
+    return (<form className="sing-up-form" onSubmit={this.submitHandler}>
+        <p className="sing-up-form__labels-text">Login</p>
         <input type="name" className={isLoginValid} placeholder="Enter login" onChange={this.loginHandler}></input>
-      </div>
-      <div className="input-group mb-3">
         <div className="input-group-prepend">
-          <span className="input-group-text">Profile image</span>
+          <p className="sing-up-form__labels-text">Profile image</p>
         </div>
         <div className="custom-file">
           <input onChange={this.profilePictureHandler} type="file" className="custom-file-input" id="inputFileProfileImage" accept=".jpg, .jpeg, .png"></input>
-          <label className="custom-file-label" forhtml="inputFileProfileImage">
-            {this.state.profilePictureName}
-          </label>
         </div>
-      </div>
-      <div className="form-group">
-        <p>Email address</p>
+        <p className="sing-up-form__labels-text">Email address</p>
         <input type="email" className={isEmailValid} placeholder="Enter email" onChange={this.emailHandler}></input>
-        <small className="form-text text-muted">
-          We'll never share your email with anyone else.
-        </small>
-      </div>
-      <div className="form-group">
-        <p>Password</p>
+        <p className="form-text text-muted">We'll never share your email with anyone else.</p>
+        <p className="sing-up-form__labels-text">Password</p>
         <input type="password" className="form-control" placeholder="Password" onChange={this.passwordHandler}></input>
-      </div>
-      <button type="submit" className="btn btn-primary">
-        SingUp
-      </button>
+        <button type="submit" className="btn btn-primary">
+          SingUp
+        </button>
     </form>);
   }
 }

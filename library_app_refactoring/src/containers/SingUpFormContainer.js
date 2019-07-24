@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import SingUpForm from '../components/SingUpForm';
+import SingUpForm from '../components/SingUpForm/SingUpForm';
 import {singUpUser, setModal} from '../actions'
 import {emailRegExp} from '../constants/regExp'
 
@@ -23,6 +23,7 @@ class SingUpFormContainer extends React.PureComponent {
   }
 
   identityCheck = (e, key) => {
+    console.log(key);
     if (e.target.value === ''){
       this.setState({[key]:false})
       return

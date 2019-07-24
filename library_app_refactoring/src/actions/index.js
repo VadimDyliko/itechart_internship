@@ -1,6 +1,5 @@
-import {SET_USER, SET_MODAL, SET_SEARCH, SET_BOOKS} from "../constants/actionTypes";
+import {SET_USER, SET_MODAL, SET_SEARCH, SET_BOOKS, SET_BOOKS_COVERS} from "../constants/actionTypes";
 import base64 from "base64-arraybuffer";
-
 
 const validateUserData = (
   data = {
@@ -117,21 +116,30 @@ export const fetchBooks = filter => (dispatch, getState) => {
           throw new Error("Books load faild");
         }
       })
-      .then((books)=>dispatch(validateBooksData(books)))
+      .then((books)=>dispatch(setBooks(books)))
       .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something not ok!", modalText: err})))
   }
 }
 
-
-const validateBooksData = books => dispatch => {
-  books.forEach(book=>{
-    if (book.bookPicture){
-      book.bookPicture = pictureToBase64(book.bookPicture)
-    }
+export const fetchBookCover = bookId => (dispatch, getState) => {
+  return fetch(`/books/cover/${bookId}`)
+  .then((res)=>res.json())
+  .then((cover)=>{
+    return Object.assign({}, cover, {bookPicture: pictureToBase64(cover.bookPicture)})
   })
-  dispatch(setBooks(books))
+  .then((cover)=>{
+    dispatch(setCoverToStore(cover._id, cover.bookPicture))
+    return cover
+  })
+  .then((cover)=>cover.bookPicture)
 }
 
+const setCoverToStore = (id, cover) => {
+ return {
+   type: SET_BOOKS_COVERS,
+   ////Here CAHCHE
+ }
+}
 
 const setBooks = (books) =>{
   return {

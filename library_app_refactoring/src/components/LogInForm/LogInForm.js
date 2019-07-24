@@ -1,4 +1,5 @@
 import React from "react";
+import './LogInForm.css';
 
 class LogInForm extends React.PureComponent {
   state={
@@ -17,12 +18,13 @@ class LogInForm extends React.PureComponent {
 
   render() {
     return (<form className="log-in-form" onSubmit={this.loginSubmitHundler}>
+      <h2>Please, sign in:</h2>
       <div className="form-group">
-        <label>Login</label>
+        <p>Login</p>
         <input type="text" className="form-control" placeholder="Enter login" name="login" onChange={this.inputDataHandler}></input>
       </div>
       <div className="form-group">
-        <label>Password</label>
+        <p>Password</p>
         <input type="password" className="form-control" placeholder="Password" name="password" onChange={this.inputDataHandler}></input>
       </div>
       <button type="submit" className="btn btn-primary">

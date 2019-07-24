@@ -12,8 +12,10 @@ const {secretKey} = require("../config/constants");
 router.post("/singup", upload.single("profilePicture"), (req, res) => {
   console.log(req.body);
   if (req.body.login && req.body.email && req.body.password) {
+    //
     let xss = /<|>|\//gi;
     if (!req.body.login.search(xss)) {
+      //
       console.log("XSS");
       res.sendStatus(400);
     } else {
@@ -33,7 +35,7 @@ router.post("/singup", upload.single("profilePicture"), (req, res) => {
             let newUser = new User({
               email: req.body.email,
               password: crypto
-                .createHmac("sha256", "supersecretkey")
+                .createHmac("sha256", secretKey)
                 .update(req.body.password)
                 .digest("hex"),
               login: req.body.login
@@ -45,10 +47,11 @@ router.post("/singup", upload.single("profilePicture"), (req, res) => {
                 httpOnly: true
               });
               res.sendStatus(200);
+              //
               console.log(`we got a new user ${user}`);
             });
           } else {
-            console.error("we have user with such email or login");
+            //we have user with such email or login
             res.sendStatus(401);
           }
         })
@@ -58,12 +61,13 @@ router.post("/singup", upload.single("profilePicture"), (req, res) => {
         });
     }
   } else {
-    console.error("there are note important user data");
+    //there are not important user data in request
     res.sendStatus(400);
   }
 });
 
 router.post("/login", (req, res) => {
+  //
   console.log(`----->>>/login req.body:`);
   console.log(req.body);
   if (req.body.login && req.body.password) {
@@ -102,8 +106,6 @@ router.get(
     session: false
   }),
   function(req, res) {
-    console.log("--->>>/profile req.cookies: ");
-    console.log(req.cookies);
     let payload = {
       login: req.user.login,
       email: req.user.email,
@@ -117,8 +119,34 @@ router.get(
 );
 
 router.get("/books", (req, res) => {
-  Book.find().then(books => res.json(books));
+  Book.find()
+    .then(books =>books.map(book=>{
+      return newBook = {
+        _id: book._id,
+        tittle: book.tittle,
+        year: book.year,
+        bookAthour: book.bookAthour
+      }
+    }))
+    .then(books =>{
+      console.log(books);
+       res.json(books)
+     })
 });
+
+router.get("/books/cover/:bookId", (req,res)=>{
+  console.log('requesting cover for ', req.params.bookId);
+  Book.findById(req.params.bookId)
+  .then(book => {return {
+      _id: book._id,
+      bookPicture: book.bookPicture
+    }})
+  .then(book=>res.json(book))
+  .catch((err)=>console.log(err))
+})
+// router.get("/books", (req, res) => {
+//   Book.find().then(books => res.json(books));
+// });
 
 router.get("/logout", (req, res) => {
   res.clearCookie("jwt");
