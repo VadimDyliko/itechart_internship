@@ -15,7 +15,7 @@ class SingUpFormContainer extends React.PureComponent {
     if (this.state.login && this.state.email) {
       this.props.onSingUpUser(data).then(() => this.props.history.push('/home')).catch((err) => console.log(err))
     } else {
-      this.onSetModal({isShow: true, modalTitle: "Registration faild", modalText: "User is registred with such login or email"});
+      this.onSetModal({isShow: true, modalTitle: "Registration faild", modalText: "Set valid information"});
     }
   }
 
@@ -24,7 +24,6 @@ class SingUpFormContainer extends React.PureComponent {
   }
 
   identityCheck = (e, key) => {
-    console.log(key);
     if (e.target.value === '') {
       this.setState({[key]: false})
       return

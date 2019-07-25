@@ -3,10 +3,11 @@ import "./Comment.css"
 
 class Comment extends React.PureComponent {
   render() {
-    let {commentAuthor, commentText} = this.props
+    let {commentAuthor, commentText, commentAuthorId} = this.props
+    let authorAvatar = `/user/avatar/${commentAuthorId}`
     return (
       <div className="comment">
-        <img src="/user/avatar/5d2c8e221658ce17f7295ce8" className="comment__author-avatar" alt="avatar"/>
+        <img src={authorAvatar} className="comment__author-avatar" alt="avatar"/>
         <div className="comment__details">
           <p>{commentAuthor}</p>
           <p>{commentText}</p>

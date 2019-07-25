@@ -19,6 +19,10 @@ state={
   componentDidMount() {
     socket.emit('reqBookData', {bookId: this.props.match.params.bookId})
     socket.on('resBookData', data=>{
+      data.comments.forEach((comment, i)=>{
+        //Clear comment in db and add autor id to key
+        comment.id = i
+      })
       this.setState(data)
     })
   }
@@ -29,15 +33,15 @@ state={
 
   render() {
     return (<div>
-      <BookDetail bookId={this.props.match.params.bookId} tittle={this.state.tittle} year={this.state.year} bookAthour={this.state.bookAthour} bookDiscription={this.state.bookDiscription} comments={this.state.comments}/>
+      <BookDetail bookId={this.props.match.params.bookId} tittle={this.state.tittle} year={this.state.year} bookAthour={this.state.bookAthour} bookDiscription={this.state.bookDiscription} comments={this.state.comments} userId={this.props.userId}/>
     </div>);
   }
 }
 
 const mapStateToProps = state => {
   return {
-
+    userId:state.user._id
   }
 }
 
-export default connect()(BookDetailContainer);
+export default connect(mapStateToProps)(BookDetailContainer);

@@ -14,6 +14,9 @@ class Book extends React.PureComponent {
   render() {
     return (<div className="book" onClick={this.clickHandler}>
       <img src={this.state.coverImgUrl} className="book__cover-image" alt="cover"/>
+      <div className="book__about">
+        <span className="book__title">{this.props.book.tittle}</span>
+      </div>
     </div>)
   }
 }

@@ -3,11 +3,23 @@ const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
 const storage = multer.memoryStorage();
-const upload = multer({storage: storage});
-const { singUp, logIn, identityCheck } = require("../services/auth");
-const { getBookCover, getBooks, getSingleBookCover } = require("../services/books");
+const upload = multer({
+  storage: storage
+});
+const {
+  singUp,
+  logIn,
+  identityCheck,
+  getUserAvatar,
+  getProfile
+} = require("../services/auth");
+const {
+  getBookCover,
+  getBooks,
+  getSingleBookCover,
+  addComment
+} = require("../services/books");
 
-const {Book, User} = require('../services/mongo');
 
 router.post("/singup", upload.single("profilePicture"), (req, res) => {
   console.log(req.body);
@@ -29,20 +41,14 @@ router.post("/login", (req, res) => {
 router.get("/profile", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
-  let payload = {
-    login: req.user.login,
-    email: req.user.email,
-    firstName: req.user.firstName,
-    lastName: req.user.lastName,
-    booksOnHand: req.user.booksOnHand,
-    profilePicture: req.user.profilePicture
-  };
-  res.json(payload);
+  getProfile(req, res)
 });
+
 
 router.get("/user/avatr/:userId", (req, res) => {
   sendStatus(200)
 })
+
 
 router.get("/books", (req, res) => {
   getBooks(req, res)
@@ -66,16 +72,16 @@ router.get("/book/cover/:bookId", (req, res) => {
 
 
 router.get("/user/avatar/:userId", (req, res) => {
-  //getSingleUserAvatar(req, res)
-  console.log(req);
-  console.log('************************************',req.params.userId);
-  User.findById(req.params.userId)
-  .then(user=>{
-    res.set('Content-Type', 'image/jpeg');
-    res.send(user.profilePicture)
-  })
-  .catch((err)=>console.log(err))
+  getUserAvatar(req, res)
 })
+
+
+router.post("/addcomment", passport.authenticate("jwt", {
+  session: false
+}), (req, res) => {
+  addComment(req, res)
+})
+
 
 module.exports = router
 

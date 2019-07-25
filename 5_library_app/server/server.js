@@ -10,6 +10,8 @@ const { User, Book } = require("./services/mongo");
 const {getSingleBookData} = require("./services/books")
 require("./services/passportJWT");
 
+
+
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -34,3 +36,7 @@ server.listen(4000, err => {
     console.log("<<<Server started>>>");
   }
 });
+
+module.exports = {
+  io
+}

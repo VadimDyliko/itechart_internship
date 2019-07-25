@@ -1,11 +1,24 @@
 .book{
   overflow: hidden;
-  width: 150px;
-  height: 250px;
+  width: 200px;
+  height: 400px;
   background: rgba(0, 0, 0, 0.57);
   border-radius: 5px;
+  cursor: pointer;
 }
 .book__cover-image{
-  width: 150px;
-  height: 250px;
+  width: 200px;
+  height: 300px;
+}
+.book__about{
+  text-align: center;
+  padding: 5px;
+  width: 200px;
+  height: 100px;
+}
+.book__title{
+  font-size: 12px;
+}
+.book:hover{
+  transform: scale(1.05);
 }

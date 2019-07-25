@@ -98,8 +98,33 @@ const identityCheck = (req, res) => {
 }
 
 
+const getProfile = (req, res) => {
+  let payload = {
+    _id: req.user._id,
+    login: req.user.login,
+    email: req.user.email,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    booksOnHand: req.user.booksOnHand
+  };
+  res.json(payload);
+}
+
+
+const getUserAvatar = (req, res) => {
+  User.findById(req.params.userId)
+  .then(user=>{
+    res.set('Content-Type', 'image/jpeg');
+    res.send(user.profilePicture)
+  })
+  .catch((err)=>console.log(err))
+}
+
+
 module.exports = {
   singUp,
   logIn,
-  identityCheck
+  identityCheck,
+  getUserAvatar,
+  getProfile
 }

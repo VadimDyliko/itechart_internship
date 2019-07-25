@@ -42,8 +42,25 @@ const getSingleBookData = (id) => {
 }
 
 
+const addComment = (req, res) => {
+  let newComment = {
+    commentAuthorId: req.user._id,
+    commentAuthor: req.user.login,
+    commentText: req.body.commentText,
+    date: Date.now(),
+  }
+  console.log(req.body.bookId);
+  Book.findByIdAndUpdate(req.body.bookId,
+    {$push: {comments: newComment}},
+    {safe: true, upsert: true})
+    .then(()=>res.sendStatus(200))
+    .catch(err=>console.log(err))
+}
+
+
 module.exports = {
   getBooks,
   getSingleBookCover,
-  getSingleBookData
+  getSingleBookData,
+  addComment
 }

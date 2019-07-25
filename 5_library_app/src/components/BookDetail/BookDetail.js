@@ -16,11 +16,11 @@ class BookDetailContainer extends React.PureComponent {
       {
         comments.map(comment=>{
           return (
-            <Comment commentAuthor={comment.commentAuthor} commentText={comment.commentText}/>
+            <Comment key={comment.id} commentAuthor={comment.commentAuthor} commentAuthorId={comment.commentAuthorId} commentText={comment.commentText}/>
           )
         })
       }
-      <CommentAdd/>
+      <CommentAdd bookId={this.props.bookId} commentAuthorId={this.props.userId}/>
     </div>);
   }
 }
