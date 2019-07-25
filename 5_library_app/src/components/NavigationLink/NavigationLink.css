@@ -1,0 +1,24 @@
+.navigation-link{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 5px 0;
+}
+.navigation-link:hover{
+  color: white;
+  text-decoration: none;
+}
+.navigation-link__link-text{
+  margin: 0;
+}
+.navigation-link__link-text:hover{
+  border-bottom: 1px solid white;
+}
+.navigation-link__icon{
+  margin: 0 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
