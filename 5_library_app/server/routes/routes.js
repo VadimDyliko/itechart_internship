@@ -7,7 +7,6 @@ const upload = multer({storage: storage});
 const { singUp, logIn, identityCheck } = require("../services/auth");
 const { getBookCover, getBooks } = require("../services/books");
 
-
 router.post("/singup", upload.single("profilePicture"), (req, res) => {
   console.log(req.body);
   if (req.body.login && req.body.email && req.body.password) {
@@ -59,7 +58,6 @@ router.get("/logout", (req, res) => {
 router.post("/identityCheck", (req, res) => {
   identityCheck(req, res)
 });
-
 
 module.exports = router
 

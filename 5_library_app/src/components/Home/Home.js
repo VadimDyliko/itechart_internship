@@ -5,15 +5,13 @@ import Book from '../Book/Book';
 class Home extends React.PureComponent {
 
   render() {
-    return (
-      <div className="home">
-        {this.props.books.map(book=>{
-          return (
-            <Book key={book._id} book={book} bookClickHandler={this.props.bookClickHandler} bookCoverHandler={this.props.bookCoverHandler}/>
-          )
-        })}
-      </div>
-    );
+    return (<div className="home">
+      {
+        this.props.books.map(book => {
+          return (<Book key={book._id} book={book} bookClickHandler={this.props.bookClickHandler} bookCoverHandler={this.props.bookCoverHandler}/>)
+        })
+      }
+    </div>);
   }
 }
 

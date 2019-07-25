@@ -5,8 +5,7 @@ const { secretKey, XSSRegExp, messages } = require("../config/constants");
 
 
 const singUp = (req, res) => {
-  let xss = XSSRegExp;
-  if (!req.body.login.search(xss)) {
+  if (!req.body.login.search(/<|>|\//gi)) {
     console.log(messages.XSSMessage);
     res.sendStatus(400);
   } else {

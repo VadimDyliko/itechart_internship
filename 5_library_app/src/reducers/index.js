@@ -1,12 +1,10 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import user from './user';
 import modalMessage from './modalMessage';
 import books from './books';
 import booksDetails from './booksDetails';
 
-
-
-const rootReducer = combineReducers ({
+const rootReducer = combineReducers({
   user,
   books,
   booksDetails,

@@ -5,9 +5,9 @@
   justify-content: center;
 }
 .form-control{
-  font-size: 20px;
+  padding: 0 10px;
+  font-size: 22px;
   outline:none;
-  height: 30px;
   border: none;
   border-bottom: 5px rgb(102, 13, 215) solid;
   border-radius: 12px;

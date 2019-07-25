@@ -7,7 +7,6 @@ const messages = {
   XSSMessage: 'XSS has detected',
   userLoginMessage: 'User has singin'
 }
-const XSSRegExp = /<|>|\//gi
 module.exports = {
   dbUrl,
   secretKey,

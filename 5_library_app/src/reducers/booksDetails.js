@@ -1,12 +1,11 @@
-import {SET_BOOKS_COVERS} from "../constants/actionTypes";
+  import {handleActions} from 'redux-actions';
 
-  const booksDetails = (state = {}, action) => {
-    switch (action.type) {
-      case SET_BOOKS_COVERS:
-        return {...state, ...action.data}
-      default:
-        return state;
-    }
-  }
+  const booksDetails = handleActions({
+    SET_BOOKS_COVERS: (state, action) => ({
+      ...state,
+      ...action.data
+    }),
+  },{});
 
-export default booksDetails;
+
+  export default booksDetails;

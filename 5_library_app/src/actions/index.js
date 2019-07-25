@@ -1,5 +1,5 @@
-import {SET_USER, SET_MODAL, SET_SEARCH, SET_BOOKS, SET_BOOKS_COVERS} from "../constants/actionTypes";
 import base64 from "base64-arraybuffer";
+
 
 const validateUserData = (
   data = {
@@ -21,7 +21,7 @@ const validateUserData = (
 
 const setUser = data => {
   return {
-    type: SET_USER,
+    type: "SET_USER",
     data
   };
 }
@@ -115,9 +115,10 @@ export const fetchBooks = filter => (dispatch, getState) => {
         }
       })
       .then((books)=>dispatch(setBooks(books)))
-      .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something not ok!", modalText: err})))
+      .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something happend", modalText: err})))
   }
 }
+
 
 export const fetchBookCover = bookId => (dispatch, getState) => {
   let bookById = getState().booksDetails[bookId]
@@ -132,11 +133,13 @@ export const fetchBookCover = bookId => (dispatch, getState) => {
     return cover
   })
   .then((cover)=>cover.bookPicture)
+  .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something happend", modalText: err})))
 }
+
 
 const setCoverToStore = (id, cover) => {
  return {
-   type: SET_BOOKS_COVERS,
+   type: "SET_BOOKS_COVERS",
    data:{
      [id]:{
        cover
@@ -145,9 +148,10 @@ const setCoverToStore = (id, cover) => {
  }
 }
 
+
 const setBooks = (books) =>{
   return {
-    type: SET_BOOKS,
+    type: "SET_BOOKS",
     books
   };
 }
@@ -155,15 +159,7 @@ const setBooks = (books) =>{
 
 export const setModal = (data = {isShow: false, modalTitle: "", modalText: ""}) => {
   return {
-    type: SET_MODAL,
-    data
-  };
-}
-
-
-export function setSearch(data) {
-  return {
-    type: SET_SEARCH,
+    type: "SET_MODAL",
     data
   };
 }

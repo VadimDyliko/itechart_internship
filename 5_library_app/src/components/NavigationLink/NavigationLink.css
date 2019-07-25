@@ -16,3 +16,9 @@
 .navigation-link__link-text:hover{
   border-bottom: 1px solid white;
 }
+.navigation-link__icon{
+  margin: 0 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}

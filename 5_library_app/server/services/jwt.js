@@ -13,16 +13,20 @@ const token = {
     return token;
   },
 
-  verifyToken: token => {
-    return jwt.verify(token, secretKey, (err, decodedToken) => {
-      if (decodedToken) {
-        return decodedToken;
-      } else {
-        return false;
-        console.log(err);
-      }
-    });
-  }
+
+  //
+  //***Maybe, I will need this in future***
+  //
+  // verifyToken: token => {
+  //   return jwt.verify(token, secretKey, (err, decodedToken) => {
+  //     if (decodedToken) {
+  //       return decodedToken;
+  //     } else {
+  //       return false;
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 };
 
 module.exports = token;

@@ -2,16 +2,18 @@ import React from "react";
 import './LogInForm.css';
 
 class LogInForm extends React.PureComponent {
-  state={
-    login:'',
-    password:'',
+  state = {
+    login: '',
+    password: ''
   }
 
-  inputDataHandler=(e)=>{
-    this.setState({[e.target.name]:e.target.value})
+  inputDataHandler = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
-  loginSubmitHundler=(e)=>{
+  loginSubmitHundler = (e) => {
     e.preventDefault();
     this.props.loginSubmitHundler(this.state);
   }
@@ -34,4 +36,4 @@ class LogInForm extends React.PureComponent {
   }
 }
 
-export default (LogInForm);
+export default(LogInForm);

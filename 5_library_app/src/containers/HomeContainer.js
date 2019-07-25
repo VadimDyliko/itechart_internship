@@ -5,14 +5,12 @@ import Home from "../components/Home/Home"
 import Spiner from "../components/Spiner"
 
 class HomeContainer extends React.PureComponent {
-  state={
-    isLoading: true,
+  state = {
+    isLoading: true
   }
 
   componentDidMount() {
-    //filter do not realized yet
-    this.props.onFetchBooks('all')
-    .then(()=>this.setState({isLoading: false}))
+    this.props.onFetchBooks().then(() => this.setState({isLoading: false}))
   }
 
   bookClickHandler = bookId => {
@@ -24,11 +22,12 @@ class HomeContainer extends React.PureComponent {
   }
 
   render() {
-    let content = this.state.isLoading?<Spiner/>:<Home books={this.props.books} bookClickHandler={this.bookClickHandler} bookCoverHandler={this.bookCoverHandler}/>
-    return (
-      <>
-      {content}
-      </>
+    let content = this.state.isLoading
+      ? <Spiner/>
+      : <Home books={this.props.books} bookClickHandler={this.bookClickHandler} bookCoverHandler={this.bookCoverHandler}/>
+    return (<> {
+      content
+    } < />
     );
   }
 }
