@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import {fetchBooks, fetchBookCover} from "../actions"
+import {fetchBooks} from "../actions"
 import Home from "../components/Home/Home"
 import Spiner from "../components/Spiner"
 
@@ -17,14 +17,10 @@ class HomeContainer extends React.PureComponent {
     this.props.history.push(`/book/${bookId}/`)
   }
 
-  bookCoverHandler = bookId => {
-    return this.props.onFetchBookCover(bookId)
-  }
-
   render() {
     let content = this.state.isLoading
       ? <Spiner/>
-      : <Home books={this.props.books} bookClickHandler={this.bookClickHandler} bookCoverHandler={this.bookCoverHandler}/>
+      : <Home books={this.props.books} bookClickHandler={this.bookClickHandler} />
     return (<> {
       content
     } < />
@@ -41,7 +37,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchBooks: (filter) => {return dispatch(fetchBooks())},
-    onFetchBookCover: (bookId) => {return dispatch(fetchBookCover(bookId))}
   }
 }
 

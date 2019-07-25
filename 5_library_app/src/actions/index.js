@@ -120,35 +120,6 @@ export const fetchBooks = filter => (dispatch, getState) => {
 }
 
 
-export const fetchBookCover = bookId => (dispatch, getState) => {
-  let bookById = getState().booksDetails[bookId]
-  if (bookById) return Promise.resolve(bookById.cover)
-  return fetch(`/books/cover/${bookId}`)
-  .then((res)=>res.json())
-  .then((cover)=>{
-    return Object.assign({}, cover, {bookPicture: pictureToBase64(cover.bookPicture)})
-  })
-  .then((cover)=>{
-    dispatch(setCoverToStore(cover._id, cover.bookPicture))
-    return cover
-  })
-  .then((cover)=>cover.bookPicture)
-  .catch((err)=>dispatch(setModal({isShow: true, modalTitle: "Something happend", modalText: err})))
-}
-
-
-const setCoverToStore = (id, cover) => {
- return {
-   type: "SET_BOOKS_COVERS",
-   data:{
-     [id]:{
-       cover
-     }
-   }
- }
-}
-
-
 const setBooks = (books) =>{
   return {
     type: "SET_BOOKS",

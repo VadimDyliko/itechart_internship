@@ -1,0 +1,10 @@
+.book-detail{
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.book-detail__cover-image{
+  width: 200px;
+  height: 300px;
+}

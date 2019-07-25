@@ -5,7 +5,9 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 const { singUp, logIn, identityCheck } = require("../services/auth");
-const { getBookCover, getBooks } = require("../services/books");
+const { getBookCover, getBooks, getSingleBookCover } = require("../services/books");
+
+const {Book, User} = require('../services/mongo');
 
 router.post("/singup", upload.single("profilePicture"), (req, res) => {
   console.log(req.body);
@@ -38,15 +40,13 @@ router.get("/profile", passport.authenticate("jwt", {
   res.json(payload);
 });
 
+router.get("/user/avatr/:userId", (req, res) => {
+  sendStatus(200)
+})
 
 router.get("/books", (req, res) => {
   getBooks(req, res)
 });
-
-
-router.get("/books/cover/:bookId", (req, res) => {
-  getBookCover(req, res)
-})
 
 
 router.get("/logout", (req, res) => {
@@ -58,6 +58,24 @@ router.get("/logout", (req, res) => {
 router.post("/identityCheck", (req, res) => {
   identityCheck(req, res)
 });
+
+
+router.get("/book/cover/:bookId", (req, res) => {
+  getSingleBookCover(req, res)
+})
+
+
+router.get("/user/avatar/:userId", (req, res) => {
+  //getSingleUserAvatar(req, res)
+  console.log(req);
+  console.log('************************************',req.params.userId);
+  User.findById(req.params.userId)
+  .then(user=>{
+    res.set('Content-Type', 'image/jpeg');
+    res.send(user.profilePicture)
+  })
+  .catch((err)=>console.log(err))
+})
 
 module.exports = router
 

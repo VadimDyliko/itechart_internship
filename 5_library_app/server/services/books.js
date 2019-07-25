@@ -1,13 +1,11 @@
 const { User, Book } = require("./mongo");
 
-
-const getBookCover = (req, res) => {
+const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
-  .then(book => {return {
-      _id: book._id,
-      bookPicture: book.bookPicture
-    }})
-  .then(book=>res.json(book))
+  .then(book=>{
+    res.set('Content-Type', 'image/jpeg');
+    res.send(book.bookPicture)
+  })
   .catch((err)=>console.log(err))
 }
 
@@ -23,13 +21,29 @@ const getBooks = (req, res) => {
       }
     }))
     .then(books =>{
-      console.log(books);
        res.json(books)
      })
 }
 
 
+const getSingleBookData = (id) => {
+  return Book.findById(id)
+  .then(book =>{
+    return newBook = {
+      _id: book._id,
+      tittle: book.tittle,
+      year: book.year,
+      bookAthour: book.bookAthour,
+      bookDiscription: book.bookDiscription,
+      comments: book.comments
+    }
+  })
+  .catch((err)=>console.log(err))
+}
+
+
 module.exports = {
-  getBookCover,
-  getBooks
+  getBooks,
+  getSingleBookCover,
+  getSingleBookData
 }
