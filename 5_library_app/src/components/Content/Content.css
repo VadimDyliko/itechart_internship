@@ -1,9 +1,8 @@
-.content__books {
-  width: 90vw;
-  margin: 0;
-  padding-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 15px;
-  justify-items: center;
+.content{
+  width: 100%;
+  background: linear-gradient(to right, rgba(34,14,51,1) 0%, rgba(19,19,19,1) 100%);
+  display: flex;
+  justify-content: center;
+  color: white;
+  overflow-y: scroll;
 }
