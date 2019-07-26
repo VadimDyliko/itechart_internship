@@ -1,5 +1,6 @@
 const { User, Book } = require("./mongo");
 
+
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
   .then(book=>{
@@ -43,6 +44,10 @@ const getSingleBookData = (id) => {
 
 
 const addComment = (req, res) => {
+  if (!req.body.bookId){
+    res.sendStatus(400)
+    return
+  }
   let newComment = {
     commentAuthorId: req.user._id,
     commentAuthor: req.user.login,
@@ -52,7 +57,9 @@ const addComment = (req, res) => {
   Book.findByIdAndUpdate(req.body.bookId,
     {$push: {comments: newComment}},
     {safe: true, upsert: true})
-    .then(()=>res.sendStatus(200))
+    .then(()=>{
+      res.sendStatus(200)
+    })
     .catch(err=>console.log(err))
 }
 

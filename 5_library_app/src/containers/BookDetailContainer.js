@@ -9,7 +9,7 @@ const BookDetail = React.lazy(() => import ('../components/BookDetail/BookDetail
 class BookDetailContainer extends React.PureComponent {
 
   state = {
-    _id: '',
+    bookId: this.props.match.params.bookId,
     tittle: '',
     year: '',
     bookAthour: '',
@@ -18,38 +18,49 @@ class BookDetailContainer extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (!this.props.booksDetails[this.props.match.params.bookId]) this.props.onGetSingleBook(this.props.match.params.bookId)
-    socket.emit('reqBookData', {bookId: this.props.match.params.bookId})
-    socket.on('resBookData', data => {
-      data.comments.forEach((comment, i) => {
+    if (!this.props.booksDetails[this.state.bookId]) this.props.onGetSingleBook(this.state.bookId);
+    socket.emit('reqBookData', {bookId: this.state.bookId});
+    socket.on('resBookData', comments => {
+      comments.forEach((comment, i) => {
         comment.id = i + comment.commentAuthorId + comment.date;
       })
-      this.setState(data)
+      this.setState({comments: comments});
     })
-    socket.on(`commentAddedTo${this.props.match.params.bookId}`, () => {
-      socket.emit('reqBookData', {bookId: this.props.match.params.bookId})
+    socket.on(`commentAddedTo${this.state.bookId}`, () => {
+      console.log('need to update comments');
+      socket.emit('reqBookData', {bookId: this.state.bookId});
     })
   }
 
   componentWillUnmount(nextProps, nextState) {
-    socket.off('getBookData')
-    socket.off(`commentAddedTo${this.props.match.params.bookId}`)
+    socket.off('resBookData');
+    socket.off(`commentAddedTo${this.state.bookId}`);
   }
 
   commentAddHandler = commentText => {
-    this.props.onAddComment(commentText, this.props.match.params.bookId)
-    socket.emit('addComment', {bookId: this.props.match.params.bookId})
+    let newComment = {
+      commentAuthorId: this.props.userId,
+      commentAuthor: this.props.userLogin,
+      commentText: commentText,
+      date: Date.now(),
+      id: this.state.comments.length + 2 + this.commentAuthorId + this.date
+    }
+    this.setState((prevState)=>({comments: [...prevState.comments, newComment]}))
+    this.props.onAddComment(commentText, this.state.bookId)
+    socket.emit('addComment', {bookId: this.state.bookId})
   }
 
   render() {
+    let {tittle, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.props.match.params.bookId} tittle={this.state.tittle} year={this.state.year} bookAthour={this.state.bookAthour} bookDiscription={this.state.bookDiscription} comments={this.state.comments} userId={this.props.userId} commentAddHandler={this.commentAddHandler}/>
+      <BookDetail bookId={this.state.bookId} tittle={tittle} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} commentAddHandler={this.commentAddHandler}/>
     </Suspense>);
   }
 }
 
 const mapStateToProps = state => {
   return {
+    userLogin: state.user.login,
     userId: state.user._id,
     booksDetails: state.booksDetails
   }

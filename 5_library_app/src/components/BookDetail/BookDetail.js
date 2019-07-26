@@ -3,7 +3,7 @@ import "./BookDetail.css"
 import Comment from '../Comment/Comment'
 import CommentAdd from '../CommentAdd/CommentAdd'
 
-class BookDetailContainer extends React.PureComponent {
+class BookDetail extends React.PureComponent {
   render() {
     let {
       tittle,
@@ -20,8 +20,7 @@ class BookDetailContainer extends React.PureComponent {
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>
         <div className="book-detail__details">
           <h2>{tittle}</h2>
-          <p>{bookAthour}
-            {year}</p>
+          <p>{bookAthour}{year}</p>
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>
       </div>
@@ -37,4 +36,4 @@ class BookDetailContainer extends React.PureComponent {
   }
 }
 
-export default BookDetailContainer;
+export default BookDetail;
