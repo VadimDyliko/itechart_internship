@@ -8,6 +8,7 @@ class Content extends React.PureComponent {
 
   render() {
     return (<div className="content">
+      <Route path="/" exact component={HomeContainer}/>
       <Route path="/home" component={HomeContainer}/>
       <Route path="/book/:bookId/" component={BookDetailContainer}/> {this.props.children}
     </div>);

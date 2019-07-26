@@ -5,12 +5,13 @@ const { User } = require("./mongo");
 const {secretKey} = require("../config/constants")
 
 const cookieExtractor = function(req) {
-  var token = null;
+  let token = null;
   if (req && req.cookies) {
     token = req.cookies["jwt"];
   }
   return token;
 };
+
 const opts = {
   jwtFromRequest: cookieExtractor,
   secretOrKey: secretKey

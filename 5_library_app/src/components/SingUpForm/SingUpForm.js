@@ -56,13 +56,17 @@ class SingUpForm extends React.PureComponent {
       "form-control is-valid": this.props.isEmailValid,
       "form-control is-invalid": !this.props.isEmailValid
     })
+    let isImageValid = classnames({
+      "custom-file is-valid": this.state.profilePicture,
+      "custom-file is-invalid": !this.props.profilePicture
+    })
     return (<form className="sing-up-form" onSubmit={this.submitHandler}>
       <p className="sing-up-form__labels-text">Login</p>
       <input type="name" className={isLoginValid} placeholder="Enter login" onChange={this.loginHandler}></input>
       <div className="input-group-prepend">
         <p className="sing-up-form__labels-text">Profile image</p>
       </div>
-      <div className="custom-file">
+      <div className={isImageValid}>
         <input onChange={this.profilePictureHandler} type="file" className="custom-file-input" id="inputFileProfileImage" accept=".jpg, .jpeg, .png"></input>
       </div>
       <p className="sing-up-form__labels-text">Email address</p>
