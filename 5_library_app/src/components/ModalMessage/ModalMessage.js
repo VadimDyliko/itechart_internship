@@ -1,5 +1,6 @@
 import React from "react";
 import "./ModalMessage.css"
+import ReactDOM from 'react-dom'
 
 class MadalMessage extends React.PureComponent {
 
@@ -18,12 +19,11 @@ class MadalMessage extends React.PureComponent {
           </button>
         </div>
       </div>)
-      : null
-    return (<> {
+      : <div></div>
+    return ReactDOM.createPortal(<> {
       modalMessage
-    } < />
-    );
+    }</>, document.getElementById("modal"))
   }
 }
 
-export default (MadalMessage);
+export default(MadalMessage);

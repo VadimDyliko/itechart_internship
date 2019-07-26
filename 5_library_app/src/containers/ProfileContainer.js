@@ -10,11 +10,7 @@ class ProfileContainer extends React.PureComponent {
   }
 
   render() {
-    let {
-      login,
-      email,
-      userId
-    } = this.props
+    let {login, email, userId} = this.props
     return (<Profile login={login} email={email} userId={userId} LogOutHandler={this.LogOutHandler}/>);
   }
 }

@@ -17,7 +17,8 @@ const {
   getBookCover,
   getBooks,
   getSingleBookCover,
-  addComment
+  addComment,
+  getSingleBook
 } = require("../services/books");
 
 
@@ -68,6 +69,10 @@ router.post("/identityCheck", (req, res) => {
 
 router.get("/book/cover/:bookId", (req, res) => {
   getSingleBookCover(req, res)
+})
+
+router.get("/book/:bookId", (req, res) => {
+  getSingleBook(req, res)
 })
 
 

@@ -1,16 +1,13 @@
-import React from "react";
+import React, {Suspense} from "react";
 import {connect} from 'react-redux'
 import {fetchBooks} from "../actions"
-import Home from "../components/Home/Home"
 import Spiner from "../components/Spiner"
+const Home = React.lazy(() => import ('../components/Home/Home'));
 
 class HomeContainer extends React.PureComponent {
-  state = {
-    isLoading: true
-  }
 
   componentDidMount() {
-    this.props.onFetchBooks().then(() => this.setState({isLoading: false}))
+    this.props.onFetchBooks()
   }
 
   bookClickHandler = bookId => {
@@ -18,25 +15,21 @@ class HomeContainer extends React.PureComponent {
   }
 
   render() {
-    let content = this.state.isLoading
-      ? <Spiner/>
-      : <Home books={this.props.books} bookClickHandler={this.bookClickHandler} />
-    return (<> {
-      content
-    } < />
-    );
+    return (<Suspense fallback={<Spiner / >}>
+      <Home books={this.props.books} bookClickHandler={this.bookClickHandler}/>
+    </Suspense >);
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    books: state.books
-  }
+  return {books: state.books}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchBooks: (filter) => {return dispatch(fetchBooks())},
+    onFetchBooks: (filter) => {
+      return dispatch(fetchBooks())
+    }
   }
 }
 

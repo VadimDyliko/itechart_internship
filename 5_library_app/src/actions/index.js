@@ -33,9 +33,6 @@ export const logOutUser = () => dispatch => {
       _id: '',
       login: "Guest",
       email: null,
-      firstName: "Guest",
-      lastName: null,
-      age: null,
       booksOnHand: [],
     })))
 }
@@ -100,9 +97,7 @@ export const singUpUser = data => dispatch => {
 
 
 export const fetchBooks = filter => (dispatch, getState) => {
-  if (getState().books.length > 0) {
-    return Promise.resolve()
-  } else {
+  if (getState().books.length > 0) {} else {
     return fetch("/books")
       .then((res) => {
         if (res.status === 200) {
@@ -126,6 +121,35 @@ const setBooks = (books) => {
     type: "SET_BOOKS",
     books
   };
+}
+
+
+export const getSingleBook = (bookId) => (dispatch) => {
+  fetch(`/book/${bookId}`)
+    .then(res=>res.json())
+    .then(data=>{
+      dispatch(setSingleBook(data))
+    })
+}
+
+const setSingleBook = data => {
+  return {
+    type: "SET_SINGLE_BOOK",
+    data
+  }
+}
+
+export const addComment = (commentText, bookId) => (dispatch) => {
+  fetch("/addcomment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      bookId: bookId,
+      commentText
+    })
+  })
 }
 
 

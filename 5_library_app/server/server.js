@@ -11,7 +11,6 @@ const {getSingleBookData} = require("./services/books")
 require("./services/passportJWT");
 
 
-
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -20,13 +19,16 @@ app.use(passport.initialize());
 app.use('/', routes);
 
 
-io.on('connection', function (socket) {
-  socket.on('reqBookData', (book)=>{
+io.on('connection', function(socket) {
+  socket.on('reqBookData', (book) => {
     getSingleBookData(book.bookId)
-    .then((book)=>{
-      return book
-    })
-    .then((book)=>socket.emit('resBookData', book))
+      .then((book) => {
+        return book
+      })
+      .then((book) => socket.emit('resBookData', book))
+  })
+  socket.on('addComment', (comment) => {
+    io.emit(`commentAddedTo${comment.bookId}`)
   })
 });
 
@@ -36,7 +38,3 @@ server.listen(4000, err => {
     console.log("<<<Server started>>>");
   }
 });
-
-module.exports = {
-  io
-}

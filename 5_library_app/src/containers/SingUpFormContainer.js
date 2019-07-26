@@ -12,7 +12,7 @@ class SingUpFormContainer extends React.PureComponent {
   }
 
   singUpSubmitHandler = (data) => {
-    if (this.state.login && this.state.email) {
+    if (this.state.login && this.state.email && this.state.profilePicture) {
       this.props.onSingUpUser(data).then(() => this.props.history.push('/home')).catch((err) => console.log(err))
     } else {
       this.onSetModal({isShow: true, modalTitle: "Registration faild", modalText: "Set valid information"});

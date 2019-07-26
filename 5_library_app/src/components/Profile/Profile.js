@@ -5,8 +5,9 @@ import personIcon from '../../png/person.png'
 class Profile extends React.PureComponent {
 
   render() {
-    console.log(this.props.userId);
-    let userAvatarUrl = this.props.userId?`/user/avatar/${this.props.userId}`:personIcon
+    let userAvatarUrl = this.props.userId
+      ? `/user/avatar/${this.props.userId}`
+      : personIcon
     return (<div className="profile">
       <img className="profile__avatar" src={userAvatarUrl} alt="avatar"/>
       <p className="profile__login">{this.props.login}</p>

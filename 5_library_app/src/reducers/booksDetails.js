@@ -1,7 +1,7 @@
   import {handleActions} from 'redux-actions';
 
   const booksDetails = handleActions({
-    SET_BOOKS_COVERS: (state, action) => ({
+    SET_SINGLE_BOOK: (state, action) => ({
       ...state,
       ...action.data
     }),

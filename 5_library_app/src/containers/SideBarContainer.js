@@ -8,7 +8,9 @@ import SideBar from '../components/SideBar/SideBar'
 class SideBarContainer extends React.PureComponent {
 
   render() {
-    let profileIcon = this.props.userId?`/user/avatar/${this.props.userId}`:personIcon
+    let profileIcon = this.props.userId
+      ? `/user/avatar/${this.props.userId}`
+      : personIcon
     let links = (this.props.userLogin !== 'Guest')
       ? (<NavigationLink toPath='/profile/' linkText='Profile' icon={profileIcon}/>)
       : (<> < NavigationLink toPath = '/login/' linkText = 'Login' icon = {

@@ -49,7 +49,6 @@ const addComment = (req, res) => {
     commentText: req.body.commentText,
     date: Date.now(),
   }
-  console.log(req.body.bookId);
   Book.findByIdAndUpdate(req.body.bookId,
     {$push: {comments: newComment}},
     {safe: true, upsert: true})
@@ -58,9 +57,27 @@ const addComment = (req, res) => {
 }
 
 
+const getSingleBook = (req, res) => {
+  Book.findById(req.params.bookId)
+  .then(book =>{
+    return newBook = {
+      [book._id]:{
+        tittle: book.tittle,
+        year: book.year,
+        bookAthour: book.bookAthour,
+        bookDiscription: book.bookDiscription
+      }
+    }
+  })
+  .then(book=>res.json(book))
+  .catch((err)=>console.log(err))
+}
+
+
 module.exports = {
   getBooks,
   getSingleBookCover,
   getSingleBookData,
-  addComment
+  addComment,
+  getSingleBook
 }
