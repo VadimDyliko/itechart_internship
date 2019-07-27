@@ -5,3 +5,7 @@ body {
   background-color: rgb(237, 237, 237);
   outline: none
 }
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}

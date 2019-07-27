@@ -27,7 +27,7 @@ class BookDetail extends React.PureComponent {
       <div>
         {
           comments.map(comment => {
-            return (<Comment key={comment.id} commentAuthor={comment.commentAuthor} commentAuthorId={comment.commentAuthorId} commentText={comment.commentText}/>)
+            return (<Comment key={comment.id} commentAuthor={comment.commentAuthor} commentAuthorId={comment.commentAuthorId} commentText={comment.commentText} date={comment.date}/>)
           })
         }
         <CommentAdd bookId={bookId} commentAuthorId={userId} commentAddHandler={commentAddHandler}/>

@@ -46,7 +46,6 @@ class BookDetailContainer extends React.PureComponent {
     }
     this.setState((prevState)=>({comments: [...prevState.comments, newComment]}))
     this.props.onAddComment(commentText, this.state.bookId)
-    socket.emit('addComment', {bookId: this.state.bookId})
   }
 
   render() {

@@ -15,6 +15,7 @@ class CommentAdd extends React.PureComponent {
   submitHandler = e => {
     e.preventDefault();
     this.props.commentAddHandler(this.state.commentText)
+    this.setState({commentText:''})
   }
 
   render() {
@@ -25,7 +26,7 @@ class CommentAdd extends React.PureComponent {
     return (<form className="comment-add" onSubmit={this.submitHandler}>
       <img src={authorAvatar} className="comment__author-avatar" alt="avatar"/>
       <div className="comment-input__details">
-        <input className="comment__comment-input" type="text" placeholder="Enter comment" onChange={this.commentTextHandler}></input>
+        <textarea className="comment__comment-input" type="text" placeholder="Enter comment" onChange={this.commentTextHandler} value={this.state.commentText}/>
         <button type="submit" className="btn comment-add__button">Add comment</button>
       </div>
     </form>);
