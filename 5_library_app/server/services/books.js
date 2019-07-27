@@ -42,6 +42,12 @@ const getSingleBookData = (id) => {
   .catch((err)=>console.log(err))
 }
 
+//*******************************************************
+
+const {io} = require('../server');
+
+
+//*******************************************************
 
 const addComment = (req, res) => {
   if (!req.body.bookId){
@@ -58,6 +64,8 @@ const addComment = (req, res) => {
     {$push: {comments: newComment}},
     {safe: true, upsert: true})
     .then(()=>{
+      io.sockets.emit(`commentAddedTo${req.body.bookId}`);
+      //io.sockets.emit(`hi`,'everyone');
       res.sendStatus(200)
     })
     .catch(err=>console.log(err))
