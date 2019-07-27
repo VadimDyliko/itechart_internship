@@ -1,5 +1,5 @@
 const { User, Book } = require("./mongo");
-
+const {io} = require('../server');
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -42,12 +42,6 @@ const getSingleBookData = (id) => {
   .catch((err)=>console.log(err))
 }
 
-//*******************************************************
-
-const {io} = require('../server');
-
-
-//*******************************************************
 
 const addComment = (req, res) => {
   if (!req.body.bookId){

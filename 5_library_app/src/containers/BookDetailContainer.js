@@ -1,6 +1,6 @@
 import React, {Suspense} from "react";
 import {connect} from "react-redux";
-import Spiner from '../components/Spiner';
+import Spiner from '../components/Spiner/Spiner';
 import {addComment, getSingleBook} from '../actions'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
@@ -27,7 +27,6 @@ class BookDetailContainer extends React.PureComponent {
       this.setState({comments: comments});
     })
     socket.on(`commentAddedTo${this.state.bookId}`, () => {
-      console.log('need to update comments');
       socket.emit('reqBookData', {bookId: this.state.bookId});
     })
   }
