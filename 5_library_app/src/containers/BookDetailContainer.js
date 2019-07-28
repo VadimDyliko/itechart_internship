@@ -29,14 +29,14 @@ class BookDetailContainer extends React.PureComponent {
       })
       this.setState({comments: comments, count: data.count, availableCount: data.availableCount});
     })
-    socket.on(`commentAddedTo${this.state.bookId}`, () => {
+    socket.on(`dataUpdate${this.state.bookId}`, () => {
       socket.emit('reqBookData', {bookId: this.state.bookId});
     })
   }
 
   componentWillUnmount(nextProps, nextState) {
     socket.off('resBookData');
-    socket.off(`commentAddedTo${this.state.bookId}`);
+    socket.off(`dataUpdate${this.state.bookId}`);
   }
 
   commentAddHandler = commentText => {
@@ -53,7 +53,7 @@ class BookDetailContainer extends React.PureComponent {
 
 
   bookingHandler = e => {
-    this.props.onBookingBook(this.state.bookId);
+    this.props.onBookingBook(this.state.bookId)
   }
 
 

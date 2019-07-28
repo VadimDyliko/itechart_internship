@@ -49,7 +49,7 @@ const addComment = (req, res) => {
     {$push: {comments: newComment}},
     {safe: true, upsert: true})
     .then(()=>{
-      io.sockets.emit(`commentAddedTo${req.body.bookId}`);
+      io.sockets.emit(`dataUpdate${req.body.bookId}`);
       res.sendStatus(200)
     })
     .catch(err=>console.log(err))
@@ -73,9 +73,20 @@ const getSingleBook = (req, res) => {
 }
 
 const bookingBook = (bookId, userId, response) => {
-  Promise.all([setUserToBookBook(bookId, userId),setBookingBookToUser(bookId, userId)])
-  .then(()=>response.sendStatus(200))
-  .catch((err)=>console.log(err))
+  Book.findById(bookId)
+  .then((book)=>{
+    if (book.availableCount>0) {
+      Promise.all([setUserToBookBook(bookId, userId),setBookingBookToUser(book, userId)])
+      .then(()=>{
+        io.sockets.emit(`dataUpdate${bookId}`)
+        response.sendStatus(200)
+      })
+      .catch((err)=>console.log(err))
+    } else {
+      response.sendStatus(400)
+    }
+  })
+
 }
 
 const setUserToBookBook = (bookId, userId) =>{
@@ -98,10 +109,12 @@ const setUserToBookBook = (bookId, userId) =>{
 }
 
 
-const setBookingBookToUser = (bookId, userId) => {
+const setBookingBookToUser = (book, userId) => {
+  console.log(book);
   return new Promise ((res, rej)=>{
     let data = {
-      bookId: bookId,
+      bookId: book._id,
+      tittle: book.tittle,
       dateOfBook: Date.now(),
       datebookEnd: Date.now() + maxBookingTime,
     }

@@ -152,10 +152,13 @@ export const addComment = (commentText, bookId) => (dispatch) => {
 
 
 export const bookingBook = (bookId) => (dispatch) => {
-  fetch("/bookingBook", {
+  return fetch("/bookingBook", {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({bookId: bookId})
+  })
+  .then(res=>{
+    if (res.status === 200) dispatch(fetchUser())
   })
 }
 
