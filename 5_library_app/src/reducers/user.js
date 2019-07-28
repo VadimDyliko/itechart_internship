@@ -7,12 +7,14 @@ const user = handleActions({
     login: action.data.login,
     email: action.data.email,
     booksOnHand: action.data.booksOnHand,
+    bookingBooks: action.data.bookingBooks
   }),
 }, {
   _id:'',
   login: "Guest",
   email: null,
   booksOnHand: [],
+  bookingBooks: []
 });
 
 export default user;

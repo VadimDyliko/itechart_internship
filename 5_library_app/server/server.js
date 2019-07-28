@@ -11,9 +11,13 @@ io.on('connection', function(socket) {
   socket.on('reqBookData', (book) => {
     getSingleBookData(book.bookId)
       .then((book) => {
-        return book.comments
+        return {
+          comments: book.comments,
+          count: book.count,
+          availableCount: book.availableCount
+        }
       })
-      .then((book) => socket.emit('resBookData', book))
+      .then((data) => socket.emit('resBookData', data))
   })
 });
 

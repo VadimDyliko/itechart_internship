@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {connect} from "react-redux";
 import Spiner from '../components/Spiner/Spiner';
-import {addComment, getSingleBook} from '../actions'
+import {addComment, getSingleBook, bookingBook} from '../actions'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
 const BookDetail = React.lazy(() => import ('../components/BookDetail/BookDetail'));
@@ -14,17 +14,20 @@ class BookDetailContainer extends React.PureComponent {
     year: '',
     bookAthour: '',
     bookDiscription: '',
-    comments: []
+    comments: [],
+    count: 0,
+    availableCount: 0
   }
 
   componentDidMount() {
     if (!this.props.booksDetails[this.state.bookId]) this.props.onGetSingleBook(this.state.bookId);
     socket.emit('reqBookData', {bookId: this.state.bookId});
-    socket.on('resBookData', comments => {
-      comments.forEach((comment, i) => {
+    socket.on('resBookData', data => {
+      let comments = data.comments.map((comment, i) => {
         comment.id = i + comment.commentAuthorId + comment.date;
+        return comment;
       })
-      this.setState({comments: comments});
+      this.setState({comments: comments, count: data.count, availableCount: data.availableCount});
     })
     socket.on(`commentAddedTo${this.state.bookId}`, () => {
       socket.emit('reqBookData', {bookId: this.state.bookId});
@@ -48,10 +51,16 @@ class BookDetailContainer extends React.PureComponent {
     this.props.onAddComment(commentText, this.state.bookId)
   }
 
+
+  bookingHandler = e => {
+    this.props.onBookingBook(this.state.bookId);
+  }
+
+
   render() {
     let {tittle, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.state.bookId} tittle={tittle} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} commentAddHandler={this.commentAddHandler}/>
+      <BookDetail bookId={this.state.bookId} tittle={tittle} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} />
     </Suspense>);
   }
 }
@@ -67,7 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToState = dispatch => {
   return {
     onAddComment: (commentText, bookId) => dispatch(addComment(commentText, bookId)),
-    onGetSingleBook: (bookId) => dispatch(getSingleBook(bookId))
+    onGetSingleBook: (bookId) => dispatch(getSingleBook(bookId)),
+    onBookingBook: (bookId) => dispatch(bookingBook(bookId))
   }
 }
 

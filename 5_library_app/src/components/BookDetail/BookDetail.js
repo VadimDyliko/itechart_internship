@@ -13,14 +13,18 @@ class BookDetail extends React.PureComponent {
       comments,
       commentAddHandler,
       userId,
-      bookId
+      bookId,
+      count,
+      availableCount
     } = this.props
     return (<div className="book-detail">
       <div className="book-detail__about">
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>
         <div className="book-detail__details">
           <h2>{tittle}</h2>
-          <p>{bookAthour}{year}</p>
+          <p>{bookAthour} {year}</p>
+          <p>{availableCount}/{count}</p>
+          <button className="btn" onClick={this.props.bookingHandler}>Book</button>
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>
       </div>

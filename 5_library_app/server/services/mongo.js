@@ -19,6 +19,7 @@ const userSchema = mongoose.Schema({
   lastName: String,
   age: Number,
   booksOnHand: Array,
+  bookingBooks: Array,
   profilePicture: Buffer
 });
 
@@ -29,10 +30,12 @@ const bookSchema = mongoose.Schema({
   year: Number,
   bookAthour: String,
   bookDiscription: String,
-  bookBookedBy: String,
-  bookOnHandAt: String,
+  bookBookedBy: Array,
+  bookOnHandAt: Array,
   bookPicture: Buffer,
-  comments: Array
+  comments: Array,
+  count: Number,
+  availableCount: Number
 });
 
 const Book = mongoose.model("Book", bookSchema);

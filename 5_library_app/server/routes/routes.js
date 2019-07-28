@@ -18,7 +18,8 @@ const {
   getBooks,
   getSingleBookCover,
   addComment,
-  getSingleBook
+  getSingleBook,
+  bookingBook
 } = require("../services/books");
 
 
@@ -85,6 +86,13 @@ router.post("/addcomment", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   addComment(req, res)
+})
+
+
+router.post("/bookingBook", passport.authenticate("jwt", {
+  session: false
+}), (req, res) => {
+  bookingBook(req.body.bookId, req.user._id, res)
 })
 
 

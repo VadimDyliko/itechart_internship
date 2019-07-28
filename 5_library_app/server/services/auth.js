@@ -103,7 +103,8 @@ const getProfile = (req, res) => {
     _id: req.user._id,
     login: req.user.login,
     email: req.user.email,
-    booksOnHand: req.user.booksOnHand
+    booksOnHand: req.user.booksOnHand,
+    bookingBooks: req.user.bookingBooks
   };
   res.json(payload);
 }

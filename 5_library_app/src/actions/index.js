@@ -142,13 +142,20 @@ const setSingleBook = data => {
 export const addComment = (commentText, bookId) => (dispatch) => {
   fetch("/addcomment", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
       bookId: bookId,
       commentText
     })
+  })
+}
+
+
+export const bookingBook = (bookId) => (dispatch) => {
+  fetch("/bookingBook", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({bookId: bookId})
   })
 }
 

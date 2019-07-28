@@ -1,5 +1,6 @@
 const { User, Book } = require("./mongo");
 const {io} = require('../server');
+const {maxBookingTime} = require("../config/constants")
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -29,16 +30,6 @@ const getBooks = (req, res) => {
 
 const getSingleBookData = (id) => {
   return Book.findById(id)
-  .then(book =>{
-    return newBook = {
-      _id: book._id,
-      tittle: book.tittle,
-      year: book.year,
-      bookAthour: book.bookAthour,
-      bookDiscription: book.bookDiscription,
-      comments: book.comments
-    }
-  })
   .catch((err)=>console.log(err))
 }
 
@@ -59,7 +50,6 @@ const addComment = (req, res) => {
     {safe: true, upsert: true})
     .then(()=>{
       io.sockets.emit(`commentAddedTo${req.body.bookId}`);
-      //io.sockets.emit(`hi`,'everyone');
       res.sendStatus(200)
     })
     .catch(err=>console.log(err))
@@ -82,11 +72,53 @@ const getSingleBook = (req, res) => {
   .catch((err)=>console.log(err))
 }
 
+const bookingBook = (bookId, userId, response) => {
+  Promise.all([setUserToBookBook(bookId, userId),setBookingBookToUser(bookId, userId)])
+  .then(()=>response.sendStatus(200))
+  .catch((err)=>console.log(err))
+}
+
+const setUserToBookBook = (bookId, userId) =>{
+  return new Promise ((res, rej)=>{
+    let data = {
+      userId: userId,
+      dateOfBook: Date.now(),
+      datebookEnd: Date.now() + maxBookingTime,
+    }
+    Book.findByIdAndUpdate(bookId,
+      {$push: {bookBookedBy: data}},
+      {safe: true, upsert: true})
+        .then(book=>{
+          book.availableCount--
+          book.save()
+        })
+        .then(()=>res())
+        .catch(err=>rej(err))
+  })
+}
+
+
+const setBookingBookToUser = (bookId, userId) => {
+  return new Promise ((res, rej)=>{
+    let data = {
+      bookId: bookId,
+      dateOfBook: Date.now(),
+      datebookEnd: Date.now() + maxBookingTime,
+    }
+    User.findByIdAndUpdate(userId,
+      {$push: {bookingBooks: data}},
+      {safe: true, upsert: true})
+      .then(()=>res())
+      .catch((err)=>rej(err))
+  })
+}
+
 
 module.exports = {
   getBooks,
   getSingleBookCover,
   getSingleBookData,
   addComment,
-  getSingleBook
+  getSingleBook,
+  bookingBook
 }
