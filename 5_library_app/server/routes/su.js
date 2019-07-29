@@ -7,6 +7,7 @@ const upload = multer({
   storage: storage
 });
 const {suFetchBookData, suHandOutBook, suCancelBook, suReturnBookFromHands, suReturnToBookStatus} = require("../services/su");
+const {  decrementAvailableCount, incrementAvailableCount} = require("../services/books")
 
 
 router.get("/fetchBookData/:bookId", passport.authenticate("jwtSU", {
@@ -28,6 +29,7 @@ router.post("/cancelBook", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
   suCancelBook(req.body.userId, req.body.bookId, res)
+    .then(()=>incrementAvailableCount(req.body.bookId))
     .then(()=>res.sendStatus(200))
 })
 

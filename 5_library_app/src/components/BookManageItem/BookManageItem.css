@@ -2,6 +2,7 @@
   border: 1px rgb(93, 36, 186) solid;
   border-radius: 15px;
   padding: 10px;
+  margin: 5px 0;
 }
 .book-manage__item>p{
   font-size: 12px;

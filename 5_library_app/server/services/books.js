@@ -88,7 +88,9 @@ const bookingBook = (bookId, userId) => {
       })
       if (book.availableCount > 0 && index<0) {
         Promise.all([setUserToBookBook(bookId, userId), setBookingBookToUser(book, userId)])
-          .then(() => io.sockets.emit(`dataUpdate${bookId}`))
+          .then(() => {
+            io.sockets.emit(`dataUpdate${bookId}`)
+          })
           .catch((err) => console.log(err))
       } else {
         throw new Error()
@@ -111,10 +113,6 @@ const setUserToBookBook = (bookId, userId) => {
       }, {
         safe: true,
         upsert: true
-      })
-      .then(book => {
-        book.availableCount--
-        book.save()
       })
       .then(() => res())
       .catch(err => rej(err))
@@ -161,8 +159,7 @@ const removeUserFromBook = (bookId, userId) => {
         })
         if (index > (-1)) {
           book.bookBookedBy.splice(index, 1);
-          book.availableCount++;
-          console.log('+++++++++++++++++++');
+          // book.availableCount++;
           book.save();
           res();
         } else {
@@ -192,6 +189,26 @@ const removeBookFromUser = (bookId, userId) => {
   })
 }
 
+
+const decrementAvailableCount = bookId => {
+  return Book.findById(bookId)
+    .then((book)=>{
+      book.availableCount--;
+      book.save()
+    })
+
+}
+
+
+const incrementAvailableCount = bookId => {
+  return Book.findById(bookId)
+    .then((book)=>{
+      book.availableCount++;
+      book.save()
+    })
+}
+
+
 module.exports = {
   getBooks,
   getSingleBookCover,
@@ -199,5 +216,7 @@ module.exports = {
   addComment,
   getSingleBook,
   bookingBook,
-  cancelBook
+  cancelBook,
+  decrementAvailableCount,
+  incrementAvailableCount
 }

@@ -23,9 +23,9 @@ class BookManageContainer extends React.PureComponent {
 
   render() {
     return(
-      <div className="book-manage">
+      <>
       <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus}/>
-      </div>
+      </>
     )
   }
 }

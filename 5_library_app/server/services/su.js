@@ -1,5 +1,5 @@
 const { User, Book } = require("./mongo");
-const {cancelBook, bookingBook} = require('./books');
+const {cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount} = require('./books');
 const {maxOnHandTime} = require('../config/constants');
 
 const suFetchBookData = (req, res) => {
@@ -35,11 +35,6 @@ const setUserToBookOnHands = (bookId, userId) => {
       }, {
         safe: true,
         upsert: true
-      })
-      .then(book => {
-        console.log(book);
-        // book.availableCount--
-        // book.save()
       })
       .then(() => res())
       .catch(err => rej(err))

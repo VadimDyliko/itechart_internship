@@ -20,7 +20,9 @@ const {
   addComment,
   getSingleBook,
   bookingBook,
-  cancelBook
+  cancelBook,
+  decrementAvailableCount,
+  incrementAvailableCount
 } = require("../services/books");
 
 
@@ -94,6 +96,7 @@ router.post("/bookingBook", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   bookingBook(req.body.bookId, req.user._id)
+    .then(()=>decrementAvailableCount(req.body.bookId))
     .then(()=>{res.sendStatus(200)})
     .catch(()=>{res.sendStatus(400)})
 })
@@ -110,6 +113,7 @@ router.post("/cancelBook", passport.authenticate("jwt", {
   session: false
 }), (req, res)=>{
   cancelBook(req.body.bookId, req.user._id, res)
+    .then(()=>incrementAvailableCount(req.body.bookId))
     .then(() => res.sendStatus(200))
     .catch((err) => {
       console.log(err);
