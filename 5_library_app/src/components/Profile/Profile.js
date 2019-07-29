@@ -1,6 +1,6 @@
 import React from "react";
 import './Profile.css';
-import personIcon from '../../png/person.png'
+import personIcon from '../../images/person.png'
 
 class Profile extends React.PureComponent {
 

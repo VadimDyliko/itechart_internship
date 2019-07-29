@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import NavigationLink from '../components/NavigationLink/NavigationLink'
-import personIcon from '../png/person.png'
-import personAddIcon from '../png/person_add.png'
+import personIcon from '../images/person.png'
+import personAddIcon from '../images/person_add.png'
 import SideBar from '../components/SideBar/SideBar'
 
 class SideBarContainer extends React.PureComponent {

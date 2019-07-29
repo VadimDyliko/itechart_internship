@@ -1,6 +1,6 @@
 import React from "react";
 import "./CommentAdd.css"
-import personIcon from '../../png/person.png'
+import personIcon from '../../images/person.png'
 
 class CommentAdd extends React.PureComponent {
 

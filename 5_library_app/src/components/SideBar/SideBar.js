@@ -1,10 +1,10 @@
 import React from "react";
 import NavigationLink from '../NavigationLink/NavigationLink'
 import './SideBar.css'
-import logo from '../../png/logo.png'
-import homeIcon from '../../png/home.png'
-import bookIcon from '../../png/book.png'
-import searchIcon from '../../png/search.png'
+import logo from '../../images/logo.png'
+import homeIcon from '../../images/home.png'
+import bookIcon from '../../images/book.png'
+import searchIcon from '../../images/search.png'
 
 class SideBar extends React.PureComponent {
 
