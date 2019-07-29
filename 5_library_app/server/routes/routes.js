@@ -19,7 +19,8 @@ const {
   getSingleBookCover,
   addComment,
   getSingleBook,
-  bookingBook
+  bookingBook,
+  cancelBook
 } = require("../services/books");
 
 
@@ -93,6 +94,13 @@ router.post("/bookingBook", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   bookingBook(req.body.bookId, req.user._id, res)
+})
+
+
+router.post("/cancelBook", passport.authenticate("jwt", {
+  session: false
+}), (req, res)=>{
+  cancelBook(req.body.bookId, req.user._id, res);
 })
 
 

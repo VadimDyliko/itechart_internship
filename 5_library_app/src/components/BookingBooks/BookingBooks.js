@@ -9,7 +9,7 @@ class BookingBooks extends React.Component {
         {
           this.props.bookingBooks.map(book=>{
             book.key = book.bookId+book.dateOfBook
-            return <BookedBook key={book.key} book={book}/>
+            return <BookedBook key={book.key} book={book} cancelBook={this.props.cancelBook}/>
           })
         }
       </div>

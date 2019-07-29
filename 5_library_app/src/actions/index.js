@@ -139,7 +139,7 @@ const setSingleBook = data => {
   }
 }
 
-export const addComment = (commentText, bookId) => (dispatch) => {
+export const addComment = (commentText, bookId) => dispatch => {
   fetch("/addcomment", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -151,14 +151,42 @@ export const addComment = (commentText, bookId) => (dispatch) => {
 }
 
 
-export const bookingBook = (bookId) => (dispatch) => {
+export const bookingBook = bookId => dispatch => {
   return fetch("/bookingBook", {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({bookId: bookId})
   })
   .then(res=>{
-    if (res.status === 200) dispatch(fetchUser())
+    if (res.status === 200) {
+      dispatch(fetchUser())
+    } else {
+      dispatch(setModal({
+        isShow: true,
+        modalTitle: "Booking book faild",
+        modalText: "There are no available books or you alredy have one of it"
+      }))
+    }
+  })
+}
+
+
+export const cancelBook = bookId => dispatch => {
+  return fetch("/cancelBook", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({bookId: bookId})
+  })
+  .then(res=>{
+    if (res.status === 200) {
+      dispatch(fetchUser())
+    } else {
+      dispatch(setModal({
+        isShow: true,
+        modalTitle: "Something happend",
+        modalText: ""
+      }))
+    }
   })
 }
 
