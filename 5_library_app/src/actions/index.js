@@ -191,6 +191,90 @@ export const cancelBook = bookId => dispatch => {
 }
 
 
+export const suFetchBookData = bookId => dispatch => {
+  return fetch(`/su/fetchBookData/${bookId}`)
+    .then(res=>res.json())
+    .then(data=>dispatch(setManagedBook(data)))
+}
+
+
+const setManagedBook = data => {
+  return {
+    type: "SET_MANAGED_BOOK",
+    data
+  }
+}
+
+
+export const suHandOutBook = (userId, bookId) => dispatch => {
+  return fetch('/su/handout', {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      userId: userId,
+      bookId: bookId
+    })
+  })
+  .then(res=>{
+    if (res.status === 200) {
+      dispatch(suFetchBookData(bookId))
+    } else {
+      dispatch(setModal({
+        isShow: true,
+        modalTitle: "Something happend",
+        modalText: ""
+      }))
+    }
+  })
+}
+
+
+export const suCancelBook = (userId, bookId) => dispatch => {
+  return fetch('/su/cancelBook', {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      userId: userId,
+      bookId: bookId
+    })
+  })
+  .then(res=>{
+    if (res.status === 200) {
+      dispatch(suFetchBookData(bookId))
+    } else {
+      dispatch(setModal({
+        isShow: true,
+        modalTitle: "Something happend",
+        modalText: ""
+      }))
+    }
+  })
+}
+
+
+export const suReturnToBookStatus = (userId, bookId) => dispatch => {
+  return fetch('/su/returntobookstatus', {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      userId: userId,
+      bookId: bookId
+    })
+  })
+  .then(res=>{
+    if (res.status === 200) {
+      dispatch(suFetchBookData(bookId))
+    } else {
+      dispatch(setModal({
+        isShow: true,
+        modalTitle: "Something happend",
+        modalText: ""
+      }))
+    }
+  })
+}
+
+
 export const setModal = (data = {
   isShow: false,
   modalTitle: "",

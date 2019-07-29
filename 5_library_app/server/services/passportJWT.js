@@ -17,7 +17,7 @@ const opts = {
   secretOrKey: secretKey
 };
 
-passport.use(
+passport.use( "jwt",
   new JwtStrategy(opts, function(jwt_payload, done) {
     User.findOne(
       {
@@ -29,6 +29,27 @@ passport.use(
           return done(err, false);
         }
         if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      }
+    );
+  })
+);
+
+passport.use( "jwtSU",
+  new JwtStrategy(opts, function(jwt_payload, done) {
+    User.findOne(
+      {
+        _id: jwt_payload.userId
+      },
+      function(err, user) {
+        if (err) {
+          console.log(err);
+          return done(err, false);
+        }
+        if (user.su) {
           return done(null, user);
         } else {
           return done(null, false);

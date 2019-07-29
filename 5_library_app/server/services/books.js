@@ -1,13 +1,6 @@
-const {
-  User,
-  Book
-} = require("./mongo");
-const {
-  io
-} = require('../server');
-const {
-  maxBookingTime
-} = require("../config/constants")
+const { User, Book } = require("./mongo");
+const { io } = require('../server');
+const { maxBookingTime } = require("../config/constants")
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -84,32 +77,25 @@ const getSingleBook = (req, res) => {
     .catch((err) => console.log(err))
 }
 
-const bookingBook = (bookId, userId, response) => {
-  Book.findById(bookId)
+const bookingBook = (bookId, userId) => {
+  return Book.findById(bookId)
     .then((book) => {
-
-
       let index = -1;
       book.bookBookedBy.forEach((book, i) => {
         let stringUserId = userId.toString()
         let bookUserId = book.userId.toString()
         if (bookUserId === stringUserId) index = i
       })
-
-
       if (book.availableCount > 0 && index<0) {
         Promise.all([setUserToBookBook(bookId, userId), setBookingBookToUser(book, userId)])
-          .then(() => {
-            io.sockets.emit(`dataUpdate${bookId}`)
-            response.sendStatus(200)
-          })
+          .then(() => io.sockets.emit(`dataUpdate${bookId}`))
           .catch((err) => console.log(err))
       } else {
-        response.sendStatus(400)
+        throw new Error()
       }
     })
-
 }
+
 
 const setUserToBookBook = (bookId, userId) => {
   return new Promise((res, rej) => {
@@ -158,13 +144,8 @@ const setBookingBookToUser = (book, userId) => {
 }
 
 
-const cancelBook = (bookId, userId, res) => {
-  Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
-    .then(() => res.sendStatus(200))
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    })
+const cancelBook = (bookId, userId) => {
+  return Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
 }
 
 
@@ -178,10 +159,15 @@ const removeUserFromBook = (bookId, userId) => {
           let bookUserId = book.userId.toString()
           if (bookUserId === userId) index = i
         })
-        if (index > (-1)) book.bookBookedBy.splice(index, 1);
-        book.availableCount++;
-        book.save();
-        res();
+        if (index > (-1)) {
+          book.bookBookedBy.splice(index, 1);
+          book.availableCount++;
+          console.log('+++++++++++++++++++');
+          book.save();
+          res();
+        } else {
+          throw new Error('There are not such user')
+        }
       })
       .catch((err) => rej(err))
   })

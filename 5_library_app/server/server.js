@@ -27,6 +27,7 @@ module.exports={
 
 
 const routes = require("./routes/routes");
+const su = require("./routes/su");
 const { User, Book } = require("./services/mongo");
 const {getSingleBookData} = require("./services/books");
 require("./services/passportJWT");
@@ -38,7 +39,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use('/', routes);
-
+app.use('/su', su);
 
 
 server.listen(4000, err => {

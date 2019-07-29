@@ -60,7 +60,7 @@ class BookDetailContainer extends React.PureComponent {
   render() {
     let {tittle, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.state.bookId} tittle={tittle} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} />
+      <BookDetail bookId={this.state.bookId} tittle={tittle} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} />
     </Suspense>);
   }
 }
@@ -69,6 +69,7 @@ const mapStateToProps = state => {
   return {
     userLogin: state.user.login,
     userId: state.user._id,
+    su: state.user.su,
     booksDetails: state.booksDetails
   }
 }

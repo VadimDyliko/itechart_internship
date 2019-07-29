@@ -19,9 +19,9 @@ class BookedBook extends React.Component {
           <Link to={`/book/${bookId}/`} className="navigation-link">
               {tittle}
           </Link>
-          <button className="btn" onClick={this.cancelBook}>Cancel book</button>
           <p>Date of book: {dateOfBook}</p>
           <p>Date of book end: {datebookEnd}</p>
+          <button className="btn" onClick={this.cancelBook}>Cancel book</button>
         </div>
       </div>
     )

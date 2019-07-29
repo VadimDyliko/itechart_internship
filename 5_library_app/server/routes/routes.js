@@ -93,14 +93,28 @@ router.post("/addcomment", passport.authenticate("jwt", {
 router.post("/bookingBook", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
-  bookingBook(req.body.bookId, req.user._id, res)
+  bookingBook(req.body.bookId, req.user._id)
+    .then(()=>{res.sendStatus(200)})
+    .catch(()=>{res.sendStatus(400)})
 })
+//
+//
+// router.post("/bookingBook", passport.authenticate("jwt", {
+//   session: false
+// }), (req, res) => {
+//   bookingBook(req.body.bookId, req.user._id, res)
+// })
 
 
 router.post("/cancelBook", passport.authenticate("jwt", {
   session: false
 }), (req, res)=>{
-  cancelBook(req.body.bookId, req.user._id, res);
+  cancelBook(req.body.bookId, req.user._id, res)
+    .then(() => res.sendStatus(200))
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    })
 })
 
 

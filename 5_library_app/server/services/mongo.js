@@ -20,7 +20,8 @@ const userSchema = mongoose.Schema({
   age: Number,
   booksOnHand: Array,
   bookingBooks: Array,
-  profilePicture: Buffer
+  profilePicture: Buffer,
+  su: Boolean
 });
 
 const User = mongoose.model("User", userSchema);

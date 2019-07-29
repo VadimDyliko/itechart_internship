@@ -5,6 +5,7 @@ import LogInFormContainer from './LogInFormContainer'
 import SingUpFormContainer from './SingUpFormContainer'
 import ProfileContainer from './ProfileContainer'
 import Content from '../components/Content/Content'
+import BookManageContainer from "./BookManageContainer"
 
 class ContentContainer extends React.PureComponent {
   render() {
@@ -14,14 +15,21 @@ class ContentContainer extends React.PureComponent {
         LogInFormContainer
       } /> <Route path="/singup" component={SingUpFormContainer}/>
     </>)
+    let suContent = this.props.su?(
+      <Route path="/book/:bookId/manage" component={BookManageContainer}/>
+    ):null
     return (<Content>
       {route}
+      {suContent}
     </Content>);
   }
 }
 
 const mapStateToProps = state => {
-  return {userLogin: state.user.login}
+  return {
+    userLogin: state.user.login,
+    su: state.user.su
+  }
 }
 
 export default connect(mapStateToProps)(ContentContainer);

@@ -7,10 +7,12 @@ const messages = {
   XSSMessage: 'XSS has detected',
   userLoginMessage: 'User has singin'
 }
-const maxBookingTime = 1209600000; //ms
+const maxBookingTime = 1000*60*60*48; //ms
+const maxOnHandTime = 1000*60*60*24*30; //ms
 module.exports = {
   dbUrl,
   secretKey,
   messages,
-  maxBookingTime
+  maxBookingTime,
+  maxOnHandTime
 }

@@ -1,0 +1,8 @@
+.book-manage__item{
+  border: 1px rgb(93, 36, 186) solid;
+  border-radius: 15px;
+  padding: 10px;
+}
+.book-manage__item>p{
+  font-size: 12px;
+}

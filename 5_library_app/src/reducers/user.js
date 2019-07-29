@@ -7,7 +7,8 @@ const user = handleActions({
     login: action.data.login,
     email: action.data.email,
     booksOnHand: action.data.booksOnHand,
-    bookingBooks: action.data.bookingBooks
+    bookingBooks: action.data.bookingBooks,
+    su: action.data.su
   }),
 }, {
   _id:'',

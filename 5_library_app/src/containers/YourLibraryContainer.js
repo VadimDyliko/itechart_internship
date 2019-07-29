@@ -6,7 +6,6 @@ import {cancelBook} from "../actions"
 class YourLibraryContainer extends React.PureComponent {
 
   cancelBook = bookId => {
-    console.log(bookId);
     this.props.onCancelBook(bookId)
   }
 

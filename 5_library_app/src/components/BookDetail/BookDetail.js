@@ -1,7 +1,8 @@
 import React from "react";
-import "./BookDetail.css"
-import Comment from '../Comment/Comment'
-import CommentAdd from '../CommentAdd/CommentAdd'
+import "./BookDetail.css";
+import Comment from '../Comment/Comment';
+import CommentAdd from '../CommentAdd/CommentAdd';
+import {Link} from "react-router-dom";
 
 class BookDetail extends React.PureComponent {
   render() {
@@ -15,8 +16,16 @@ class BookDetail extends React.PureComponent {
       userId,
       bookId,
       count,
-      availableCount
+      availableCount,
+      su
     } = this.props
+    let suContent = su?(
+      <div>
+        <Link to={`/book/${bookId}/manage`} className="navigation-link">
+          Manage this book
+        </Link>
+      </div>
+    ):null
     return (<div className="book-detail">
       <div className="book-detail__about">
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>
@@ -28,6 +37,7 @@ class BookDetail extends React.PureComponent {
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>
       </div>
+      {suContent}
       <div>
         {
           comments.map(comment => {

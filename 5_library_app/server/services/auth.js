@@ -104,7 +104,8 @@ const getProfile = (req, res) => {
     login: req.user.login,
     email: req.user.email,
     booksOnHand: req.user.booksOnHand,
-    bookingBooks: req.user.bookingBooks
+    bookingBooks: req.user.bookingBooks,
+    su: req.user.su
   };
   res.json(payload);
 }
