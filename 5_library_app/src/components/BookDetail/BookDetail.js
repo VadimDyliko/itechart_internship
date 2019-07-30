@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 class BookDetail extends React.PureComponent {
   render() {
     let {
-      tittle,
+      title,
       year,
       bookAthour,
       bookDiscription,
@@ -17,7 +17,8 @@ class BookDetail extends React.PureComponent {
       bookId,
       count,
       availableCount,
-      su
+      su,
+      suBtnHandler
     } = this.props
     let suContent = su?(
       <div>
@@ -30,7 +31,7 @@ class BookDetail extends React.PureComponent {
       <div className="book-detail__about">
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>
         <div className="book-detail__details">
-          <h2>{tittle}</h2>
+          <h2>{title}</h2>
           <p>{bookAthour} {year}</p>
           <p>{availableCount}/{count}</p>
           <button className="btn" onClick={this.props.bookingHandler}>Book</button>
@@ -41,7 +42,7 @@ class BookDetail extends React.PureComponent {
       <div>
         {
           comments.map(comment => {
-            return (<Comment key={comment.id} commentAuthor={comment.commentAuthor} commentAuthorId={comment.commentAuthorId} commentText={comment.commentText} date={comment.date}/>)
+            return (<Comment key={comment.id} commentAuthor={comment.commentAuthor} commentAuthorId={comment.commentAuthorId} commentText={comment.commentText} date={comment.date} su={su} suBtnHandler={suBtnHandler}/>)
           })
         }
         <CommentAdd bookId={bookId} commentAuthorId={userId} commentAddHandler={commentAddHandler}/>

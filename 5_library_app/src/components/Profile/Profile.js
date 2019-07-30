@@ -1,6 +1,7 @@
 import React from "react";
 import './Profile.css';
 import personIcon from '../../images/person.png'
+import YourLibraryContainer from "../../containers/YourLibraryContainer"
 
 class Profile extends React.PureComponent {
 
@@ -13,6 +14,7 @@ class Profile extends React.PureComponent {
       <p className="profile__login">{this.props.login}</p>
       <p className="profile__login">{this.props.email}</p>
       <button className="btn" onClick={this.props.LogOutHandler}>LogOut</button>
+      <YourLibraryContainer/>
     </div>);
   }
 }

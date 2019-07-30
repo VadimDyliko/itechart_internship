@@ -1,6 +1,7 @@
 const { User, Book } = require("./mongo");
 const {cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount} = require('./books');
 const {maxOnHandTime} = require('../config/constants');
+const { io } = require('../server');
 
 const suFetchBookData = (req, res) => {
   Book.findById(req.params.bookId)
@@ -17,7 +18,7 @@ const suFetchBookData = (req, res) => {
 
 const suHandOutBook = (userId, bookId) => {
   return cancelBook(bookId, userId)
-    .then(()=>Promise.all([setUserToBookOnHands(bookId, userId), setBookIsOnHandToUser(bookId, userId)]))
+    .then((book)=>Promise.all([setUserToBookOnHands(bookId, userId), setBookIsOnHandToUser(bookId, userId, book)]))
 }
 
 
@@ -42,9 +43,10 @@ const setUserToBookOnHands = (bookId, userId) => {
 }
 
 
-const setBookIsOnHandToUser = (bookId, userId) => {
+const setBookIsOnHandToUser = (bookId, userId, book) => {
   return new Promise((res, rej) => {
     let data = {
+      title: book.title,
       bookId: bookId,
       dateOfHandOut: Date.now(),
       dateToReturn: Date.now() + maxOnHandTime,
@@ -115,10 +117,30 @@ const removeBookFromUserOnHands = (userId, bookId) => {
 }
 
 
+const deleteComment = (bookId, commentId) => {
+  return new Promise((res, rej) => {
+    Book.findById(bookId)
+      .then(book=>{
+        let index = -1
+        book.comments.forEach((comment, i) => {
+          if(commentId === (comment.commentAuthorId + comment.date)) index = i
+        })
+        let newComment = {...book.comments[index], commentText: "<<<Deleted by moderator>>>"}
+        if (index > (-1)) book.comments.splice(index, 1, newComment);
+        book.save()
+          .then(()=>io.sockets.emit(`dataUpdate${bookId}`))
+        res();
+      })
+      .catch((err) => rej(err))
+  })
+}
+
+
 module.exports = {
   suFetchBookData,
   suHandOutBook,
   suCancelBook,
   suReturnBookFromHands,
-  suReturnToBookStatus
+  suReturnToBookStatus,
+  deleteComment
 }

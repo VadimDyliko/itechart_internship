@@ -27,3 +27,12 @@
   align-self: flex-end;
   font-size: 8px;
 }
+.comment__su-btn{
+  align-self: flex-end;
+  border: 1px white solid;
+  background: none;
+  color: white;
+  padding: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}

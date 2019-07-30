@@ -17,7 +17,7 @@ const getBooks = (req, res) => {
     .then(books => books.map(book => {
       return newBook = {
         _id: book._id,
-        tittle: book.tittle,
+        title: book.title,
         year: book.year,
         bookAthour: book.bookAthour
       }
@@ -66,7 +66,7 @@ const getSingleBook = (req, res) => {
     .then(book => {
       return newBook = {
         [book._id]: {
-          tittle: book.tittle,
+          title: book.title,
           year: book.year,
           bookAthour: book.bookAthour,
           bookDiscription: book.bookDiscription
@@ -124,7 +124,7 @@ const setBookingBookToUser = (book, userId) => {
   return new Promise((res, rej) => {
     let data = {
       bookId: book._id,
-      tittle: book.tittle,
+      title: book.title,
       dateOfBook: Date.now(),
       datebookEnd: Date.now() + maxBookingTime,
     }
@@ -144,6 +144,7 @@ const setBookingBookToUser = (book, userId) => {
 
 const cancelBook = (bookId, userId) => {
   return Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
+    .then(data=>data[0])
 }
 
 
@@ -161,7 +162,7 @@ const removeUserFromBook = (bookId, userId) => {
           book.bookBookedBy.splice(index, 1);
           // book.availableCount++;
           book.save();
-          res();
+          res(book);
         } else {
           throw new Error('There are not such user')
         }
@@ -209,6 +210,20 @@ const incrementAvailableCount = bookId => {
 }
 
 
+const searchBook = (req, res) => {
+  let regExp = new RegExp(req.body.searchExp, 'gi')
+  Book.find({ $or: [{ title: regExp }, { bookAthour: regExp }, {year: regExp}] })
+    .then(books=>{
+      books = books.map(book=>{
+        return {
+          _id: book._id,
+          title: book.title
+        }
+      })
+      res.json(books)
+    })
+}
+
 module.exports = {
   getBooks,
   getSingleBookCover,
@@ -218,5 +233,6 @@ module.exports = {
   bookingBook,
   cancelBook,
   decrementAvailableCount,
-  incrementAvailableCount
+  incrementAvailableCount,
+  searchBook
 }

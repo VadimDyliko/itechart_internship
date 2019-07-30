@@ -4,6 +4,7 @@ import './Content.css';
 import HomeContainer from '../../containers/HomeContainer';
 import BookDetailContainer from '../../containers/BookDetailContainer';
 import YourLibraryContainer from '../../containers/YourLibraryContainer';
+import SearchContainer from '../../containers/SearchContainer';
 
 class Content extends React.PureComponent {
 
@@ -11,8 +12,9 @@ class Content extends React.PureComponent {
     return (<div className="content">
       <Route path="/" exact component={HomeContainer}/>
       <Route path="/home" component={HomeContainer}/>
+      <Route path="/search" component={SearchContainer}/>
       <Route path="/yourlibrary" component={YourLibraryContainer}/>
-      <Route path="/book/:bookId/" component={BookDetailContainer}/> 
+      <Route path="/book/:bookId/" component={BookDetailContainer}/>
       {this.props.children}
     </div>);
   }

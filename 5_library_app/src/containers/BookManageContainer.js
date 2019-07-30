@@ -21,10 +21,14 @@ class BookManageContainer extends React.PureComponent {
     this.props.onSuReturnToBookStatus(userId, this.props.match.params.bookId);
   }
 
+  goBack = () => {
+    this.props.history.goBack()
+  }
+
   render() {
     return(
       <>
-      <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus}/>
+      <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus} goBack={this.goBack}/>
       </>
     )
   }

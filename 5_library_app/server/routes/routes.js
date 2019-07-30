@@ -22,7 +22,8 @@ const {
   bookingBook,
   cancelBook,
   decrementAvailableCount,
-  incrementAvailableCount
+  incrementAvailableCount,
+  searchBook
 } = require("../services/books");
 
 
@@ -100,13 +101,6 @@ router.post("/bookingBook", passport.authenticate("jwt", {
     .then(()=>{res.sendStatus(200)})
     .catch(()=>{res.sendStatus(400)})
 })
-//
-//
-// router.post("/bookingBook", passport.authenticate("jwt", {
-//   session: false
-// }), (req, res) => {
-//   bookingBook(req.body.bookId, req.user._id, res)
-// })
 
 
 router.post("/cancelBook", passport.authenticate("jwt", {
@@ -122,23 +116,9 @@ router.post("/cancelBook", passport.authenticate("jwt", {
 })
 
 
+router.post("/search", (req,res)=> {
+  searchBook(req, res)
+})
+
+
 module.exports = router
-
-
-
-
-
-// router.post('/bookAdd', upload.single("bookPicture"), (req,res)=>{
-//   console.log(req.body);
-//   console.log(req.file.buffer);
-//   let newBook = new Book({
-//     tittle: req.body.title,
-//     year: req.body.year,
-//     bookAthour: req.body.bookAthour,
-//     bookDiscription: req.body.bookDiscription,
-//     bookPicture: req.file.buffer,
-//   })
-//   newBook.save()
-//   .then(()=>res.sendStatus(200))
-//   .catch((err)=>console.log(err))
-// })

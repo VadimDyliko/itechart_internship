@@ -6,6 +6,7 @@ class BookingBooks extends React.Component {
   render () {
     return(
       <div className="booking-books">
+        <h4>Booked books:</h4>
         {
           this.props.bookingBooks.map(book=>{
             book.key = book.bookId+book.dateOfBook

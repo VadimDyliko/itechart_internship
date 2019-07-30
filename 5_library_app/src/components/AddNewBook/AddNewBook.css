@@ -1,0 +1,7 @@
+.add-new-book__form{
+  display: flex;
+  flex-direction: column;
+}
+.add-new-book__form > input {
+    margin: 15px 0;
+}

@@ -8,6 +8,7 @@ class BookManage extends React.PureComponent {
     return(
       <div className="book-manage">
           <div className="book-manage__list">
+            <button className="btn" onClick={this.props.goBack}>Go Back</button>
           <p>booked by:</p>
           {this.props.suContent?this.props.suContent.bookBookedBy.map((book,i)=>{
                   return <BookManageBookedItem key={i + book.userId + book.dateOfBook} book={book} handOutHandler={this.props.handOutHandler} cancelBookHandler={this.props.cancelBookHandler}/>

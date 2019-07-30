@@ -27,8 +27,8 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 const bookSchema = mongoose.Schema({
-  tittle: String,
-  year: Number,
+  title: String,
+  year: String,
   bookAthour: String,
   bookDiscription: String,
   bookBookedBy: Array,

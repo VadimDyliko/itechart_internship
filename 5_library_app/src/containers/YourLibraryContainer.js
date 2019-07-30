@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import BookingBooks from '../components/BookingBooks/BookingBooks'
+import BooksOnHand from '../components/BooksOnHand/BooksOnHand'
 import {cancelBook} from "../actions"
 
 class YourLibraryContainer extends React.PureComponent {
@@ -13,6 +14,7 @@ class YourLibraryContainer extends React.PureComponent {
     return(
       <>
         <BookingBooks bookingBooks={this.props.bookingBooks} cancelBook={this.cancelBook}/>
+        <BooksOnHand booksOnHand={this.props.booksOnHand}/>
       </>
     )
   }
@@ -21,6 +23,7 @@ class YourLibraryContainer extends React.PureComponent {
 const mapStateToProps = state => {
   return {
     bookingBooks: state.user.bookingBooks,
+    booksOnHand: state.user.booksOnHand
   }
 }
 

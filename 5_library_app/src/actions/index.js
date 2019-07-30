@@ -275,6 +275,75 @@ export const suReturnToBookStatus = (userId, bookId) => dispatch => {
 }
 
 
+export const suDeleteComment = (bookId, commentId) => dispatch => {
+  return fetch('/su/deletecomment', {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      bookId: bookId,
+      commentId: commentId
+    })
+  })
+}
+
+
+export const suAddNewBook = data => dispatch => {
+  let formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("year", data.year);
+  formData.append("bookAthour", data.bookAthour);
+  formData.append("bookDiscription", data.bookDiscription);
+  formData.append("coverImage", data.coverImage);
+  return fetch("/su/bookadd", {
+      method: "POST",
+      body: formData
+    })
+    .then(res=>{
+      if (res.status === 200) {
+        dispatch(setModal({isShow: true, modalTitle: "Book add", modalText: "The book has been added to the library"}))
+      } else {
+        dispatch(setModal({isShow: true, modalTitle: "Book add faild", modalText: "Something happend"}))
+      }
+    })
+}
+
+
+export const suFetchBooksForManage = (filter) => dispatch => {
+  return fetch(`/su/fetchbooksformanage/${filter}`)
+    .then(res=>res.json())
+    .then(data=>dispatch(suSetBooksForManage(data)))
+}
+
+
+const suSetBooksForManage = data => {
+  return {
+    type: "SET_BOOKS_FOR_MANAGE",
+    data
+  };
+}
+
+
+export const searchRequest = searchExp => dispatch => {
+  return fetch('/search', {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      searchExp: searchExp
+    })
+  })
+    .then(res=>res.json())
+    .then(data=>dispatch(setSearchResult(data)))
+}
+
+
+const setSearchResult = data => {
+  return {
+    type: "SET_SEARCH_RESULT",
+    data
+  };
+}
+
+
 export const setModal = (data = {
   isShow: false,
   modalTitle: "",

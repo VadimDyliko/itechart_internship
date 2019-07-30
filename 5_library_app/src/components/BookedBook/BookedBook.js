@@ -9,7 +9,7 @@ class BookedBook extends React.Component {
   }
 
   render () {
-    let {bookId, tittle, dateOfBook, datebookEnd} = this.props.book;
+    let {bookId, title, dateOfBook, datebookEnd} = this.props.book;
     dateOfBook = new Date(dateOfBook).toLocaleString();
     datebookEnd = new Date(datebookEnd).toLocaleString();
     return(
@@ -17,7 +17,7 @@ class BookedBook extends React.Component {
         <img className="booked-book__cover-image" src={`/book/cover/${bookId}`} alt="cover"/>
         <div className="booked-book__details">
           <Link to={`/book/${bookId}/`} className="navigation-link">
-              {tittle}
+              {title}
           </Link>
           <p>Date of book: {dateOfBook}</p>
           <p>Date of book end: {datebookEnd}</p>
