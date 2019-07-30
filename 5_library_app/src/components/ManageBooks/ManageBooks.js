@@ -1,5 +1,6 @@
 import React from 'react';
 import './ManageBooks.css';
+import BookInline from '../BookInline/BookInline'
 
 class ManageBooks extends React.PureComponent {
 
@@ -11,13 +12,13 @@ class ManageBooks extends React.PureComponent {
     return(
       <div className="manage-books">
         <select className="manage-books__filter-select" onChange={this.selectHandler}>
-          <option>all</option>
-          <option>on hands</option>
           <option>booked</option>
+          <option>on hands</option>
+          <option>all</option>
         </select>
         {
           this.props.manageBooks.map(book=>{
-            return <div key={book._id}>{book.title}</div>
+            return <BookInline key={book._id} book={book} />
           })
         }
       </div>

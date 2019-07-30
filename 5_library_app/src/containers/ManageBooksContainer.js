@@ -6,12 +6,13 @@ import {suFetchBooksForManage} from '../actions'
 class SearchContainer extends React.PureComponent {
 
   componentDidMount() {
-    this.props.onSuFetchBooksForManage('all')
+    this.props.onSuFetchBooksForManage('booked')
   }
 
   filterHandler = (filter) => {
     this.props.onSuFetchBooksForManage(filter)
   }
+
 
   render () {
     return(

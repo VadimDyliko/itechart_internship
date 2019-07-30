@@ -69,16 +69,33 @@ router.post('/bookadd', passport.authenticate("jwtSU", {
 router.get('/fetchbooksformanage/:filter', passport.authenticate("jwtSU", {
   session: false
 }), (req, res)=> {
-    console.log(req.params);
-    if (req.params.filter === 'all') {
-      getBooks(req, res)
-    } else if (req.params.filter === 'booked') {
-      Book.find({bookBookedBy:{ $gt: [] }})
-      .then(books=>res.json(books))
-    } else if (req.params.filter === 'on hands') {
-      Book.find({bookOnHandAt:{ $gt: [] }})
-      .then(books=>res.json(books))
+    let exp
+    console.log(req.params.filter);
+    switch (req.params.filter) {
+      case 'booked':
+      console.log(123);
+      exp = {bookBookedBy:{ $gt: [] }};
+      break;
+      case 'on hands':
+      exp = {bookOnHandAt:{ $gt: [] }};
+      break;
+      default:
+      exp = {};
     }
+    console.log(exp);
+      Book.find(exp)
+      .then(books=>books.map(book=>{
+          return newBook = {
+            _id: book._id,
+            title: book.title,
+            year: book.year,
+            bookAthour: book.bookAthour,
+            bookBookedBy: book.bookBookedBy,
+            bookOnHandAt: book.bookOnHandAt,
+            availableCount: book.availableCount
+          }
+        }))
+      .then(books=>res.json(books))
 })
 
 module.exports = router
