@@ -1,6 +1,13 @@
-const { User, Book } = require("./mongo");
-const { io } = require('../server');
-const { maxBookingTime } = require("../config/constants")
+const {
+  User,
+  Book
+} = require("./mongo");
+const {
+  io
+} = require('../server');
+const {
+  maxBookingTime
+} = require("../config/constants")
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -86,7 +93,7 @@ const bookingBook = (bookId, userId) => {
         let bookUserId = book.userId.toString()
         if (bookUserId === stringUserId) index = i
       })
-      if (book.availableCount > 0 && index<0) {
+      if (book.availableCount > 0 && index < 0) {
         Promise.all([setUserToBookBook(bookId, userId), setBookingBookToUser(book, userId)])
           .then(() => {
             io.sockets.emit(`dataUpdate${bookId}`)
@@ -144,7 +151,7 @@ const setBookingBookToUser = (book, userId) => {
 
 const cancelBook = (bookId, userId) => {
   return Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
-    .then(data=>data[0])
+    .then(data => data[0])
 }
 
 
@@ -193,7 +200,7 @@ const removeBookFromUser = (bookId, userId) => {
 
 const decrementAvailableCount = bookId => {
   return Book.findById(bookId)
-    .then((book)=>{
+    .then((book) => {
       book.availableCount--;
       book.save()
     })
@@ -203,7 +210,7 @@ const decrementAvailableCount = bookId => {
 
 const incrementAvailableCount = bookId => {
   return Book.findById(bookId)
-    .then((book)=>{
+    .then((book) => {
       book.availableCount++;
       book.save()
     })
@@ -212,9 +219,17 @@ const incrementAvailableCount = bookId => {
 
 const searchBook = (req, res) => {
   let regExp = new RegExp(req.body.searchExp, 'gi')
-  Book.find({ $or: [{ title: regExp }, { bookAthour: regExp }, {year: regExp}] })
-    .then(books=>{
-      books = books.map(book=>{
+  Book.find({
+      $or: [{
+        title: regExp
+      }, {
+        bookAthour: regExp
+      }, {
+        year: regExp
+      }]
+    })
+    .then(books => {
+      books = books.map(book => {
         return {
           _id: book._id,
           title: book.title

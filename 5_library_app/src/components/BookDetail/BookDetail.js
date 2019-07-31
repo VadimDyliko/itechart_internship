@@ -34,6 +34,7 @@ class BookDetail extends React.PureComponent {
           <h2>{title}</h2>
           <p>{bookAthour} {year}</p>
           <p>{availableCount}/{count}</p>
+          <button className="btn" onClick={this.props.goBack}>Back</button>
           <button className="btn" onClick={this.props.bookingHandler}>Book</button>
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>

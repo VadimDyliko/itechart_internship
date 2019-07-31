@@ -62,10 +62,15 @@ class BookDetailContainer extends React.PureComponent {
     this.props.onSuDeleteComment(this.state.bookId, commentId);
   }
 
+
+    goBack = () => {
+      this.props.history.goBack()
+    }
+
   render() {
     let {title, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler}/>
+      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack}/> 
     </Suspense>);
   }
 }

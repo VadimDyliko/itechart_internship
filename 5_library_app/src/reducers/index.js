@@ -6,6 +6,7 @@ import booksDetails from './booksDetails';
 import su from './su';
 import searchResult from './searchResult';
 import manageBooks from './manageBooks';
+import manageUsers from './manageUsers';
 
 const rootReducer = combineReducers({
   user,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   modalMessage,
   su,
   searchResult,
-  manageBooks
+  manageBooks,
+  manageUsers
 })
 
 export default rootReducer

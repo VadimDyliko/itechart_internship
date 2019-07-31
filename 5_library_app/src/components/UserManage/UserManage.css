@@ -1,17 +1,18 @@
-.book-manage{
+.user-manage{
   position: absolute;
   z-index: 50;
   background: rgba(0, 0, 0, 0.95);
   width: 800px;
   display: flex;
+  align-items: center;
+  flex-direction: column;
   padding: 25px;
   top: 25px;
   border-radius: 15px;
   min-height: 80vh;
 }
-.book-manage__list{
-  width: 400px;
-}
-.book-manage_btn{
-  align-self: flex-start;
+.user-manage__avatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }

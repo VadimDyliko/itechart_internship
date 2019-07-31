@@ -5,7 +5,7 @@ import './BookInline.css';
 class BookInline extends React.PureComponent {
 
   render() {
-    let {bookOnHandAt, bookBookedBy, _id, title, availableCount} = this.props.book
+    let {bookOnHandAt, bookBookedBy, _id, title, availableCount, bookAthour, year} = this.props.book
     return (
       <div className="book-inline">
         <div className="book-inline__cover">
@@ -15,12 +15,12 @@ class BookInline extends React.PureComponent {
           <Link to={`/book/${_id}`} className="book-inline-link">
             <p>{title}</p>
           </Link>
+          <p>{bookAthour}</p>
+          <p>{year}</p>
+          <p>Booked / On hands / Available: {bookBookedBy.length}/{bookOnHandAt.length}/{availableCount}</p>
           <Link to={`/book/${_id}/manage`} className="book-inline-link">
             <p>Manage this book</p>
           </Link>
-          <p>Booked: {bookBookedBy.length}</p>
-          <p>On hands: {bookOnHandAt.length}</p>
-          <p>Available: {availableCount}</p>
         </div>
       </div>
   )

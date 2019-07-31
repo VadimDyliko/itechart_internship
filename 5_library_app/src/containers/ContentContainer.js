@@ -8,6 +8,8 @@ import Content from '../components/Content/Content'
 import BookManageContainer from "./BookManageContainer"
 import AddNewBookContainer from "./AddNewBookContainer"
 import ManageBooksContainer from "./ManageBooksContainer"
+import ManageUsersContainer from "./ManageUsersContainer"
+import UserManageContainer from "./UserManageContainer"
 
 class ContentContainer extends React.PureComponent {
   render() {
@@ -22,6 +24,8 @@ class ContentContainer extends React.PureComponent {
         <Route path="/book/:bookId/manage" component={BookManageContainer}/>
         <Route path="/addbook" component={AddNewBookContainer}/>
         <Route path="/managebooks" component={ManageBooksContainer}/>
+        <Route path="/manageusers" component={ManageUsersContainer}/>
+        <Route path="/manageusers/:userId" component={UserManageContainer}/>
       </>
     ):null
     return (<Content>

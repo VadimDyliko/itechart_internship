@@ -5,6 +5,10 @@ const su = handleActions({
     ...state,
     ...action.data
   }),
+  SET_MANAGED_USER: (state, action) => ({
+    ...state,
+    ...action.data
+  }),
 },{});
 
 

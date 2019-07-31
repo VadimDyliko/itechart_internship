@@ -3,12 +3,12 @@ import './AddNewBook.css'
 
 class AddNewBook extends React.Component {
 
-  state={
+  state = {
     title: '',
     year: '',
     bookAthour: '',
     bookDiscription: '',
-    coverImage: '',
+    coverImage: ''
   }
 
   submitHandler = e => {
@@ -18,7 +18,9 @@ class AddNewBook extends React.Component {
 
   inputHandler = e => {
     console.log(e.target.name);
-    this.setState({[e.target.name]:e.target.value})
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   coverImageHandler = e => {
@@ -39,9 +41,8 @@ class AddNewBook extends React.Component {
     }
   }
 
-  render () {
-    return(
-      <div className="add-new-book">
+  render() {
+    return (<div className="add-new-book">
       <form onSubmit={this.submitHandler} className="add-new-book__form">
         <p>title</p>
         <input type="text" className="add-new-book form-control" name="title" onChange={this.inputHandler}/>
@@ -55,8 +56,7 @@ class AddNewBook extends React.Component {
         <input onChange={this.coverImageHandler} type="file" className="custom-file-input" id="inputFileCoverImage" accept=".jpg, .jpeg, .png"></input>
         <button type="submit" className="btn">Add new book</button>
       </form>
-      </div>
-    )
+    </div>)
   }
 }
 

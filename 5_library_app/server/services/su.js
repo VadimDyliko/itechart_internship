@@ -1,13 +1,25 @@
-const { User, Book } = require("./mongo");
-const {cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount} = require('./books');
-const {maxOnHandTime} = require('../config/constants');
-const { io } = require('../server');
+const {
+  User,
+  Book
+} = require("./mongo");
+const {
+  cancelBook,
+  bookingBook,
+  decrementAvailableCount,
+  incrementAvailableCount
+} = require('./books');
+const {
+  maxOnHandTime
+} = require('../config/constants');
+const {
+  io
+} = require('../server');
 
 const suFetchBookData = (req, res) => {
   Book.findById(req.params.bookId)
-    .then(book=>{
+    .then(book => {
       res.json({
-        managedBook:{
+        managedBook: {
           bookBookedBy: book.bookBookedBy,
           bookOnHandAt: book.bookOnHandAt
         }
@@ -18,7 +30,7 @@ const suFetchBookData = (req, res) => {
 
 const suHandOutBook = (userId, bookId) => {
   return cancelBook(bookId, userId)
-    .then((book)=>Promise.all([setUserToBookOnHands(bookId, userId), setBookIsOnHandToUser(bookId, userId, book)]))
+    .then((book) => Promise.all([setUserToBookOnHands(bookId, userId), setBookIsOnHandToUser(bookId, userId, book)]))
 }
 
 
@@ -72,12 +84,12 @@ const suCancelBook = (userId, bookId) => {
 
 const suReturnToBookStatus = (userId, bookId) => {
   return suReturnBookFromHands(userId, bookId)
-    .then(()=>bookingBook(bookId, userId))
+    .then(() => bookingBook(bookId, userId))
 }
 
 
 const suReturnBookFromHands = (userId, bookId) => {
-    return Promise.all([removeUserFromBookOnHands(userId, bookId), removeBookFromUserOnHands(userId, bookId)])
+  return Promise.all([removeUserFromBookOnHands(userId, bookId), removeBookFromUserOnHands(userId, bookId)])
 }
 
 
@@ -120,15 +132,18 @@ const removeBookFromUserOnHands = (userId, bookId) => {
 const deleteComment = (bookId, commentId) => {
   return new Promise((res, rej) => {
     Book.findById(bookId)
-      .then(book=>{
+      .then(book => {
         let index = -1
         book.comments.forEach((comment, i) => {
-          if(commentId === (comment.commentAuthorId + comment.date)) index = i
+          if (commentId === (comment.commentAuthorId + comment.date)) index = i
         })
-        let newComment = {...book.comments[index], commentText: "<<<Deleted by moderator>>>"}
+        let newComment = {
+          ...book.comments[index],
+          commentText: "<<<Deleted by moderator>>>"
+        }
         if (index > (-1)) book.comments.splice(index, 1, newComment);
         book.save()
-          .then(()=>io.sockets.emit(`dataUpdate${bookId}`))
+          .then(() => io.sockets.emit(`dataUpdate${bookId}`))
         res();
       })
       .catch((err) => rej(err))

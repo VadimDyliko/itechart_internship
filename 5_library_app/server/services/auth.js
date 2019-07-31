@@ -1,7 +1,13 @@
-const { User } = require("./mongo");
+const {
+  User
+} = require("./mongo");
 const token = require("./jwt");
 const crypto = require("crypto");
-const { secretKey, XSSRegExp, messages } = require("../config/constants");
+const {
+  secretKey,
+  XSSRegExp,
+  messages
+} = require("../config/constants");
 
 
 const singUp = (req, res) => {
@@ -113,11 +119,11 @@ const getProfile = (req, res) => {
 
 const getUserAvatar = (req, res) => {
   User.findById(req.params.userId)
-  .then(user=>{
-    res.set('Content-Type', 'image/jpeg');
-    res.send(user.profilePicture)
-  })
-  .catch((err)=>console.log(err))
+    .then(user => {
+      res.set('Content-Type', 'image/jpeg');
+      res.send(user.profilePicture)
+    })
+    .catch((err) => console.log(err))
 }
 
 

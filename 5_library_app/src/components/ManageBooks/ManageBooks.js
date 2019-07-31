@@ -8,21 +8,34 @@ class ManageBooks extends React.PureComponent {
     this.props.filterHandler(e.target.value)
   }
 
-  render () {
-    return(
-      <div className="manage-books">
-        <select className="manage-books__filter-select" onChange={this.selectHandler}>
-          <option>booked</option>
-          <option>on hands</option>
+  sortHandler = e => {
+    this.props.sortHandler(e.target.value)
+  }
+
+  render() {
+    return (<div className="manage-books">
+      <div className="manage-books__controls">
+        <span>Filter:</span>
+        <select className="manage-books__select" onChange={this.selectHandler}>
           <option>all</option>
+          <option>on hands</option>
+          <option>booked</option>
         </select>
-        {
-          this.props.manageBooks.map(book=>{
-            return <BookInline key={book._id} book={book} />
-          })
-        }
+        <span>Sort by:</span>
+        <select className="manage-books__select" onChange={this.sortHandler}>
+          <option>id</option>
+          <option>title</option>
+          <option>on hands time</option>
+          <option>author</option>
+          <option>year</option>
+        </select>
       </div>
-    )
+      {
+        this.props.manageBooks.map(book => {
+          return <BookInline key={book._id} book={book}/>
+        })
+      }
+    </div>)
   }
 }
 

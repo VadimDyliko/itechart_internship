@@ -14,7 +14,7 @@ class Content extends React.PureComponent {
       <Route path="/home" component={HomeContainer}/>
       <Route path="/search" component={SearchContainer}/>
       <Route path="/yourlibrary" component={YourLibraryContainer}/>
-      <Route path="/book/:bookId/" component={BookDetailContainer}/>
+      <Route path="/book/:bookId/" exact component={BookDetailContainer}/>
       {this.props.children}
     </div>);
   }

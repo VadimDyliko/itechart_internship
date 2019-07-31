@@ -1,0 +1,19 @@
+.user-inline{
+  overflow: hidden;
+  width: 100%;
+  min-height: 50px;
+  background: rgba(0, 0, 0, 0.57);
+  border-radius: 5px;
+  margin: 5px 0;
+  display: flex;
+  font-size: 12px;
+  border-radius: 25px;
+}
+.user-inline__avatar{
+  height: 50px;
+  border-radius: 50%;
+}
+.user-inline__about{
+  flex-grow: 1;
+  margin: 0 15px;
+}
