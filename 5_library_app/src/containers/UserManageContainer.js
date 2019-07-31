@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {suFetchUserData, suCancelBook, suReturnToBookStatus, suHandOutBook, suReturnBookToLibrary} from "../actions"
+import {suFetchUserData, suCancelBook, suReturnToBookStatus, suHandOutBook, suReturnBookToLibrary, suBanUser} from "../actions"
 import UserManage from "../components/UserManage/UserManage"
 
 class UserManageContainer extends React.PureComponent {
@@ -29,6 +29,13 @@ class UserManageContainer extends React.PureComponent {
      .then(()=>this.props.onSuFetchUserData(this.props.match.params.userId))
   }
 
+  suBanUser = (userId, reason, ban) => {
+    this.props.onSuBanUser(userId, reason, ban)
+     .then(()=>this.props.onSuFetchUserData(this.props.match.params.userId))
+  }
+
+
+
   goBack = () => {
     this.props.history.goBack()
   }
@@ -36,7 +43,7 @@ class UserManageContainer extends React.PureComponent {
   render() {
     return(
       <>
-      <UserManage goBack={this.goBack} managedUser={this.props.managedUser} onSuCancelBook={this.suCancelBook} onSuReturnToBookStatus={this.suReturnToBookStatus} onSuHandOutBook={this.suHandOutBook} onSuReturnBookToLibrary={this.suReturnBookToLibrary}/>
+      <UserManage goBack={this.goBack} managedUser={this.props.managedUser} onSuCancelBook={this.suCancelBook} onSuReturnToBookStatus={this.suReturnToBookStatus} onSuHandOutBook={this.suHandOutBook} onSuReturnBookToLibrary={this.suReturnBookToLibrary} onSuBanUser={this.suBanUser}/>
       </>
     )
   }
@@ -55,6 +62,7 @@ const mapDispatchToProps = dispatch => {
     onSuReturnToBookStatus: (userId, bookId) => dispatch(suReturnToBookStatus(userId, bookId)),
     onSuHandOutBook: (userId, bookId) => dispatch(suHandOutBook(userId, bookId)),
     onSuReturnBookToLibrary: (userId, bookId) => dispatch(suReturnBookToLibrary(userId, bookId)),
+    onSuBanUser: (userId, reason, ban) => dispatch(suBanUser(userId, reason, ban)),
   }
 }
 

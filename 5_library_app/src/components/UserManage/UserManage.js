@@ -7,12 +7,18 @@ import UserManageHandOutBook from '../UserManageBook/UserManageHandOutBook'
 
 
 class UserManage extends React.PureComponent {
+
+  onSuBanUser = e => {
+    //this.props.onSuBanUser
+  }
+
   render () {
     let user = this.props.managedUser
     let {_id, login, email} = user?user:''
     return(
       <div className="user-manage">
         <button onClick={this.props.goBack} className="btn">Go back</button>
+        <button onClick={this.props.goBack} className="btn">Ban user</button>
         <img src={`/user/avatar/${_id}`} className="user-manage__avatar" alt="avatar"/>
           <p className="user-manage__login">{login}</p>
           <p className="user-manage__login">{email}</p>

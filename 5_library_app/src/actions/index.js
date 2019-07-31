@@ -483,3 +483,18 @@ const suSetUsersForManage = data => {
     data
   };
 }
+
+
+export const suBanUser = (userId, reason, ban) => dispatch => {
+  return fetch('/su/banuser', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ban: ban,
+      userId: userId,
+      reason: reason
+    })
+  })
+}

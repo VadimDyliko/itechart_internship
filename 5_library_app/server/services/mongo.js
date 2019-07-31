@@ -23,7 +23,12 @@ const userSchema = mongoose.Schema({
   booksOnHand: Array,
   bookingBooks: Array,
   profilePicture: Buffer,
-  su: Boolean
+  su: Boolean,
+  ban: {
+    reason: String,
+    date: String,
+    isBan: Boolean
+  }
 });
 
 const User = mongoose.model("User", userSchema);

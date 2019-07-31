@@ -142,6 +142,13 @@ router.post('/fetchusersformanage', passport.authenticate("jwtSU", {
 })
 
 
+router.post('/banuser', passport.authenticate("jwtSU", {
+  session: false
+}), (req, res) => {
+  console.log(req.body);
+})
+
+
 router.get("/fetchUserData/:userId", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
