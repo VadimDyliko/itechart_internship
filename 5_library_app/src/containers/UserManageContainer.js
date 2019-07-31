@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {suFetchUserData, suCancelBook, suReturnToBookStatus, suHandOutBook, suReturnBookToLibrary, suBanUser} from "../actions"
+import {suFetchUserData, suCancelBook, suReturnToBookStatus, suHandOutBook, suReturnBookToLibrary, suBanUser} from "../actions/su"
 import UserManage from "../components/UserManage/UserManage"
 
 class UserManageContainer extends React.PureComponent {
 
   componentDidMount() {
+    console.log(this.props.match.params.userId);
     this.props.onSuFetchUserData(this.props.match.params.userId)
   }
 

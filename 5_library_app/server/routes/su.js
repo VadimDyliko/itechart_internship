@@ -135,7 +135,8 @@ router.post('/fetchusersformanage', passport.authenticate("jwtSU", {
         login: user.login,
         email: user.email,
         booksOnHand: user.booksOnHand,
-        bookingBooks: user.bookingBooks
+        bookingBooks: user.bookingBooks,
+        isBan: user.isBan
       }
     }))
     .then(users => res.json(users))
@@ -146,12 +147,24 @@ router.post('/banuser', passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
   console.log(req.body);
+  User.findById(req.body.userId)
+    .then(user=>{
+      user.isBan = req.body.ban
+      user.ban = {
+        reason: req.body.reason,
+        date: Date.now(),
+      }
+      user.save()
+    })
+    .then(()=>res.sendStatus(200))
+    .catch(err=>console.log(err))
 })
 
 
 router.get("/fetchUserData/:userId", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
+  console.log(req.params.userId);
   User.findById(req.params.userId)
     .then(user => {
       res.json({
@@ -160,7 +173,8 @@ router.get("/fetchUserData/:userId", passport.authenticate("jwtSU", {
           login: user.login,
           email: user.email,
           booksOnHand: user.booksOnHand,
-          bookingBooks: user.bookingBooks
+          bookingBooks: user.bookingBooks,
+          isBan: user.isBan
         }
       })
     })

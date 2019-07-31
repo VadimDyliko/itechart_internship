@@ -111,7 +111,8 @@ const getProfile = (req, res) => {
     email: req.user.email,
     booksOnHand: req.user.booksOnHand,
     bookingBooks: req.user.bookingBooks,
-    su: req.user.su
+    su: req.user.su,
+    isBan: req.user.isBan
   };
   res.json(payload);
 }

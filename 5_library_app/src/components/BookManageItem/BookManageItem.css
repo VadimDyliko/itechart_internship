@@ -1,9 +1,19 @@
 .book-manage__item{
-  border: 1px rgb(93, 36, 186) solid;
+  background: rgba(105, 50, 168, 0.5);
   border-radius: 15px;
   padding: 10px;
-  margin: 5px 0;
-}
-.book-manage__item>p{
   font-size: 12px;
+}
+.book-manage__btn{
+  margin: 5px;
+  background: none;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 2px;
+  color: white;
+  border: 1px white solid;
+}
+.book-manage__btn:hover{
+  background: white;
+  color: black;
 }

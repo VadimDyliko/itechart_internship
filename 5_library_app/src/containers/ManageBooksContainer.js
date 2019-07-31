@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ManageBooks from '../components/ManageBooks/ManageBooks'
-import {suFetchBooksForManage, suSortManageBooksArr} from '../actions'
+import {suFetchBooksForManage, suSortManageBooksArr} from '../actions/su'
 
 class ManageBooksContainer extends React.PureComponent {
 

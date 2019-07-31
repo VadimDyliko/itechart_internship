@@ -4,13 +4,22 @@
   background: rgba(0, 0, 0, 0.95);
   width: 800px;
   display: flex;
+  flex-direction: column;
   padding: 25px;
   top: 25px;
   border-radius: 15px;
   min-height: 80vh;
 }
+.book-manage__lists{
+  display: flex;
+  align-items: flex-start;
+}
 .book-manage__list{
-  width: 400px;
+  width: 50%;
+  border: 1px solid rgb(56, 38, 148);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 5px;
 }
 .book-manage_btn{
   align-self: flex-start;

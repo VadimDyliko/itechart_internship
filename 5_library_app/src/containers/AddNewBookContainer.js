@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import AddNewBook from '../components/AddNewBook/AddNewBook';
-import {setModal, suAddNewBook} from '../actions'
+import {setModal} from '../actions'
+import {suAddNewBook} from '../actions/su'
 
 class AddNewBookContainer extends React.Component {
 

@@ -15,7 +15,7 @@ class BookManageBookedItem extends React.Component {
         <p>user id: {this.props.book.userId}</p>
         <p>Hand out date: {handOutDate}</p>
         <p>Hand out left date: {handOutDateLeft}</p>
-        <button className="" onClick={this.returnTobookStatus}>Return to book status</button>
+        <button className="book-manage__btn" onClick={this.returnTobookStatus}>Return to book status</button>
       </div>
     )
   }

@@ -24,10 +24,10 @@ const userSchema = mongoose.Schema({
   bookingBooks: Array,
   profilePicture: Buffer,
   su: Boolean,
+  isBan: Boolean,
   ban: {
     reason: String,
-    date: String,
-    isBan: Boolean
+    date: String,    
   }
 });
 

@@ -13,6 +13,7 @@ class UserInline extends React.PureComponent {
           <Link to={`/manageusers/${_id}`} className="user-inline-link">
             <p>{login}</p>
           </Link>
+          <p>{this.props.user.isBan?'BANED':''}</p>
           <p>{email}</p>
         </div>
       </div>

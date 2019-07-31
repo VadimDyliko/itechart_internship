@@ -1,7 +1,8 @@
 import React, {Suspense} from "react";
 import {connect} from "react-redux";
 import Spiner from '../components/Spiner/Spiner';
-import {addComment, getSingleBook, bookingBook, suDeleteComment} from '../actions'
+import {addComment, getSingleBook, bookingBook} from '../actions'
+import {suDeleteComment} from '../actions/su'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
 const BookDetail = React.lazy(() => import ('../components/BookDetail/BookDetail'));
@@ -70,7 +71,7 @@ class BookDetailContainer extends React.PureComponent {
   render() {
     let {title, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack}/> 
+      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack}/>
     </Suspense>);
   }
 }

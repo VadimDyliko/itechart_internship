@@ -86,14 +86,14 @@ router.get("/user/avatar/:userId", (req, res) => {
 })
 
 
-router.post("/addcomment", passport.authenticate("jwt", {
+router.post("/addcomment", passport.authenticate("jwtBanCheck", {
   session: false
 }), (req, res) => {
   addComment(req, res)
 })
 
 
-router.post("/bookingBook", passport.authenticate("jwt", {
+router.post("/bookingBook", passport.authenticate("jwtBanCheck", {
   session: false
 }), (req, res) => {
   bookingBook(req.body.bookId, req.user._id)
@@ -107,7 +107,7 @@ router.post("/bookingBook", passport.authenticate("jwt", {
 })
 
 
-router.post("/cancelBook", passport.authenticate("jwt", {
+router.post("/cancelBook", passport.authenticate("jwtBanCheck", {
   session: false
 }), (req, res) => {
   cancelBook(req.body.bookId, req.user._id, res)

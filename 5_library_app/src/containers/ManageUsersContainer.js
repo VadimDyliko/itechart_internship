@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ManageUsers from '../components/ManageUsers/ManageUsers'
-import {suFetchUsersForManage} from '../actions'
+import {suFetchUsersForManage} from '../actions/su'
 
 class ManageUsersContainer extends React.PureComponent {
 

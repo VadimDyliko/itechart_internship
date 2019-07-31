@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {suFetchBookData, suHandOutBook, suCancelBook, suReturnToBookStatus} from "../actions"
+import {suFetchBookData, suHandOutBook, suCancelBook, suReturnToBookStatus} from "../actions/su"
 import BookManage from "../components/BookManage/BookManage"
 
 class BookManageContainer extends React.PureComponent {

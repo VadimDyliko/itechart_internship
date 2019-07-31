@@ -4,22 +4,24 @@ import BookedBook from '../BookedBook/BookedBook'
 import BookOnHand from '../BookOnHand/BookOnHand'
 import UserManageBookedBook from '../UserManageBook/UserManageBookedBook'
 import UserManageHandOutBook from '../UserManageBook/UserManageHandOutBook'
-
+import personIcon from '../../images/person.png'
 
 class UserManage extends React.PureComponent {
 
   onSuBanUser = e => {
-    //this.props.onSuBanUser
+    this.props.onSuBanUser(this.props.managedUser._id, 'someReason', !this.props.managedUser.isBan)
   }
 
   render () {
-    let user = this.props.managedUser
-    let {_id, login, email} = user?user:''
+    let user = this.props.managedUser;
+    let {_id, login, email, isBan} = user?user:'';
+    let avatar = user?`/user/avatar/${_id}`: personIcon;
     return(
       <div className="user-manage">
         <button onClick={this.props.goBack} className="btn">Go back</button>
-        <button onClick={this.props.goBack} className="btn">Ban user</button>
-        <img src={`/user/avatar/${_id}`} className="user-manage__avatar" alt="avatar"/>
+        <button onClick={this.onSuBanUser} className="btn">{isBan?'UNBAN':'BAN'}</button>
+        <img src={avatar} className="user-manage__avatar" alt="avatar"/>
+          <p>{isBan?'BANED':''}</p>
           <p className="user-manage__login">{login}</p>
           <p className="user-manage__login">{email}</p>
           <p>Booked books:</p>
