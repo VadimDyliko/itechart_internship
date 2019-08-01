@@ -157,10 +157,10 @@ const removeUserFromBook = (bookId, userId) => {
       .then((book) => {
         book.bookBookedBy.forEach((booked, i, arr) => {
           let bookUserId = booked.userId.toString()
-          if (bookUserId == userId) arr.splice(i, 1);      
+          if (bookUserId == userId) arr.splice(i, 1);
         })
-          book.save();
-          res(book);
+        book.save();
+        res(book);
       })
   })
 }

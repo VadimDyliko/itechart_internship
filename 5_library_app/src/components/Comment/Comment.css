@@ -1,32 +1,38 @@
-.comment{
+.comment {
   display: flex;
   padding: 15px;
   margin: 5px 0;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 }
-.comment__author-avatar{
+
+.comment__author-avatar {
   margin: 0 25px;
   height: 50px;
   border-radius: 50%;
 }
-.comment__details{
+
+.comment__details {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.comment__author{
+
+.comment__author {
   font-size: 16px;
   font-weight: bold;
 }
-.comment__text{
+
+.comment__text {
   font-size: 14px;
 }
-.comment__date{
+
+.comment__date {
   align-self: flex-end;
   font-size: 8px;
 }
-.comment__su-btn{
+
+.comment__su-btn {
   align-self: flex-end;
   border: 1px white solid;
   background: none;

@@ -11,10 +11,10 @@ class BookManageBookedItem extends React.Component {
     this.props.cancelBookHandler(this.props.book.userId)
   }
 
-  render () {
+  render() {
     let dateOfBook = new Date(this.props.book.dateOfBook).toLocaleString()
     let datebookEnd = new Date(this.props.book.datebookEnd).toLocaleString()
-    return(
+    return (
       <div className="book-manage__item">
         <img src={`/user/avatar/${this.props.book.userId}`} className="user-inline__avatar" alt="avatar"/>
         <p>user id: {this.props.book.userId}</p>

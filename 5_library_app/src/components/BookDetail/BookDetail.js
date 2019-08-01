@@ -2,7 +2,7 @@ import React from "react";
 import "./BookDetail.css";
 import Comment from '../Comment/Comment';
 import CommentAdd from '../CommentAdd/CommentAdd';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class BookDetail extends React.PureComponent {
 
@@ -26,13 +26,13 @@ class BookDetail extends React.PureComponent {
       su,
       suBtnHandler
     } = this.props
-    let suContent = su?(
+    let suContent = su ? (
       <div>
         <Link to={`/book/${bookId}/manage`} className="navigation-link">
           Manage this book
         </Link>
       </div>
-    ):null
+    ) : null
     return (<div className="book-detail">
       <div className="book-detail__about">
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>

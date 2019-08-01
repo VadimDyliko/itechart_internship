@@ -6,7 +6,7 @@ class ManageUsers extends React.PureComponent {
 
 
   inputHandler = e => {
-    this.setState({input: e.target.value})
+    this.setState({ input: e.target.value })
   }
 
   searchHandler = e => {

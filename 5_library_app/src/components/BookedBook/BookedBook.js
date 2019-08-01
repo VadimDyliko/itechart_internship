@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./BookedBook.css";
 
 class BookedBook extends React.Component {
@@ -8,11 +8,11 @@ class BookedBook extends React.Component {
     this.props.cancelBook(this.props.book.bookId);
   }
 
-  render () {
-    let {bookId, title, dateOfBook, datebookEnd} = this.props.book;
+  render() {
+    let { bookId, title, dateOfBook, datebookEnd } = this.props.book;
     dateOfBook = new Date(dateOfBook).toLocaleString();
     datebookEnd = new Date(datebookEnd).toLocaleString();
-    return(
+    return (
       <div className="booked-book">
         <img className="booked-book__cover-image" src={`/book/cover/${bookId}`} alt="cover"/>
         <div className="booked-book__details">

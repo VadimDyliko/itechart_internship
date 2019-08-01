@@ -1,4 +1,4 @@
-.book-inline{
+.book-inline {
   overflow: hidden;
   width: 100%;
   min-height: 80px;
@@ -8,12 +8,15 @@
   display: flex;
   font-size: 12px;
 }
-.book-inline__cover-image{
+
+.book-inline__cover-image {
   height: 80px;
 }
-.book-inline-link{
+
+.book-inline-link {
   color: white;
 }
-.book-inline__cover{
+
+.book-inline__cover {
   width: 80px;
 }

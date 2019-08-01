@@ -1,11 +1,11 @@
-import React, {Suspense} from "react";
-import {connect} from "react-redux";
+import React, { Suspense } from "react";
+import { connect } from "react-redux";
 import Spiner from '../components/Spiner/Spiner';
-import {addComment, getSingleBook, bookingBook, setModal} from '../actions'
-import {suDeleteComment} from '../actions/su'
+import { addComment, getSingleBook, bookingBook, setModal } from '../actions'
+import { suDeleteComment } from '../actions/su'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
-const BookDetail = React.lazy(() => import ('../components/BookDetail/BookDetail'));
+const BookDetail = React.lazy(() => import('../components/BookDetail/BookDetail'));
 
 class BookDetailContainer extends React.PureComponent {
 
@@ -22,17 +22,18 @@ class BookDetailContainer extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (!this.props.booksDetails[this.state.bookId]) this.props.onGetSingleBook(this.state.bookId);
-    socket.emit('reqBookData', {bookId: this.state.bookId});
+    if (!this.props.booksDetails[this.state.bookId])
+      this.props.onGetSingleBook(this.state.bookId);
+    socket.emit('reqBookData', { bookId: this.state.bookId });
     socket.on('resBookData', data => {
       let comments = data.comments.map((comment, i) => {
         comment.id = i + comment.commentAuthorId + comment.date;
         return comment;
       })
-      this.setState({comments: comments, count: data.count, availableCount: data.availableCount});
+      this.setState({ comments: comments, count: data.count, availableCount: data.availableCount });
     })
     socket.on(`dataUpdate${this.state.bookId}`, () => {
-      socket.emit('reqBookData', {bookId: this.state.bookId});
+      socket.emit('reqBookData', { bookId: this.state.bookId });
     })
   }
 
@@ -43,13 +44,15 @@ class BookDetailContainer extends React.PureComponent {
 
   banCheck = () => {
     if (this.props.isBan) {
-      this.props.onSetModal({isShow: true, modalTitle: "Faild", modalText: "Your accaunt has been baned"})
+      this.props.onSetModal({ isShow: true, modalTitle: "Faild", modalText: "Your accaunt has been baned" })
       return true
-    } return false
+    }
+    return false
   }
 
   commentAddHandler = commentText => {
-    if (this.banCheck()) return
+    if (this.banCheck())
+      return
     let newComment = {
       commentAuthorId: this.props.userId,
       commentAuthor: this.props.userLogin,
@@ -57,18 +60,23 @@ class BookDetailContainer extends React.PureComponent {
       date: Date.now(),
       id: this.state.comments.length + 2 + this.commentAuthorId + this.date
     }
-    this.setState((prevState)=>({comments: [...prevState.comments, newComment]}))
+    this.setState((prevState) => ({
+      comments: [
+        ...prevState.comments,
+        newComment
+      ]
+    }))
     this.props.onAddComment(commentText, this.state.bookId)
   }
 
-
   bookingHandler = e => {
-    if (this.banCheck()) return
+    if (this.banCheck())
+      return
     this.props.onBookingBook(this.state.bookId, this.state.bookingTime)
   }
 
   bookingTimeHandler = bookingTime => {
-    this.setState({bookingTime})
+    this.setState({ bookingTime })
   }
 
   suBtnHandler = (commentAuthorId, date) => {
@@ -76,13 +84,14 @@ class BookDetailContainer extends React.PureComponent {
     this.props.onSuDeleteComment(this.state.bookId, commentId);
   }
 
-
-    goBack = () => {
-      this.props.history.goBack()
-    }
+  goBack = () => {
+    this.props.history.goBack()
+  }
 
   render() {
-    let {title, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
+    let { title, year, bookAthour, bookDiscription } = this.props.booksDetails[this.state.bookId] ?
+      this.props.booksDetails[this.state.bookId] :
+      this.state
     return (<Suspense fallback={<Spiner/>}>
       <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack} bookingTimeHandler={this.bookingTimeHandler}/>
     </Suspense>);
@@ -90,13 +99,7 @@ class BookDetailContainer extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  return {
-    userLogin: state.user.login,
-    userId: state.user._id,
-    su: state.user.su,
-    isBan: state.user.isBan,
-    booksDetails: state.booksDetails
-  }
+  return { userLogin: state.user.login, userId: state.user._id, su: state.user.su, isBan: state.user.isBan, booksDetails: state.booksDetails }
 }
 
 const mapDispatchToState = dispatch => {

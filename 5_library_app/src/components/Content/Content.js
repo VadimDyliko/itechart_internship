@@ -1,5 +1,5 @@
 import React from "react";
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './Content.css';
 import HomeContainer from '../../containers/HomeContainer';
 import BookDetailContainer from '../../containers/BookDetailContainer';

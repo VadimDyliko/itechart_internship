@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './BookInline.css';
 
 class BookInline extends React.PureComponent {
 
   render() {
-    let {bookOnHandAt, bookBookedBy, _id, title, availableCount, bookAthour, year} = this.props.book
+    let { bookOnHandAt, bookBookedBy, _id, title, availableCount, bookAthour, year } = this.props.book
     return (
       <div className="book-inline">
         <div className="book-inline__cover">
@@ -23,7 +23,7 @@ class BookInline extends React.PureComponent {
           </Link>
         </div>
       </div>
-  )
+    )
   }
 }
 

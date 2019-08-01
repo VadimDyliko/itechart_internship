@@ -29,15 +29,15 @@ class AddNewBook extends React.Component {
       if (e.target.files[0].type.split("/")[0] === "image") {
         this.setState({
           coverImage: file,
-          coverImageName: file
-            ? file.name
-            : "Choose file"
+          coverImageName: file ?
+            file.name :
+            "Choose file"
         });
       } else {
-        this.props.onSetModal({isShow: true, modalTitle: "Invalid image type", modalText: "Choose valid image"});
+        this.props.onSetModal({ isShow: true, modalTitle: "Invalid image type", modalText: "Choose valid image" });
       }
     } else {
-      this.setState({profilePicture: null, profilePictureName: "Choose file"});
+      this.setState({ profilePicture: null, profilePictureName: "Choose file" });
     }
   }
 

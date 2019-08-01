@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Search from '../components/Search/Search'
-import {searchRequest} from '../actions'
+import { searchRequest } from '../actions'
 
 class SearchContainer extends React.PureComponent {
 
@@ -13,17 +13,13 @@ class SearchContainer extends React.PureComponent {
     this.props.history.push(`/book/${bookId}/`)
   }
 
-  render () {
-    return(
-      <Search searchHandler={this.searchHandler} searchResult={this.props.searchResult} bookClickHandler={this.bookClickHandler}/>
-    )
+  render() {
+    return (<Search searchHandler={this.searchHandler} searchResult={this.props.searchResult} bookClickHandler={this.bookClickHandler}/>)
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    searchResult: state.searchResult
-  }
+  return { searchResult: state.searchResult }
 }
 
 const mapDispatchToProps = dispatch => {

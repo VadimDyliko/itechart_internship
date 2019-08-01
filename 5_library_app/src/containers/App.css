@@ -2,13 +2,15 @@
   margin: 0;
   padding: 0;
 }
+
 .App {
   width: 100vw;
   height: 100vh;
   display: flex;
   font-family: 'Nunito', sans-serif;
 }
-.btn{
+
+.btn {
   margin: 10px 5px;
   min-width: 150px;
   color: white;
@@ -18,11 +20,13 @@
   border-radius: 15px;
   cursor: pointer;
 }
-.btn:hover{
+
+.btn:hover {
   color: black;
   background: rgba(255, 255, 255);
 }
-.close-btn{
+
+.close-btn {
   align-self: flex-end;
   color: white;
   padding: 10px 15px;
@@ -31,7 +35,8 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.close-btn:hover{
+
+.close-btn:hover {
   color: black;
   background: rgba(255, 255, 255);
 }

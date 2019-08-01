@@ -4,8 +4,8 @@ import BookManageBookedItem from "../BookManageItem/BookManageBookedItem"
 import BookManageOnhandItem from "../BookManageItem/BookManageOnhandItem"
 
 class BookManage extends React.PureComponent {
-  render () {
-    return(
+  render() {
+    return (
       <div className="book-manage">
           <button className="book-manage_btn btn" onClick={this.props.goBack}>Go Back</button>
           <div className="book-manage__lists">

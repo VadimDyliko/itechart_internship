@@ -21,7 +21,7 @@ io.on('connection', function(socket) {
   })
 });
 
-module.exports={
+module.exports = {
   io
 }
 
@@ -29,14 +29,14 @@ module.exports={
 const routes = require("./routes/routes");
 const su = require("./routes/su");
 const { User, Book } = require("./services/mongo");
-const {getSingleBookData} = require("./services/books");
+const { getSingleBookData } = require("./services/books");
 require("./services/passportJWT");
 require("./services/timer");
 const logger = require('./services/winston');
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use('/', routes);

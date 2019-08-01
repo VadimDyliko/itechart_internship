@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './NavigationLink.css'
 
 class NavigationLink extends React.PureComponent {

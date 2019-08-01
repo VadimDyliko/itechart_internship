@@ -1,4 +1,4 @@
-.book-manage{
+.book-manage {
   position: absolute;
   z-index: 50;
   background: rgba(0, 0, 0, 0.95);
@@ -10,17 +10,20 @@
   border-radius: 15px;
   min-height: 80vh;
 }
-.book-manage__lists{
+
+.book-manage__lists {
   display: flex;
   align-items: flex-start;
 }
-.book-manage__list{
+
+.book-manage__list {
   width: 50%;
   border: 1px solid rgb(56, 38, 148);
   border-radius: 15px;
   padding: 20px;
   margin: 5px;
 }
-.book-manage_btn{
+
+.book-manage_btn {
   align-self: flex-start;
 }

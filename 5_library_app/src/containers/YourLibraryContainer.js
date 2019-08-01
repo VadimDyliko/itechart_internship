@@ -14,7 +14,7 @@ class YourLibraryContainer extends React.PureComponent {
     return (
       <>
         <BookingBooks bookingBooks={this.props.bookingBooks} cancelBook={this.cancelBook}/>
-        <BooksOnHand booksOnHand = {this.props.booksOnHand}/> 
+        <BooksOnHand booksOnHand = {this.props.booksOnHand}/>
       </>
     )
   }

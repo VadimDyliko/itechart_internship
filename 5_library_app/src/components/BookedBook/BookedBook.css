@@ -1,4 +1,4 @@
-.booked-book{
+.booked-book {
   background: rgba(0, 0, 0, 0.5);
   margin: 5px 0;
   padding: 15px;
@@ -6,7 +6,8 @@
   display: flex;
   font-size: 10px;
 }
-.booked-book__cover-image{
+
+.booked-book__cover-image {
   margin: 25px;
   height: 80px;
   border-radius: 5px;

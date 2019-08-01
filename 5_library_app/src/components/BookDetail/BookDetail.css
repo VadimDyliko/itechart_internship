@@ -1,20 +1,24 @@
-.book-detail{
+.book-detail {
   width: 100%;
   padding: 50px;
   display: flex;
   flex-direction: column;
 }
-.book-detail__about{
+
+.book-detail__about {
   display: flex;
   padding: 25px 0;
 }
-.book-detail__cover-image{
+
+.book-detail__cover-image {
   height: 350px;
   border-radius: 15px;
 }
-.book-detail__details{
+
+.book-detail__details {
   padding: 0 25px;
 }
-.book-detail__discription-text{
+
+.book-detail__discription-text {
   padding: 15px 0;
 }

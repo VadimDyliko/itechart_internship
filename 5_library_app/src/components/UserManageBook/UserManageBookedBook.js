@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './UserManageBook.css'
 
 class UserManageBookedBook extends React.PureComponent {
@@ -12,11 +12,11 @@ class UserManageBookedBook extends React.PureComponent {
     this.props.suHandOutBook(this.props.userId, this.props.book.bookId)
   }
 
-  render () {
-    let {bookId, title, dateOfBook, datebookEnd} = this.props.book
+  render() {
+    let { bookId, title, dateOfBook, datebookEnd } = this.props.book
     dateOfBook = new Date(dateOfBook).toLocaleString();
     datebookEnd = new Date(datebookEnd).toLocaleString();
-    return(
+    return (
       <div className="user-manage-book">
           <div className="book-inline__cover">
             <img src={`/book/cover/${bookId}`} className="book-inline__cover-image" alt="cover"/>

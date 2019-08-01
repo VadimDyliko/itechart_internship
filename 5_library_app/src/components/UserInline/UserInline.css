@@ -1,4 +1,4 @@
-.user-inline{
+.user-inline {
   overflow: hidden;
   width: 100%;
   min-height: 50px;
@@ -9,15 +9,18 @@
   font-size: 12px;
   border-radius: 25px;
 }
-.user-inline__avatar{
+
+.user-inline__avatar {
   height: 50px;
   border-radius: 50%;
 }
-.user-inline__about{
+
+.user-inline__about {
   flex-grow: 1;
   margin: 0 15px;
 }
-.banned-text{
+
+.banned-text {
   color: red;
   font-size: 15;
   font-weight: bold;

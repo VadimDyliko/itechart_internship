@@ -1,4 +1,4 @@
-import {setModal} from './index'
+import { setModal } from './index'
 
 export const suFetchBookData = bookId => dispatch => {
   return fetch(`/su/fetchBookData/${bookId}`)
@@ -92,7 +92,7 @@ export const suReturnToBookStatus = (userId, bookId) => dispatch => {
 
 export const suReturnBookToLibrary = (userId, bookId) => dispatch => {
   return dispatch(suReturnToBookStatus(userId, bookId))
-  .then(()=>dispatch(suCancelBook(userId, bookId)))
+    .then(() => dispatch(suCancelBook(userId, bookId)))
 }
 
 
@@ -211,15 +211,15 @@ export const suSortManageBooksArr = (booksArr, sortBy) => dispatch => {
 
 export const suFetchUsersForManage = (exp) => dispatch => {
   return fetch('/su/fetchusersformanage', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      exp: exp
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        exp: exp
+      })
     })
-  })
-    .then(res => {return res.json()})
+    .then(res => { return res.json() })
     .then(data => dispatch(suSetUsersForManage(data)))
 }
 
@@ -241,17 +241,17 @@ const suSetUsersForManage = data => {
 
 export const suBanUser = (userId, reason, ban) => dispatch => {
   return fetch('/su/banuser', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      ban: ban,
-      userId: userId,
-      reason: reason
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ban: ban,
+        userId: userId,
+        reason: reason
+      })
     })
-  })
-    .then(()=>dispatch(suFetchUsersForManage()))
+    .then(() => dispatch(suFetchUsersForManage()))
 }
 
 

@@ -1,4 +1,4 @@
-.nav-bar{
+.nav-bar {
   padding: 20px 0;
   background: rgb(0, 0, 0);
   width: 230px;
@@ -6,7 +6,8 @@
   align-items: center;
   flex-direction: column;
 }
-.nav-bar__logo{
+
+.nav-bar__logo {
   margin: 30px 0;
   width: 230px;
 }

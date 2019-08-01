@@ -51,7 +51,7 @@ passport.use("jwtBanCheck",
           console.log(err);
           return done(err, false);
         }
-        if (user && (user.isBan!==true)) {
+        if (user && (user.isBan !== true)) {
           return done(null, user);
         } else {
           return done(null, false);

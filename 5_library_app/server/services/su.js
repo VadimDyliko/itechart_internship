@@ -208,7 +208,7 @@ const fetchUsersForManage = (req, res) => {
   if (req.body.exp) {
     console.log(req.body.exp);
     let regExp = new RegExp(req.body.exp, 'gi')
-    searchExp = {$or: [{login: regExp}, {email: regExp}]}
+    searchExp = { $or: [{ login: regExp }, { email: regExp }] }
   }
   User.find(searchExp)
     .then(users => users.map(user => {
@@ -227,7 +227,7 @@ const fetchUsersForManage = (req, res) => {
 
 const banUser = (req, res) => {
   return User.findById(req.body.userId)
-    .then(user=>{
+    .then(user => {
       user.isBan = req.body.ban
       user.ban = {
         reason: req.body.reason,
@@ -237,14 +237,14 @@ const banUser = (req, res) => {
         user.bookingBooks.forEach(book => {
           console.log(book.bookId);
           removeUserFromBook(book.bookId, req.body.userId)
-            .then(()=>incrementAvailableCount(book.bookId))
+            .then(() => incrementAvailableCount(book.bookId))
         })
         user.bookingBooks = new Array;
       }
       user.save()
     })
-    .then(()=>res.sendStatus(200))
-    .catch(err=>console.log(err))
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
 }
 
 

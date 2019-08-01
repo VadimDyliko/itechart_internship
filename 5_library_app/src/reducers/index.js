@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import user from './user';
 import modalMessage from './modalMessage';
 import books from './books';
@@ -8,7 +8,7 @@ import searchResult from './searchResult';
 import manageBooks from './manageBooks';
 import manageUsers from './manageUsers';
 
-const rootReducer = combineReducers({
+const rootReducer = combineReducers( {
   user,
   books,
   booksDetails,
@@ -17,6 +17,6 @@ const rootReducer = combineReducers({
   searchResult,
   manageBooks,
   manageUsers
-})
+} )
 
 export default rootReducer

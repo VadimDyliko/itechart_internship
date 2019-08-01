@@ -8,9 +8,9 @@ class Comment extends React.PureComponent {
   }
 
   render() {
-    let {commentAuthor, commentText, commentAuthorId, date, su} = this.props
+    let { commentAuthor, commentText, commentAuthorId, date, su } = this.props
     let localDate = new Date(date).toLocaleString()
-    let suBtn = su?<button className="comment__su-btn" onClick={this.suBtnHandler}>del</button>:null
+    let suBtn = su ? <button className="comment__su-btn" onClick={this.suBtnHandler}>del</button> : null
     return (<div className="comment">
       <img src={`/user/avatar/${commentAuthorId}`} className="comment__author-avatar" alt="avatar"/>
       <div className="comment__details">

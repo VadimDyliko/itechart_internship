@@ -1,11 +1,12 @@
-.manage-users{
+.manage-users {
   width: 100%;
   padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.manage-users__select{
+
+.manage-users__select {
   cursor: pointer;
   background: rgb(0, 0, 0);
   color: white;

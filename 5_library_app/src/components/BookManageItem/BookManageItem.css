@@ -1,11 +1,12 @@
-.book-manage__item{
+.book-manage__item {
   margin: 5px 0;
   background: rgba(105, 50, 168, 0.5);
   border-radius: 15px;
   padding: 10px;
   font-size: 12px;
 }
-.book-manage__btn{
+
+.book-manage__btn {
   margin: 5px;
   background: none;
   cursor: pointer;
@@ -14,7 +15,8 @@
   color: white;
   border: 1px white solid;
 }
-.book-manage__btn:hover{
+
+.book-manage__btn:hover {
   background: white;
   color: black;
 }

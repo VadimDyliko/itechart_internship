@@ -6,31 +6,30 @@ import personIcon from '../../images/person.png'
 
 class UserManage extends React.PureComponent {
 
-  state={
-    banReason:''
-  }
+    state = {
+      banReason: ''
+    }
 
-  onSuBanUser = () => {
-    this.props.onSuBanUser(this.props.managedUser._id, this.state.banReason, !this.props.managedUser.isBan)
-  }
+    onSuBanUser = () => {
+      this.props.onSuBanUser(this.props.managedUser._id, this.state.banReason, !this.props.managedUser.isBan)
+    }
 
-  inputHandler = e => {
-    this.setState({banReason: e.target.value})
-  }
+    inputHandler = e => {
+      this.setState({ banReason: e.target.value })
+    }
 
-  render () {
-    let user = this.props.managedUser;
-    let {_id, login, email, isBan, ban} = user?user:'';
-    let avatar = user?`/user/avatar/${_id}`: personIcon;
-    let banContent = isBan?(
-      <>
-        <p className="banned-text">BANED</p>
-        <p className="banned-text">{ban.reason}</p>
-        <p className="banned-text">{new Date(+user.ban.date).toLocaleString()}</p>
-      </>
-    ):<></>
-    return(
-      <div className="user-manage">
+    render() {
+      let user = this.props.managedUser;
+      let { _id, login, email, isBan, ban } = user ? user : '';
+      let avatar = user ? `/user/avatar/${_id}` : personIcon;
+      let banContent = isBan?(
+        <>
+          <p className="banned-text">BANED</p>
+          <p className="banned-text">{ban.reason}</p>
+          <p className="banned-text">{new Date(+user.ban.date).toLocaleString()}</p>
+        </>):<></>
+        return (
+          <div className="user-manage">
         <div className="user-manage__controls">
           <button onClick={this.props.goBack} className="close-btn">&#x2613;</button>
           <div>
@@ -52,8 +51,8 @@ class UserManage extends React.PureComponent {
             return <UserManageHandOutBook key={book.bookId} book={book} userId={_id} suCancel={this.props.onSuReturnToBookStatus} suReturnBookToLibrary={this.props.onSuReturnBookToLibrary}/>
           }):null}
       </div>
-    )
-  }
-}
+        )
+      }
+    }
 
-export default UserManage;
+    export default UserManage;

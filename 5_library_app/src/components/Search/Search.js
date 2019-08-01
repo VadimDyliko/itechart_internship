@@ -4,12 +4,12 @@ import Book from '../Book/Book'
 
 class Search extends React.PureComponent {
 
-  state={
+  state = {
     input: ''
   }
 
   inputHandler = (e) => {
-    this.setState({input: e.target.value});
+    this.setState({ input: e.target.value });
   }
 
   searchHandler = (e) => {
@@ -17,8 +17,8 @@ class Search extends React.PureComponent {
     this.props.searchHandler(this.state.input);
   }
 
-  render () {
-    return(
+  render() {
+    return (
       <div className="search">
         <form onSubmit={this.searchHandler} className="search__form">
           <input type="text" className="search__input form-control" onChange={this.inputHandler}/>

@@ -7,10 +7,10 @@ class BookManageBookedItem extends React.Component {
     this.props.returnTobookStatus(this.props.book.userId)
   }
 
-  render () {
+  render() {
     let handOutDate = new Date(this.props.book.dateOfHandOut).toLocaleString()
     let handOutDateLeft = new Date(this.props.book.dateToReturn).toLocaleString()
-    return(
+    return (
       <div className="book-manage__item">
         <img src={`/user/avatar/${this.props.book.userId}`} className="user-inline__avatar" alt="avatar"/>
         <p>user id: {this.props.book.userId}</p>

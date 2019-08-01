@@ -1,18 +1,17 @@
 import React from "react";
-import {connect} from "react-redux";
-import {suFetchBookData, suHandOutBook, suCancelBook, suReturnToBookStatus} from "../actions/su"
+import { connect } from "react-redux";
+import { suFetchBookData, suHandOutBook, suCancelBook, suReturnToBookStatus } from "../actions/su"
 import BookManage from "../components/BookManage/BookManage"
 import Spiner from '../components/Spiner/Spiner'
 
 class BookManageContainer extends React.PureComponent {
 
-    state={
-      showSpiner: true
-    }
+  state = {
+    showSpiner: true
+  }
 
   componentDidMount() {
-    this.props.onSuFetchBookData(this.props.match.params.bookId)
-      .then(()=>this.setState({showSpiner:false}))
+    this.props.onSuFetchBookData(this.props.match.params.bookId).then(() => this.setState({ showSpiner: false }))
   }
 
   handOutHandler = (userId) => {
@@ -32,12 +31,13 @@ class BookManageContainer extends React.PureComponent {
   }
 
   render() {
-    let content = this.state.showSpiner?<Spiner/>:<BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus} goBack={this.goBack}/>
-    return(
-      <>
-        {content}
-      </>
-    )
+    let content = this.state.showSpiner ?
+      <Spiner/> :
+      <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus} goBack={this.goBack}/>
+    return (
+      < >
+        { content } 
+      < />)
   }
 }
 

@@ -1,4 +1,4 @@
-.modal{
+.modal {
   width: 400px;
   position: absolute;
   left: 50%;
@@ -11,10 +11,12 @@
   display: flex;
   flex-direction: column;
 }
-.modal-title{
+
+.modal-title {
   align-self: center;
 }
-.modal-footer{
+
+.modal-footer {
   display: flex;
   justify-content: center;
 }

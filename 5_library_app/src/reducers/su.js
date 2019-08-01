@@ -1,15 +1,15 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-const su = handleActions({
-  SET_MANAGED_BOOK: (state, action) => ({
+const su = handleActions( {
+  SET_MANAGED_BOOK: ( state, action ) => ( {
     ...state,
     ...action.data
-  }),
-  SET_MANAGED_USER: (state, action) => ({
+  } ),
+  SET_MANAGED_USER: ( state, action ) => ( {
     ...state,
     ...action.data
-  }),
-},{});
+  } ),
+}, {} );
 
 
 export default su;

@@ -1,7 +1,7 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-const searchResult = handleActions({
-    SET_SEARCH_RESULT: (state, action) => ([...action.data]),
+const searchResult = handleActions( {
+    SET_SEARCH_RESULT: ( state, action ) => ( [ ...action.data ] ),
   },
   []
 );

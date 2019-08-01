@@ -1,45 +1,41 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ManageBooks from '../components/ManageBooks/ManageBooks'
-import {suFetchBooksForManage, suSortManageBooksArr} from '../actions/su'
+import { suFetchBooksForManage, suSortManageBooksArr } from '../actions/su'
 import Spiner from '../components/Spiner/Spiner'
 
 class ManageBooksContainer extends React.PureComponent {
 
-  state={
+  state = {
     booksArr: this.props.manageBooks,
     showSpiner: true
   }
 
   componentDidMount() {
-    this.props.onSuFetchBooksForManage('all')
-      .then(()=>this.setState({showSpiner:false}))
+    this.props.onSuFetchBooksForManage('all').then(() => this.setState({ showSpiner: false }))
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.setState({booksArr:this.props.manageBooks})
+    this.setState({ booksArr: this.props.manageBooks })
   }
 
   filterHandler = (filter) => {
-    this.setState({showSpiner:true})
-    this.props.onSuFetchBooksForManage(filter)
-      .then(()=>this.setState({showSpiner:false}))
+    this.setState({ showSpiner: true })
+    this.props.onSuFetchBooksForManage(filter).then(() => this.setState({ showSpiner: false }))
   }
-
 
   sortHandler = sortBy => {
-    this.setState({showSpiner:true})
-    this.props.onSuSortManageBooksArr(this.state.booksArr, sortBy)
-      .then(()=>this.setState({showSpiner:false}))
+    this.setState({ showSpiner: true })
+    this.props.onSuSortManageBooksArr(this.state.booksArr, sortBy).then(() => this.setState({ showSpiner: false }))
   }
 
-  render () {
-    let content = this.state.showSpiner?<Spiner/>:<ManageBooks filterHandler={this.filterHandler} manageBooks={this.state.booksArr} sortHandler={this.sortHandler}/>
-    return(
-      <>
-        {content}
-      </>
-    )
+  render() {
+    let content = this.state.showSpiner ?
+      <Spiner/> :
+      <ManageBooks filterHandler={this.filterHandler} manageBooks={this.state.booksArr} sortHandler={this.sortHandler}/>
+    return ( < >
+      { content }
+     < />)
   }
 }
 

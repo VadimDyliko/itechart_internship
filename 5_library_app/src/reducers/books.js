@@ -1,7 +1,7 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
-const books = handleActions({
-    SET_BOOKS: (state, action) => ([...action.books]),
+const books = handleActions( {
+    SET_BOOKS: ( state, action ) => ( [ ...action.books ] ),
   },
   []
 );

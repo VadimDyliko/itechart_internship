@@ -1,4 +1,4 @@
-.book-on-hand{
+.book-on-hand {
   background: rgba(0, 0, 0, 0.5);
   margin: 5px 0;
   padding: 15px;
@@ -6,7 +6,8 @@
   display: flex;
   font-size: 10px;
 }
-.book-on-hand__cover-image{
+
+.book-on-hand__cover-image {
   margin: 25px;
   height: 80px;
   border-radius: 5px;

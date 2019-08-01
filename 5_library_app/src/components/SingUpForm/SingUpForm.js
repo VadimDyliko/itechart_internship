@@ -11,17 +11,17 @@ class SingUpForm extends React.PureComponent {
   };
 
   emailHandler = e => {
-    this.setState({email: e.target.value});
+    this.setState({ email: e.target.value });
     this.props.identityCheck(e, 'email')
   };
 
   loginHandler = e => {
-    this.setState({login: e.target.value});
+    this.setState({ login: e.target.value });
     this.props.identityCheck(e, 'login')
   };
 
   passwordHandler = e => {
-    this.setState({password: e.target.value});
+    this.setState({ password: e.target.value });
   };
 
   profilePictureHandler = e => {
@@ -30,15 +30,14 @@ class SingUpForm extends React.PureComponent {
       if (e.target.files[0].type.split("/")[0] === "image") {
         this.setState({
           profilePicture: file,
-          profilePictureName: file
-            ? file.name
-            : "Choose file"
+          profilePictureName: file ?
+            file.name : "Choose file"
         });
       } else {
-        this.props.onSetModal({isShow: true, modalTitle: "Invalid image type", modalText: "Choose valid image"});
+        this.props.onSetModal({ isShow: true, modalTitle: "Invalid image type", modalText: "Choose valid image" });
       }
     } else {
-      this.setState({profilePicture: null, profilePictureName: "Choose file"});
+      this.setState({ profilePicture: null, profilePictureName: "Choose file" });
     }
   };
 
@@ -60,24 +59,26 @@ class SingUpForm extends React.PureComponent {
       "custom-file is-valid": this.state.profilePicture,
       "custom-file is-invalid": !this.props.profilePicture
     })
-    return (<form className="sing-up-form" onSubmit={this.submitHandler}>
-      <p className="sing-up-form__labels-text">Login</p>
-      <input type="name" className={isLoginValid} placeholder="Enter login" onChange={this.loginHandler}></input>
-      <div className="input-group-prepend">
-        <p className="sing-up-form__labels-text">Profile image</p>
-      </div>
-      <div className={isImageValid}>
-        <input onChange={this.profilePictureHandler} type="file" className="custom-file-input" id="inputFileProfileImage" accept=".jpg, .jpeg, .png"></input>
-      </div>
-      <p className="sing-up-form__labels-text">Email address</p>
-      <input type="email" className={isEmailValid} placeholder="Enter email" onChange={this.emailHandler}></input>
-      <p className="form-text text-muted">We'll never share your email with anyone else.</p>
-      <p className="sing-up-form__labels-text">Password</p>
-      <input type="password" className="form-control" placeholder="Password" onChange={this.passwordHandler}></input>
-      <button type="submit" className="btn btn-primary">
-        SingUp
-      </button>
-    </form>);
+    return (
+      <form className="sing-up-form" onSubmit={this.submitHandler}>
+        <p className="sing-up-form__labels-text">Login</p>
+        <input type="name" className={isLoginValid} placeholder="Enter login" onChange={this.loginHandler}></input>
+        <div className="input-group-prepend">
+          <p className="sing-up-form__labels-text">Profile image</p>
+        </div>
+        <div className={isImageValid}>
+          <input onChange={this.profilePictureHandler} type="file" className="custom-file-input" id="inputFileProfileImage" accept=".jpg, .jpeg, .png"></input>
+        </div>
+        <p className="sing-up-form__labels-text">Email address</p>
+        <input type="email" className={isEmailValid} placeholder="Enter email" onChange={this.emailHandler}></input>
+        <p className="form-text text-muted">We'll never share your email with anyone else.</p>
+        <p className="sing-up-form__labels-text">Password</p>
+        <input type="password" className="form-control" placeholder="Password" onChange={this.passwordHandler}></input>
+        <button type="submit" className="btn btn-primary">
+          SingUp
+        </button>
+      </form>
+    );
   }
 }
 

@@ -1,21 +1,24 @@
-.user-manage-book{
-    overflow: hidden;
-    width: 100%;
-    min-height: 80px;
-    background: rgba(55, 9, 121, 0.57);
-    border-radius: 5px;
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+.user-manage-book {
+  overflow: hidden;
+  width: 100%;
+  min-height: 80px;
+  background: rgba(55, 9, 121, 0.57);
+  border-radius: 5px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
 }
+
 .user-manage-book-link {
   color: white;
 }
-.user-manage-book__about{
+
+.user-manage-book__about {
   flex-grow: 1;
 }
-.user-manage-book__btn{
+
+.user-manage-book__btn {
   margin: 0 15px;
   background: none;
   border: 1px solid white;
