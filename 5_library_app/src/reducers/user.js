@@ -8,7 +8,8 @@ const user = handleActions({
     email: action.data.email,
     booksOnHand: action.data.booksOnHand,
     bookingBooks: action.data.bookingBooks,
-    su: action.data.su
+    su: action.data.su,
+    isBan: action.data.isBan
   }),
 }, {
   _id:'',

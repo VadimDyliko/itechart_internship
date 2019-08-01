@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import BookingBooks from '../components/BookingBooks/BookingBooks'
 import BooksOnHand from '../components/BooksOnHand/BooksOnHand'
-import {cancelBook} from "../actions"
+import { cancelBook } from "../actions"
 
 class YourLibraryContainer extends React.PureComponent {
 
@@ -10,11 +10,11 @@ class YourLibraryContainer extends React.PureComponent {
     this.props.onCancelBook(bookId)
   }
 
-  render () {
-    return(
+  render() {
+    return (
       <>
         <BookingBooks bookingBooks={this.props.bookingBooks} cancelBook={this.cancelBook}/>
-        <BooksOnHand booksOnHand={this.props.booksOnHand}/>
+        <BooksOnHand booksOnHand = {this.props.booksOnHand}/> 
       </>
     )
   }
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatcheToProps = dispatch => {
   return {
-    onCancelBook: (bookId)=>dispatch(cancelBook(bookId))
+    onCancelBook: (bookId) => dispatch(cancelBook(bookId))
   }
 }
 

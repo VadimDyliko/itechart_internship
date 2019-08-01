@@ -17,3 +17,8 @@
   flex-grow: 1;
   margin: 0 15px;
 }
+.banned-text{
+  color: red;
+  font-size: 15;
+  font-weight: bold;
+}

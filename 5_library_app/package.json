@@ -10,6 +10,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.4",
     "multer": "^1.4.1",
+    "nodemailer": "^6.3.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react": "^16.8.6",
@@ -20,7 +21,8 @@
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "winston": "^3.2.1"
   },
   "scripts": {
     "server": "cd server && nodemon server.js",

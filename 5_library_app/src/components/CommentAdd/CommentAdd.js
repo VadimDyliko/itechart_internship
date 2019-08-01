@@ -19,10 +19,8 @@ class CommentAdd extends React.PureComponent {
   }
 
   render() {
-    let {commentAuthorId} = this.props
-    let authorAvatar = commentAuthorId
-      ? `/user/avatar/${commentAuthorId}`
-      : personIcon
+    let {commentAuthorId} = this.props;
+    let authorAvatar = commentAuthorId? `/user/avatar/${commentAuthorId}`: personIcon;
     return (<form className="comment-add" onSubmit={this.submitHandler}>
       <img src={authorAvatar} className="comment__author-avatar" alt="avatar"/>
       <div className="comment-input__details">

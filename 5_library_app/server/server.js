@@ -31,8 +31,8 @@ const su = require("./routes/su");
 const { User, Book } = require("./services/mongo");
 const {getSingleBookData} = require("./services/books");
 require("./services/passportJWT");
-//require("./services/timer");
-
+require("./services/timer");
+const logger = require('./services/winston');
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -45,6 +45,6 @@ app.use('/su', su);
 
 server.listen(4000, err => {
   if (!err) {
-    console.log("<<<Server started>>>");
+    logger.info(`server started`)
   }
 });

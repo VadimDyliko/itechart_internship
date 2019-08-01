@@ -251,6 +251,7 @@ export const suBanUser = (userId, reason, ban) => dispatch => {
       reason: reason
     })
   })
+    .then(()=>dispatch(suFetchUsersForManage()))
 }
 
 

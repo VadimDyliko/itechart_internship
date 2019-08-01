@@ -1,3 +1,4 @@
+const logger = require('./winston');
 const {
   User,
   Book
@@ -6,7 +7,8 @@ const {
   cancelBook,
   bookingBook,
   decrementAvailableCount,
-  incrementAvailableCount
+  incrementAvailableCount,
+  removeUserFromBook
 } = require('./books');
 const {
   maxOnHandTime
@@ -151,11 +153,129 @@ const deleteComment = (bookId, commentId) => {
 }
 
 
+const bookAdd = (req, res) => {
+  let newBook = new Book({
+    title: req.body.title,
+    year: req.body.year,
+    bookAthour: req.body.bookAthour,
+    bookDiscription: req.body.bookDiscription,
+    bookPicture: req.file.buffer,
+  })
+  newBook.save()
+    .then(() => res.sendStatus(200))
+    .catch((err) => console.log(err))
+}
+
+
+const fetchBooksForManage = (req, res) => {
+  let exp
+  switch (req.params.filter) {
+    case 'booked':
+      exp = {
+        bookBookedBy: {
+          $gt: []
+        }
+      };
+      break;
+    case 'on hands':
+      exp = {
+        bookOnHandAt: {
+          $gt: []
+        }
+      };
+      break;
+    default:
+      exp = {};
+  }
+  Book.find(exp)
+    .then(books => books.map(book => {
+      return newBook = {
+        _id: book._id,
+        title: book.title,
+        year: book.year,
+        bookAthour: book.bookAthour,
+        bookBookedBy: book.bookBookedBy,
+        bookOnHandAt: book.bookOnHandAt,
+        availableCount: book.availableCount
+      }
+    }))
+    .then(books => res.json(books))
+}
+
+
+const fetchUsersForManage = (req, res) => {
+  let searchExp = {}
+  if (req.body.exp) {
+    console.log(req.body.exp);
+    let regExp = new RegExp(req.body.exp, 'gi')
+    searchExp = {$or: [{login: regExp}, {email: regExp}]}
+  }
+  User.find(searchExp)
+    .then(users => users.map(user => {
+      return newUser = {
+        _id: user._id,
+        login: user.login,
+        email: user.email,
+        booksOnHand: user.booksOnHand,
+        bookingBooks: user.bookingBooks,
+        isBan: user.isBan
+      }
+    }))
+    .then(users => res.json(users))
+}
+
+
+const banUser = (req, res) => {
+  return User.findById(req.body.userId)
+    .then(user=>{
+      user.isBan = req.body.ban
+      user.ban = {
+        reason: req.body.reason,
+        date: Date.now(),
+      }
+      if (req.body.ban) {
+        user.bookingBooks.forEach(book => {
+          console.log(book.bookId);
+          removeUserFromBook(book.bookId, req.body.userId)
+            .then(()=>incrementAvailableCount(book.bookId))
+        })
+        user.bookingBooks = new Array;
+      }
+      user.save()
+    })
+    .then(()=>res.sendStatus(200))
+    .catch(err=>console.log(err))
+}
+
+
+const fetchUserData = (req, res) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      res.json({
+        managedUser: {
+          _id: user._id,
+          login: user.login,
+          email: user.email,
+          booksOnHand: user.booksOnHand,
+          bookingBooks: user.bookingBooks,
+          isBan: user.isBan,
+          ban: user.ban
+        }
+      })
+    })
+}
+
+
 module.exports = {
   suFetchBookData,
   suHandOutBook,
   suCancelBook,
   suReturnBookFromHands,
   suReturnToBookStatus,
-  deleteComment
+  deleteComment,
+  bookAdd,
+  fetchBooksForManage,
+  fetchUsersForManage,
+  banUser,
+  fetchUserData
 }

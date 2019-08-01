@@ -152,14 +152,15 @@ export const addComment = (commentText, bookId) => dispatch => {
 }
 
 
-export const bookingBook = bookId => dispatch => {
+export const bookingBook = (bookId, bookingTime) => dispatch => {
   return fetch("/bookingBook", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        bookId: bookId
+        bookId: bookId,
+        bookingTime: bookingTime
       })
     })
     .then(res => {

@@ -13,7 +13,9 @@ class UserManageBookedBook extends React.PureComponent {
   }
 
   render () {
-    let {bookId, title} = this.props.book
+    let {bookId, title, dateOfBook, datebookEnd} = this.props.book
+    dateOfBook = new Date(dateOfBook).toLocaleString();
+    datebookEnd = new Date(datebookEnd).toLocaleString();
     return(
       <div className="user-manage-book">
           <div className="book-inline__cover">
@@ -23,6 +25,8 @@ class UserManageBookedBook extends React.PureComponent {
             <Link to={`/book/${bookId}`} className="user-manage-book-link">
               <p>{title}</p>
             </Link>
+            <p>Date of book: {dateOfBook}</p>
+            <p>Date of book end: {datebookEnd}</p>
             <Link to={`/book/${bookId}/manage`} className="user-manage-book-link">
               <p>Manage this book</p>
             </Link>

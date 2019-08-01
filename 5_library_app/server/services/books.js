@@ -1,13 +1,6 @@
-const {
-  User,
-  Book
-} = require("./mongo");
-const {
-  io
-} = require('../server');
-const {
-  maxBookingTime
-} = require("../config/constants")
+const { User, Book } = require("./mongo");
+const { io } = require('../server');
+const { maxBookingTime } = require("../config/constants");
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -84,7 +77,9 @@ const getSingleBook = (req, res) => {
     .catch((err) => console.log(err))
 }
 
-const bookingBook = (bookId, userId) => {
+
+const bookingBook = (bookId, userId, bookingTime) => {
+  if (!bookingTime) bookingTime = maxBookingTime
   return Book.findById(bookId)
     .then((book) => {
       let index = -1;
@@ -94,7 +89,7 @@ const bookingBook = (bookId, userId) => {
         if (bookUserId === stringUserId) index = i
       })
       if (book.availableCount > 0 && index < 0) {
-        Promise.all([setUserToBookBook(bookId, userId), setBookingBookToUser(book, userId)])
+        Promise.all([setUserToBookBook(bookId, userId, bookingTime), setBookingBookToUser(book, userId, bookingTime)])
           .then(() => {
             io.sockets.emit(`dataUpdate${bookId}`)
           })
@@ -106,12 +101,12 @@ const bookingBook = (bookId, userId) => {
 }
 
 
-const setUserToBookBook = (bookId, userId) => {
+const setUserToBookBook = (bookId, userId, bookingTime) => {
   return new Promise((res, rej) => {
     let data = {
       userId: userId,
       dateOfBook: Date.now(),
-      datebookEnd: Date.now() + maxBookingTime,
+      datebookEnd: Date.now() + bookingTime,
     }
     Book.findByIdAndUpdate(bookId, {
         $push: {
@@ -127,13 +122,13 @@ const setUserToBookBook = (bookId, userId) => {
 }
 
 
-const setBookingBookToUser = (book, userId) => {
+const setBookingBookToUser = (book, userId, bookingTime) => {
   return new Promise((res, rej) => {
     let data = {
       bookId: book._id,
       title: book.title,
       dateOfBook: Date.now(),
-      datebookEnd: Date.now() + maxBookingTime,
+      datebookEnd: Date.now() + bookingTime,
     }
     User.findByIdAndUpdate(userId, {
         $push: {
@@ -160,21 +155,13 @@ const removeUserFromBook = (bookId, userId) => {
     userId = userId.toString()
     Book.findById(bookId)
       .then((book) => {
-        let index = -1;
-        book.bookBookedBy.forEach((book, i) => {
-          let bookUserId = book.userId.toString()
-          if (bookUserId === userId) index = i
+        book.bookBookedBy.forEach((booked, i, arr) => {
+          let bookUserId = booked.userId.toString()
+          if (bookUserId == userId) arr.splice(i, 1);      
         })
-        if (index > (-1)) {
-          book.bookBookedBy.splice(index, 1);
-          // book.availableCount++;
           book.save();
           res(book);
-        } else {
-          throw new Error('There are not such user')
-        }
       })
-      .catch((err) => rej(err))
   })
 }
 
@@ -184,12 +171,10 @@ const removeBookFromUser = (bookId, userId) => {
     bookId = bookId.toString()
     User.findById(userId)
       .then((user) => {
-        let index = -1;
-        user.bookingBooks.forEach((book, i) => {
+        user.bookingBooks.forEach((book, i, arr) => {
           let userBookId = book.bookId.toString()
-          if (bookId === userBookId) index = i
+          if (bookId === userBookId) arr.splice(i, 1);
         })
-        if (index > (-1)) user.bookingBooks.splice(index, 1);
         user.save();
         res();
       })
@@ -239,6 +224,7 @@ const searchBook = (req, res) => {
     })
 }
 
+
 module.exports = {
   getBooks,
   getSingleBookCover,
@@ -249,5 +235,7 @@ module.exports = {
   cancelBook,
   decrementAvailableCount,
   incrementAvailableCount,
-  searchBook
+  searchBook,
+  removeUserFromBook,
+  removeBookFromUser
 }

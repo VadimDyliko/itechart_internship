@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const logger = require('./winston');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -9,8 +10,8 @@ const {
 mongoose
   .connect(dbUrl.url)
   .then(
-    () => console.log("<<<Successfully connected to MongoDB-Atlas>>>"),
-    err => console.log(err)
+    () => logger.info("Successfully connected to MongoDB-Atlas"),
+    err => logger.err(err)
   );
 
 const userSchema = mongoose.Schema({
@@ -27,7 +28,7 @@ const userSchema = mongoose.Schema({
   isBan: Boolean,
   ban: {
     reason: String,
-    date: String,    
+    date: String,
   }
 });
 

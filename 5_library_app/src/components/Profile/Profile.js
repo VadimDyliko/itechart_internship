@@ -11,6 +11,7 @@ class Profile extends React.PureComponent {
       : personIcon
     return (<div className="profile">
       <img className="profile__avatar" src={userAvatarUrl} alt="avatar"/>
+      <p className="banned-text">{this.props.isBan?'BANED':''}</p>
       <p className="profile__login">{this.props.login}</p>
       <p className="profile__login">{this.props.email}</p>
       <button className="btn" onClick={this.props.LogOutHandler}>LogOut</button>

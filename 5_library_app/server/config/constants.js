@@ -9,7 +9,7 @@ const messages = {
 }
 const maxBookingTime = 1000 * 60 * 60 * 48; //ms
 const maxOnHandTime = 1000 * 60 * 60 * 24 * 30; //ms
-const loopTimeout = 1000 * 60; //ms
+const loopTimeout = 1000 * 60 * 60; //ms
 module.exports = {
   dbUrl,
   secretKey,

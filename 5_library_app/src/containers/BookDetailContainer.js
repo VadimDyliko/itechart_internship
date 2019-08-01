@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {connect} from "react-redux";
 import Spiner from '../components/Spiner/Spiner';
-import {addComment, getSingleBook, bookingBook} from '../actions'
+import {addComment, getSingleBook, bookingBook, setModal} from '../actions'
 import {suDeleteComment} from '../actions/su'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
@@ -17,7 +17,8 @@ class BookDetailContainer extends React.PureComponent {
     bookDiscription: '',
     comments: [],
     count: 0,
-    availableCount: 0
+    availableCount: 0,
+    bookingTime: 1000 * 60 * 60 * 24
   }
 
   componentDidMount() {
@@ -40,7 +41,15 @@ class BookDetailContainer extends React.PureComponent {
     socket.off(`dataUpdate${this.state.bookId}`);
   }
 
+  banCheck = () => {
+    if (this.props.isBan) {
+      this.props.onSetModal({isShow: true, modalTitle: "Faild", modalText: "Your accaunt has been baned"})
+      return true
+    } return false
+  }
+
   commentAddHandler = commentText => {
+    if (this.banCheck()) return
     let newComment = {
       commentAuthorId: this.props.userId,
       commentAuthor: this.props.userLogin,
@@ -54,9 +63,13 @@ class BookDetailContainer extends React.PureComponent {
 
 
   bookingHandler = e => {
-    this.props.onBookingBook(this.state.bookId)
+    if (this.banCheck()) return
+    this.props.onBookingBook(this.state.bookId, this.state.bookingTime)
   }
 
+  bookingTimeHandler = bookingTime => {
+    this.setState({bookingTime})
+  }
 
   suBtnHandler = (commentAuthorId, date) => {
     let commentId = commentAuthorId + date;
@@ -71,7 +84,7 @@ class BookDetailContainer extends React.PureComponent {
   render() {
     let {title, year, bookAthour, bookDiscription} = this.props.booksDetails[this.state.bookId]?this.props.booksDetails[this.state.bookId]:this.state
     return (<Suspense fallback={<Spiner/>}>
-      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack}/>
+      <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack} bookingTimeHandler={this.bookingTimeHandler}/>
     </Suspense>);
   }
 }
@@ -81,6 +94,7 @@ const mapStateToProps = state => {
     userLogin: state.user.login,
     userId: state.user._id,
     su: state.user.su,
+    isBan: state.user.isBan,
     booksDetails: state.booksDetails
   }
 }
@@ -89,8 +103,9 @@ const mapDispatchToState = dispatch => {
   return {
     onAddComment: (commentText, bookId) => dispatch(addComment(commentText, bookId)),
     onGetSingleBook: (bookId) => dispatch(getSingleBook(bookId)),
-    onBookingBook: (bookId) => dispatch(bookingBook(bookId)),
-    onSuDeleteComment: (bookId, commentId) => dispatch(suDeleteComment(bookId, commentId))
+    onBookingBook: (bookId, bookingTime) => dispatch(bookingBook(bookId, bookingTime)),
+    onSuDeleteComment: (bookId, commentId) => dispatch(suDeleteComment(bookId, commentId)),
+    onSetModal: (data) => dispatch(setModal(data))
   }
 }
 

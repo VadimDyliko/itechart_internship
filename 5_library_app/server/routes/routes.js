@@ -96,7 +96,8 @@ router.post("/addcomment", passport.authenticate("jwtBanCheck", {
 router.post("/bookingBook", passport.authenticate("jwtBanCheck", {
   session: false
 }), (req, res) => {
-  bookingBook(req.body.bookId, req.user._id)
+  console.log(req.body.bookingTime);
+  bookingBook(req.body.bookId, req.user._id, req.body.bookingTime)
     .then(() => decrementAvailableCount(req.body.bookId))
     .then(() => {
       res.sendStatus(200)

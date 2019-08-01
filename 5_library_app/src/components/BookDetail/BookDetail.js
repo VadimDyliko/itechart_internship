@@ -5,6 +5,12 @@ import CommentAdd from '../CommentAdd/CommentAdd';
 import {Link} from "react-router-dom";
 
 class BookDetail extends React.PureComponent {
+
+  bookingTimeHandler = e => {
+    let hours = parseFloat(e.target.value)
+    this.props.bookingTimeHandler(1000 * 60 * 60 * hours)
+  }
+
   render() {
     let {
       title,
@@ -35,6 +41,13 @@ class BookDetail extends React.PureComponent {
           <p>{bookAthour} {year}</p>
           <p>{availableCount}/{count}</p>
           <button className="btn" onClick={this.props.goBack}>Back</button>
+            <select className="manage-books__select" onChange={this.bookingTimeHandler}>
+              <option>48 hours</option>
+              <option>24 hours</option>
+              <option>12 hours</option>
+              <option>8 hours</option>
+              <option>1 hour</option>
+            </select>
           <button className="btn" onClick={this.props.bookingHandler}>Book</button>
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>

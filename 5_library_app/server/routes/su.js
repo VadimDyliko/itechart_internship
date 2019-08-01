@@ -1,3 +1,4 @@
+const logger = require('../services/winston');
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
@@ -12,16 +13,18 @@ const {
   suCancelBook,
   suReturnBookFromHands,
   suReturnToBookStatus,
-  deleteComment
+  deleteComment,
+  bookAdd,
+  fetchBooksForManage,
+  fetchUsersForManage,
+  banUser,
+  fetchUserData
 } = require("../services/su");
 const {
   decrementAvailableCount,
   incrementAvailableCount,
   getBooks
 } = require("../services/books")
-const {
-  Book, User
-} = require("../services/mongo")
 
 
 router.get("/fetchBookData/:bookId", passport.authenticate("jwtSU", {
@@ -36,6 +39,8 @@ router.post("/handout", passport.authenticate("jwtSU", {
 }), (req, res) => {
   suHandOutBook(req.body.userId, req.body.bookId, res)
     .then(() => res.sendStatus(200))
+    .then(()=>logger.info(`moderator hand out book ${req.body.bookId} to user ${req.body.userId}`))
+    .catch((err)=>logger.err(err))
 })
 
 
@@ -45,6 +50,8 @@ router.post("/cancelBook", passport.authenticate("jwtSU", {
   suCancelBook(req.body.userId, req.body.bookId, res)
     .then(() => incrementAvailableCount(req.body.bookId))
     .then(() => res.sendStatus(200))
+    .then(()=>logger.info(`moderator cancel book of book ${req.body.bookId} user ${req.body.userId}`))
+    .catch((err)=>logger.err(err))
 })
 
 
@@ -53,6 +60,8 @@ router.post("/returntobookstatus", passport.authenticate("jwtSU", {
 }), (req, res) => {
   suReturnToBookStatus(req.body.userId, req.body.bookId, res)
     .then(() => res.sendStatus(200))
+    .then(()=>logger.info(`moderator return book status of book ${req.body.bookId} to user ${req.body.userId}`))
+    .catch((err)=>logger.err(err))
 })
 
 
@@ -60,124 +69,45 @@ router.post("/deletecomment", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
   deleteComment(req.body.bookId, req.body.commentId)
-  res.sendStatus(200)
+    .then(() => res.sendStatus(200))
+    .then(()=>logger.info(`moderator delete comment from book ${req.body.bookId} comment ${req.body.commentId}`))
+    .catch((err)=>logger.err(err))
 })
 
 router.post('/bookadd', passport.authenticate("jwtSU", {
   session: false
 }), upload.single("coverImage"), (req, res) => {
-  let newBook = new Book({
-    title: req.body.title,
-    year: req.body.year,
-    bookAthour: req.body.bookAthour,
-    bookDiscription: req.body.bookDiscription,
-    bookPicture: req.file.buffer,
-  })
-  newBook.save()
-    .then(() => res.sendStatus(200))
-    .catch((err) => console.log(err))
+  bookAdd(req, res)
 })
 
 
 router.get('/fetchbooksformanage/:filter', passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
-  let exp
-  console.log(req.params.filter);
-  switch (req.params.filter) {
-    case 'booked':
-      console.log(123);
-      exp = {
-        bookBookedBy: {
-          $gt: []
-        }
-      };
-      break;
-    case 'on hands':
-      exp = {
-        bookOnHandAt: {
-          $gt: []
-        }
-      };
-      break;
-    default:
-      exp = {};
-  }
-  Book.find(exp)
-    .then(books => books.map(book => {
-      return newBook = {
-        _id: book._id,
-        title: book.title,
-        year: book.year,
-        bookAthour: book.bookAthour,
-        bookBookedBy: book.bookBookedBy,
-        bookOnHandAt: book.bookOnHandAt,
-        availableCount: book.availableCount
-      }
-    }))
-    .then(books => res.json(books))
+  fetchBooksForManage(req, res)
 })
 
 
 router.post('/fetchusersformanage', passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
-  let searchExp = {}
-  if (req.body.exp) {
-    console.log(req.body.exp);
-    let regExp = new RegExp(req.body.exp, 'gi')
-    searchExp = {$or: [{login: regExp}, {email: regExp}]}
-  }
-  User.find(searchExp)
-    .then(users => users.map(user => {
-      return newUser = {
-        _id: user._id,
-        login: user.login,
-        email: user.email,
-        booksOnHand: user.booksOnHand,
-        bookingBooks: user.bookingBooks,
-        isBan: user.isBan
-      }
-    }))
-    .then(users => res.json(users))
+  fetchUsersForManage(req, res)
 })
 
 
 router.post('/banuser', passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
-  console.log(req.body);
-  User.findById(req.body.userId)
-    .then(user=>{
-      user.isBan = req.body.ban
-      user.ban = {
-        reason: req.body.reason,
-        date: Date.now(),
-      }
-      user.save()
-    })
-    .then(()=>res.sendStatus(200))
-    .catch(err=>console.log(err))
+  banUser(req, res)
+  .then(()=>logger.warn(`moderator set ban status to ${req.body.ban} of user: ${req.body.userId} reason: ${req.body.reason}`))
+  .catch((err)=>logger.err(err))
 })
 
 
 router.get("/fetchUserData/:userId", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
-  console.log(req.params.userId);
-  User.findById(req.params.userId)
-    .then(user => {
-      res.json({
-        managedUser: {
-          _id: user._id,
-          login: user.login,
-          email: user.email,
-          booksOnHand: user.booksOnHand,
-          bookingBooks: user.bookingBooks,
-          isBan: user.isBan
-        }
-      })
-    })
+  fetchUserData(req, res)
 })
 
 module.exports = router
