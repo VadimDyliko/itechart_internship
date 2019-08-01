@@ -1,21 +1,7 @@
-const logger = require('./winston');
-const {
-  User,
-  Book
-} = require("./mongo");
-const {
-  cancelBook,
-  bookingBook,
-  decrementAvailableCount,
-  incrementAvailableCount,
-  removeUserFromBook
-} = require('./books');
-const {
-  maxOnHandTime
-} = require('../config/constants');
-const {
-  io
-} = require('../server');
+const { User, Book } = require("./mongo");
+const { cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount, removeUserFromBook } = require('./books');
+const { maxOnHandTime } = require('../config/constants');
+const { io } = require('../server');
 
 const suFetchBookData = (req, res) => {
   Book.findById(req.params.bookId)

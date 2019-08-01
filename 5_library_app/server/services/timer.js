@@ -1,7 +1,7 @@
 const { maxOnHandTime, loopTimeout } = require('../config/constants');
 const { Book, User } = require('./mongo')
 const { removeBookFromUser } = require('./books')
-//const {main} = require('./mailer');
+//require('./mailer');
 
 const checkExpiredOnHands = () => {
   return Book.find({ bookOnHandAt: { $gt: [] } })

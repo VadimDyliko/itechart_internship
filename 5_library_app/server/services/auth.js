@@ -1,29 +1,21 @@
-const {
-  User
-} = require("./mongo");
+const { User } = require("./mongo");
 const token = require("./jwt");
 const crypto = require("crypto");
-const {
-  secretKey,
-  XSSRegExp,
-  messages
-} = require("../config/constants");
-
+const { secretKey, XSSRegExp, messages } = require("../config/constants");
+const logger = require('./winston');
 
 const singUp = (req, res) => {
   if (!req.body.login.search(/<|>|\//gi)) {
-    console.log(messages.XSSMessage);
+    logger.warn(messages.XSSMessage);
     res.sendStatus(400);
   } else {
     let matchLogin = new Promise((res, rej) => {
-      User.findOne({
-        login: req.body.login
-      }).then(login => res(login));
+      User.findOne({ login: req.body.login })
+        .then(login => res(login))
     });
     let matchEmail = new Promise((res, rej) => {
-      User.findOne({
-        email: req.body.email
-      }).then(email => res(email));
+      User.findOne({ email: req.body.email })
+        .then(email => res(email))
     });
     Promise.all([matchLogin, matchEmail])
       .then(values => {
@@ -37,21 +29,21 @@ const singUp = (req, res) => {
             login: req.body.login
           });
           if (req.file) newUser.profilePicture = req.file.buffer;
-          newUser.save().then(user => {
-            res.cookie("jwt", token.setToken(user._id), {
-              expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-              httpOnly: true
+          newUser.save()
+            .then(user => {
+              res.cookie("jwt", token.setToken(user._id), {
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+                httpOnly: true
+              });
+              res.sendStatus(200);
+              console.log(messages.newUserMessage, user);
             });
-            res.sendStatus(200);
-            console.log(messages.newUserMessage, user);
-          });
         } else {
-          //we have user with such email or login
           res.sendStatus(401);
         }
       })
       .catch(err => {
-        console.error(err);
+        logger.err(err)
         res.sendStatus(500);
       });
   }
@@ -77,6 +69,7 @@ const logIn = (req, res) => {
           });
           res.sendStatus(200);
         } else {
+          logger.info(`incorrect password for user ${req.body.login}`)
           res.sendStatus(401);
         }
       } else {
@@ -100,7 +93,7 @@ const identityCheck = (req, res) => {
         res.sendStatus(401);
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => logger.err(err));
 }
 
 
@@ -124,7 +117,7 @@ const getUserAvatar = (req, res) => {
       res.set('Content-Type', 'image/jpeg');
       res.send(user.profilePicture)
     })
-    .catch((err) => console.log(err))
+    .catch((err) => logger.err(err))
 }
 
 

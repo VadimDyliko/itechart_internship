@@ -1,6 +1,7 @@
 const { User, Book } = require("./mongo");
 const { io } = require('../server');
 const { maxBookingTime } = require("../config/constants");
+const logger = require('./winston');
 
 const getSingleBookCover = (req, res) => {
   Book.findById(req.params.bookId)
@@ -8,7 +9,7 @@ const getSingleBookCover = (req, res) => {
       res.set('Content-Type', 'image/jpeg');
       res.send(book.bookPicture)
     })
-    .catch((err) => console.log(err))
+    .catch((err) => logger.err(err))
 }
 
 
@@ -25,12 +26,13 @@ const getBooks = (req, res) => {
     .then(books => {
       res.json(books)
     })
+    .catch((err) => logger.err(err))
 }
 
 
 const getSingleBookData = (id) => {
   return Book.findById(id)
-    .catch((err) => console.log(err))
+    .catch((err) => logger.err(err))
 }
 
 
@@ -57,7 +59,7 @@ const addComment = (req, res) => {
       io.sockets.emit(`dataUpdate${req.body.bookId}`);
       res.sendStatus(200)
     })
-    .catch(err => console.log(err))
+    .catch((err) => logger.err(err))
 }
 
 
@@ -74,7 +76,7 @@ const getSingleBook = (req, res) => {
       }
     })
     .then(book => res.json(book))
-    .catch((err) => console.log(err))
+    .catch((err) => logger.err(err))
 }
 
 
@@ -93,11 +95,12 @@ const bookingBook = (bookId, userId, bookingTime) => {
           .then(() => {
             io.sockets.emit(`dataUpdate${bookId}`)
           })
-          .catch((err) => console.log(err))
+          .catch((err) => logger.err(err))
       } else {
         throw new Error()
       }
     })
+    .catch((err) => logger.err(err))
 }
 
 
@@ -147,6 +150,7 @@ const setBookingBookToUser = (book, userId, bookingTime) => {
 const cancelBook = (bookId, userId) => {
   return Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
     .then(data => data[0])
+    .catch((err) => logger.err(err))
 }
 
 
@@ -162,6 +166,7 @@ const removeUserFromBook = (bookId, userId) => {
         book.save();
         res(book);
       })
+      .catch((err) => rej(err))
   })
 }
 
@@ -189,7 +194,7 @@ const decrementAvailableCount = bookId => {
       book.availableCount--;
       book.save()
     })
-
+    .catch((err) => logger.err(err))
 }
 
 
@@ -199,20 +204,13 @@ const incrementAvailableCount = bookId => {
       book.availableCount++;
       book.save()
     })
+    .catch((err) => logger.err(err))
 }
 
 
 const searchBook = (req, res) => {
   let regExp = new RegExp(req.body.searchExp, 'gi')
-  Book.find({
-      $or: [{
-        title: regExp
-      }, {
-        bookAthour: regExp
-      }, {
-        year: regExp
-      }]
-    })
+  Book.find({ $or: [{ title: regExp }, { bookAthour: regExp }, { year: regExp }] })
     .then(books => {
       books = books.map(book => {
         return {

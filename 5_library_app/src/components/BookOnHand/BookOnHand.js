@@ -6,7 +6,7 @@ class BookOnHand extends React.Component {
 
   render() {
     let { bookId, title, dateOfHandOut, dateToReturn } = this.props.book;
-    let timeOnHands = (Date.now() - dateOfHandOut) / 1000 / 60;
+    let timeOnHands = new Date(Date.now() - dateOfHandOut)
     dateOfHandOut = new Date(dateOfHandOut).toLocaleString();
     dateToReturn = new Date(dateToReturn).toLocaleString();
     return (
@@ -18,7 +18,7 @@ class BookOnHand extends React.Component {
           </Link>
           <p>Date of hand out: {dateOfHandOut}</p>
           <p>Date to return: {dateToReturn}</p>
-          <p>{timeOnHands}</p>
+          <p>Time on hands: {timeOnHands.getDate()-1} days, {timeOnHands.getHours()-3} hours, {timeOnHands.getMinutes()} minutes.</p>
         </div>
       </div>
     )

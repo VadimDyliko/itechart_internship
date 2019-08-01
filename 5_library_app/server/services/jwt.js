@@ -1,6 +1,4 @@
-const {
-  secretKey
-} = require("../config/constants")
+const { secretKey } = require("../config/constants")
 const jwt = require("jsonwebtoken");
 
 const token = {
