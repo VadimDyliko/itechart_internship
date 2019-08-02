@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ManageBooks from '../components/ManageBooks/ManageBooks'
-import { suFetchBooksForManage, suSortManageBooksArr } from '../actions/su'
-import Spiner from '../components/Spiner/Spiner'
+import ManageBooks from '../components/ManageBooks/ManageBooks';
+import { suFetchBooksForManage, suSortManageBooksArr } from '../actions/su';
+import Spiner from '../components/Spiner/Spiner';
 
 class ManageBooksContainer extends React.PureComponent {
 
@@ -20,22 +20,20 @@ class ManageBooksContainer extends React.PureComponent {
   }
 
   filterHandler = (filter) => {
-    this.setState({ showSpiner: true })
-    this.props.onSuFetchBooksForManage(filter).then(() => this.setState({ showSpiner: false }))
+    this.props.onSuFetchBooksForManage(filter)
   }
 
   sortHandler = sortBy => {
-    this.setState({ showSpiner: true })
-    this.props.onSuSortManageBooksArr(this.state.booksArr, sortBy).then(() => this.setState({ showSpiner: false }))
+    this.props.onSuSortManageBooksArr(this.state.booksArr, sortBy)
   }
 
   render() {
     let content = this.state.showSpiner ?
-      <Spiner/> :
+    <Spiner/> :
       <ManageBooks filterHandler={this.filterHandler} manageBooks={this.state.booksArr} sortHandler={this.sortHandler}/>
-    return ( < >
-      { content }
-     < />)
+      return ( < >
+        { content }
+        < />)
   }
 }
 

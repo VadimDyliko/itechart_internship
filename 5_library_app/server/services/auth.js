@@ -6,7 +6,7 @@ const logger = require('./winston');
 
 const singUp = (req, res) => {
   if (!req.body.login.search(/<|>|\//gi)) {
-    logger.warn(messages.XSSMessage);
+    logger.warn(`${messages.XSSMessage}: ${req.body.login}`);
     res.sendStatus(400);
   } else {
     let matchLogin = new Promise((res, rej) => {
@@ -36,14 +36,13 @@ const singUp = (req, res) => {
                 httpOnly: true
               });
               res.sendStatus(200);
-              console.log(messages.newUserMessage, user);
             });
         } else {
           res.sendStatus(401);
         }
       })
       .catch(err => {
-        logger.err(err)
+        logger.err(err.message)
         res.sendStatus(500);
       });
   }
@@ -51,14 +50,11 @@ const singUp = (req, res) => {
 
 
 const logIn = (req, res) => {
-  User.findOne({
-      login: req.body.login
-    },
+  User.findOne({ login: req.body.login },
     (err, user) => {
       if (user) {
         if (
-          user.password ===
-          crypto
+          user.password === crypto
           .createHmac("sha256", secretKey)
           .update(req.body.password)
           .digest("hex")
@@ -83,9 +79,7 @@ const logIn = (req, res) => {
 const identityCheck = (req, res) => {
   let newCheck = Object.keys(req.body);
   let key = newCheck[0];
-  User.findOne({
-      [key]: [req.body[key]]
-    })
+  User.findOne({ [key]: [req.body[key]] })
     .then(user => {
       if (user === null) {
         res.sendStatus(200);
@@ -93,7 +87,7 @@ const identityCheck = (req, res) => {
         res.sendStatus(401);
       }
     })
-    .catch(err => logger.err(err));
+    .catch(err => logger.err(err.message));
 }
 
 
@@ -117,7 +111,7 @@ const getUserAvatar = (req, res) => {
       res.set('Content-Type', 'image/jpeg');
       res.send(user.profilePicture)
     })
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 

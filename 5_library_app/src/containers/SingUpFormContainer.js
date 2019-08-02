@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import SingUpForm from '../components/SingUpForm/SingUpForm';
-import { singUpUser, setModal } from '../actions'
-import { emailRegExp } from '../constants/regExp'
+import { singUpUser, setModal } from '../actions';
+import { emailRegExp } from '../constants/regExp';
 
 class SingUpFormContainer extends React.PureComponent {
 
@@ -25,33 +25,21 @@ class SingUpFormContainer extends React.PureComponent {
 
   identityCheck = (e, key) => {
     if (e.target.value === '') {
-      this.setState({
-        [key]: false
-      })
+      this.setState({ [key]: false })
       return
     } else if (key === 'email' && !e.target.value.match(emailRegExp)) {
-      this.setState({
-        [key]: false
-      })
+      this.setState({ [key]: false })
       return
     }
     fetch("/identityCheck", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        [key]: e.target.value
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ [key]: e.target.value })
     }).then(res => {
       if (res.status !== 200) {
-        this.setState({
-          [key]: false
-        })
+        this.setState({ [key]: false })
       } else {
-        this.setState({
-          [key]: true
-        })
+        this.setState({ [key]: true })
       }
     });
   };

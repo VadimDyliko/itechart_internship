@@ -6,3 +6,9 @@
   color: white;
   overflow-y: scroll;
 }
+
+@media screen and (max-width: 680px) {
+  .content {
+    margin-top: 65px;
+  }
+}

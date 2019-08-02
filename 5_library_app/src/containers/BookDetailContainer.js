@@ -1,11 +1,12 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import BookDetail from '../components/BookDetail/BookDetail';
 import Spiner from '../components/Spiner/Spiner';
 import { addComment, getSingleBook, bookingBook, setModal } from '../actions'
 import { suDeleteComment } from '../actions/su'
 import openSocket from 'socket.io-client';
 const socket = openSocket('/');
-const BookDetail = React.lazy(() => import('../components/BookDetail/BookDetail'));
+
 
 class BookDetailContainer extends React.PureComponent {
 
@@ -18,7 +19,8 @@ class BookDetailContainer extends React.PureComponent {
     comments: [],
     count: 0,
     availableCount: 0,
-    bookingTime: 1000 * 60 * 60 * 24
+    bookingTime: 1000 * 60 * 60 * 24,
+    showSpiner: true
   }
 
   componentDidMount() {
@@ -30,7 +32,7 @@ class BookDetailContainer extends React.PureComponent {
         comment.id = i + comment.commentAuthorId + comment.date;
         return comment;
       })
-      this.setState({ comments: comments, count: data.count, availableCount: data.availableCount });
+      this.setState({ comments: comments, count: data.count, availableCount: data.availableCount, showSpiner: false });
     })
     socket.on(`dataUpdate${this.state.bookId}`, () => {
       socket.emit('reqBookData', { bookId: this.state.bookId });
@@ -70,8 +72,7 @@ class BookDetailContainer extends React.PureComponent {
   }
 
   bookingHandler = e => {
-    if (this.banCheck())
-      return
+    if (this.banCheck()) return
     this.props.onBookingBook(this.state.bookId, this.state.bookingTime)
   }
 
@@ -92,9 +93,10 @@ class BookDetailContainer extends React.PureComponent {
     let { title, year, bookAthour, bookDiscription } = this.props.booksDetails[this.state.bookId] ?
       this.props.booksDetails[this.state.bookId] :
       this.state
-    return (<Suspense fallback={<Spiner/>}>
+    let content = this.state.showSpiner?
+      <Spiner/>:
       <BookDetail bookId={this.state.bookId} title={title} year={year} bookAthour={bookAthour} bookDiscription={bookDiscription} comments={this.state.comments} userId={this.props.userId} su={this.props.su} commentAddHandler={this.commentAddHandler} count={this.state.count} availableCount={this.state.availableCount} bookingHandler={this.bookingHandler} suBtnHandler={this.suBtnHandler} goBack={this.goBack} bookingTimeHandler={this.bookingTimeHandler}/>
-    </Suspense>);
+    return (<>{content}</>);
   }
 }
 

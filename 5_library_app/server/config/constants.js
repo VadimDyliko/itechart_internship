@@ -8,6 +8,7 @@ const messages = {
   newUserMessage: 'We got a new User ',
   XSSMessage: 'XSS has detected',
   userLoginMessage: 'User has singin',
+  deletedByModer: "This comment deleted by moderator"
 };
 const maxBookingTime = 1000 * 60 * 60 * 48;
 const maxOnHandTime = 1000 * 60 * 60 * 24 * 30;

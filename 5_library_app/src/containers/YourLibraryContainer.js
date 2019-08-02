@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import BookingBooks from '../components/BookingBooks/BookingBooks'
-import BooksOnHand from '../components/BooksOnHand/BooksOnHand'
+import YourLibrary from '../components/YourLibrary/YourLibrary'
 import { cancelBook } from "../actions"
+
 
 class YourLibraryContainer extends React.PureComponent {
 
@@ -11,12 +11,7 @@ class YourLibraryContainer extends React.PureComponent {
   }
 
   render() {
-    return (
-      <>
-        <BookingBooks bookingBooks={this.props.bookingBooks} cancelBook={this.cancelBook}/>
-        <BooksOnHand booksOnHand = {this.props.booksOnHand}/>
-      </>
-    )
+    return <YourLibrary bookingBooks={this.props.bookingBooks} cancelBook={this.cancelBook} booksOnHand = {this.props.booksOnHand}/>
   }
 }
 

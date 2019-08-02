@@ -1,6 +1,7 @@
 const { maxOnHandTime, loopTimeout } = require('../config/constants');
-const { Book, User } = require('./mongo')
-const { removeBookFromUser } = require('./books')
+const { Book, User } = require('./mongo');
+const { removeBookFromUser } = require('./books');
+const logger = require('./winston');
 //require('./mailer');
 
 const checkExpiredOnHands = () => {
@@ -22,9 +23,9 @@ const checkExpiredBookin = () => {
       books.forEach(book => {
         book.bookBookedBy.forEach((byUser, i, arr) => {
           if (byUser.datebookEnd < Date.now()) {
-            console.log('need to back in library');
             removeBookFromUser(book._id, byUser.userId);
             arr.splice(i, 1);
+            logger.info(`auto unbooking book ${book._id} from user ${byUser.userId}`)
           }
         })
         book.save()

@@ -4,7 +4,12 @@ import BookInline from '../BookInline/BookInline'
 
 class ManageBooks extends React.PureComponent {
 
+  state={
+    selectValue: 'all'
+  }
+
   selectHandler = e => {
+    this.setState({selectValue:e.target.value})
     this.props.filterHandler(e.target.value)
   }
 
@@ -16,7 +21,7 @@ class ManageBooks extends React.PureComponent {
     return (<div className="manage-books">
       <div className="manage-books__controls">
         <span>Filter:</span>
-        <select className="manage-books__select" onChange={this.selectHandler}>
+        <select className="manage-books__select" value={this.state.selectValue} onChange={this.selectHandler}>
           <option>all</option>
           <option>on hands</option>
           <option>booked</option>
@@ -30,11 +35,13 @@ class ManageBooks extends React.PureComponent {
           <option>year</option>
         </select>
       </div>
-      {
-        this.props.manageBooks.map(book => {
-          return <BookInline key={book._id} book={book}/>
-        })
-      }
+      <div className="manage-books__books">
+        {
+          this.props.manageBooks.map(book => {
+            return <BookInline key={book._id} book={book}/>
+          })
+        }
+      </div>
     </div>)
   }
 }

@@ -20,11 +20,13 @@ class ManageUsers extends React.PureComponent {
         <input type="text" className="search__input form-control" onChange={this.inputHandler}/>
         <button type="submit" className="btn">Search</button>
       </form>
+      <div className="manage-users__users">
       {
         this.props.manageUsers.map(user=>{
-          return <UserInline key={user._id} user={user}/>
+          return <UserInline key={user._id} user={user} userInlineClickHandler={this.props.userInlineClickHandler}/>
         })
       }
+    </div>
     </div>)
   }
 }

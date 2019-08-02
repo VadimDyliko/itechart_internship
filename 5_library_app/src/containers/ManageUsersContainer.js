@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ManageUsers from '../components/ManageUsers/ManageUsers'
-import { suFetchUsersForManage } from '../actions/su'
-import Spiner from '../components/Spiner/Spiner'
+import ManageUsers from '../components/ManageUsers/ManageUsers';
+import { suFetchUsersForManage } from '../actions/su';
+import Spiner from '../components/Spiner/Spiner';
 
 class ManageUsersContainer extends React.PureComponent {
 
@@ -24,14 +24,18 @@ class ManageUsersContainer extends React.PureComponent {
     this.props.onSuFetchUsersForManage(searchExp).then(() => this.setState({ showSpiner: false }))
   }
 
+  userInlineClickHandler = (userId) => {
+    this.props.history.push(`/manageusers/${userId}`)
+  }
+
   render() {
     let content = this.state.showSpiner ?
-      <Spiner/> :
-      <ManageUsers manageUsers={this.state.usersArr} sortHandler={this.sortHandler} searchHandler={this.searchHandler}/>
-    return (
-      < >
+    <Spiner/> :
+      <ManageUsers manageUsers={this.state.usersArr} sortHandler={this.sortHandler} searchHandler={this.searchHandler} userInlineClickHandler={this.userInlineClickHandler}/>
+      return (
+        < >
         {content}
-      < />
+        < />
     )
   }
 }

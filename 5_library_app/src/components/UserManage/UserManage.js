@@ -24,16 +24,16 @@ class UserManage extends React.PureComponent {
       let avatar = user ? `/user/avatar/${_id}` : personIcon;
       let banContent = isBan?(
         <>
-          <p className="banned-text">BANED</p>
+          <p className="banned-text">BANNED</p>
           <p className="banned-text">{ban.reason}</p>
           <p className="banned-text">{new Date(+user.ban.date).toLocaleString()}</p>
-        </>):<></>
+        </>):null
         return (
           <div className="user-manage">
         <div className="user-manage__controls">
           <button onClick={this.props.goBack} className="close-btn">&#x2613;</button>
           <div>
-            <input type="text" className="user-manage__input form-control" onChange={this.inputHandler} placeholder="Enter ban reason"/>
+            <input type="text" className="user-manage__input form-control" onChange={this.inputHandler} placeholder="Enter ban/unban reason"/>
             <button onClick={this.onSuBanUser} className="btn">{isBan?'UNBAN':'BAN'}</button>
           </div>
         </div>

@@ -18,6 +18,7 @@
 
 .navigation-link__link-text:hover {
   border-bottom: 1px solid white;
+  transform: scale(1.05);
 }
 
 .navigation-link__icon {

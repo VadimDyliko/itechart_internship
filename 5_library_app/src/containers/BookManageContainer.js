@@ -30,13 +30,17 @@ class BookManageContainer extends React.PureComponent {
     this.props.history.goBack()
   }
 
+  userClickHandler = (userId) => {
+    this.props.history.push(`/manageusers/${userId}`)
+  }
+
   render() {
     let content = this.state.showSpiner ?
       <Spiner/> :
-      <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus} goBack={this.goBack}/>
+      <BookManage suContent={this.props.suContent} handOutHandler={this.handOutHandler} cancelBookHandler={this.cancelBookHandler} returnTobookStatus={this.returnTobookStatus} goBack={this.goBack} userClickHandler={this.userClickHandler}/>
     return (
       < >
-        { content } 
+        { content }
       < />)
   }
 }

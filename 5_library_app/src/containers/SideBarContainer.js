@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import NavigationLink from '../components/NavigationLink/NavigationLink'
-import personIcon from '../images/person.png'
-import personAddIcon from '../images/person_add.png'
-import bookIcon from '../images/book.png'
-import SideBar from '../components/SideBar/SideBar'
+import NavigationLink from '../components/NavigationLink/NavigationLink';
+import personIcon from '../images/person.png';
+import personAddIcon from '../images/person_add.png';
+import bookIcon from '../images/book.png';
+import SideBar from '../components/SideBar/SideBar';
 
 class SideBarContainer extends React.PureComponent {
 

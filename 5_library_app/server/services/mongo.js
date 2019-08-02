@@ -11,7 +11,7 @@ mongoose
   .connect(dbUrl.url)
   .then(
     () => logger.info("Successfully connected to MongoDB-Atlas"),
-    err => logger.err(err)
+    err => logger.err(err.message)
   );
 
 const userSchema = mongoose.Schema({

@@ -1,14 +1,17 @@
 import React from "react";
-import { connect } from 'react-redux'
-import Profile from '../components/Profile/Profile'
-import { logOutUser } from '../actions'
+import { connect } from 'react-redux';
+import Profile from '../components/Profile/Profile';
+import { logOutUser } from '../actions';
+
 class ProfileContainer extends React.PureComponent {
+
   LogOutHandler = e => {
     this.props.onLogOutUser().then(() => this.props.history.push('/home'))
   }
+
   render() {
     let { login, email, userId, isBan } = this.props
-    return (<Profile login={login} email={email} userId={userId} isBan={isBan} LogOutHandler={this.LogOutHandler}/>);
+    return <Profile login={login} email={email} userId={userId} isBan={isBan} LogOutHandler={this.LogOutHandler}/>
   }
 }
 const mapStateToProps = state => {

@@ -23,7 +23,6 @@ const token = {
   //       return decodedToken;
   //     } else {
   //       return false;
-  //       console.log(err);
   //     }
   //   });
   // }

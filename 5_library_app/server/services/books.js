@@ -9,7 +9,7 @@ const getSingleBookCover = (req, res) => {
       res.set('Content-Type', 'image/jpeg');
       res.send(book.bookPicture)
     })
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
@@ -26,13 +26,13 @@ const getBooks = (req, res) => {
     .then(books => {
       res.json(books)
     })
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
 const getSingleBookData = (id) => {
   return Book.findById(id)
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
@@ -59,7 +59,7 @@ const addComment = (req, res) => {
       io.sockets.emit(`dataUpdate${req.body.bookId}`);
       res.sendStatus(200)
     })
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
@@ -76,7 +76,7 @@ const getSingleBook = (req, res) => {
       }
     })
     .then(book => res.json(book))
-    .catch((err) => logger.err(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
@@ -85,8 +85,12 @@ const bookingBook = (bookId, userId, bookingTime) => {
   return Book.findById(bookId)
     .then((book) => {
       let index = -1;
+      let stringUserId = userId.toString()
       book.bookBookedBy.forEach((book, i) => {
-        let stringUserId = userId.toString()
+        let bookUserId = book.userId.toString()
+        if (bookUserId === stringUserId) index = i
+      })
+      book.bookOnHandAt.forEach((book, i) => {
         let bookUserId = book.userId.toString()
         if (bookUserId === stringUserId) index = i
       })
@@ -95,12 +99,11 @@ const bookingBook = (bookId, userId, bookingTime) => {
           .then(() => {
             io.sockets.emit(`dataUpdate${bookId}`)
           })
-          .catch((err) => logger.err(err))
-      } else {
+      }
+      else {
         throw new Error()
       }
     })
-    .catch((err) => logger.err(err))
 }
 
 
@@ -150,7 +153,6 @@ const setBookingBookToUser = (book, userId, bookingTime) => {
 const cancelBook = (bookId, userId) => {
   return Promise.all([removeUserFromBook(bookId, userId), removeBookFromUser(bookId, userId)])
     .then(data => data[0])
-    .catch((err) => logger.err(err))
 }
 
 
@@ -194,7 +196,6 @@ const decrementAvailableCount = bookId => {
       book.availableCount--;
       book.save()
     })
-    .catch((err) => logger.err(err))
 }
 
 
@@ -204,7 +205,6 @@ const incrementAvailableCount = bookId => {
       book.availableCount++;
       book.save()
     })
-    .catch((err) => logger.err(err))
 }
 
 

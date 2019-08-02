@@ -28,7 +28,6 @@ passport.use("jwt",
       },
       function(err, user) {
         if (err) {
-          console.log(err);
           return done(err, false);
         }
         if (user) {
@@ -48,7 +47,6 @@ passport.use("jwtBanCheck",
       },
       function(err, user) {
         if (err) {
-          console.log(err);
           return done(err, false);
         }
         if (user && (user.isBan !== true)) {
@@ -68,7 +66,6 @@ passport.use("jwtSU",
       },
       function(err, user) {
         if (err) {
-          console.log(err);
           return done(err, false);
         }
         if (user.su) {

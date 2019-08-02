@@ -1,6 +1,6 @@
 const { User, Book } = require("./mongo");
 const { cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount, removeUserFromBook } = require('./books');
-const { maxOnHandTime } = require('../config/constants');
+const { maxOnHandTime, messages} = require('../config/constants');
 const { io } = require('../server');
 
 const suFetchBookData = (req, res) => {
@@ -72,7 +72,10 @@ const suCancelBook = (userId, bookId) => {
 
 const suReturnToBookStatus = (userId, bookId) => {
   return suReturnBookFromHands(userId, bookId)
-    .then(() => bookingBook(bookId, userId))
+    .then(() => {
+      bookingBook(bookId, userId)
+    })
+    .catch((err)=>logger.err(err.message))
 }
 
 
@@ -90,8 +93,8 @@ const removeUserFromBookOnHands = (userId, bookId) => {
           if (book.userId === userId) index = i
         })
         if (index > (-1)) book.bookOnHandAt.splice(index, 1);
-        book.save();
-        res();
+        book.save()
+          .then(()=>res())
       })
       .catch((err) => rej(err))
   })
@@ -109,8 +112,8 @@ const removeBookFromUserOnHands = (userId, bookId) => {
           if (bookId === book.bookId) index = i
         })
         if (index > (-1)) user.booksOnHand.splice(index, 1);
-        user.save();
-        res();
+        user.save()
+          .then(()=>res())
       })
       .catch((err) => rej(err))
   })
@@ -127,7 +130,7 @@ const deleteComment = (bookId, commentId) => {
         })
         let newComment = {
           ...book.comments[index],
-          commentText: "<<<Deleted by moderator>>>"
+          commentText: messages.deletedByModer
         }
         if (index > (-1)) book.comments.splice(index, 1, newComment);
         book.save()
@@ -149,7 +152,7 @@ const bookAdd = (req, res) => {
   })
   newBook.save()
     .then(() => res.sendStatus(200))
-    .catch((err) => console.log(err))
+    .catch((err) => logger.err(err.message))
 }
 
 
@@ -157,18 +160,10 @@ const fetchBooksForManage = (req, res) => {
   let exp
   switch (req.params.filter) {
     case 'booked':
-      exp = {
-        bookBookedBy: {
-          $gt: []
-        }
-      };
+      exp = { bookBookedBy: { $gt: [] } };
       break;
     case 'on hands':
-      exp = {
-        bookOnHandAt: {
-          $gt: []
-        }
-      };
+      exp = { bookOnHandAt: { $gt: [] } };
       break;
     default:
       exp = {};
@@ -192,7 +187,6 @@ const fetchBooksForManage = (req, res) => {
 const fetchUsersForManage = (req, res) => {
   let searchExp = {}
   if (req.body.exp) {
-    console.log(req.body.exp);
     let regExp = new RegExp(req.body.exp, 'gi')
     searchExp = { $or: [{ login: regExp }, { email: regExp }] }
   }
@@ -221,16 +215,15 @@ const banUser = (req, res) => {
       }
       if (req.body.ban) {
         user.bookingBooks.forEach(book => {
-          console.log(book.bookId);
           removeUserFromBook(book.bookId, req.body.userId)
             .then(() => incrementAvailableCount(book.bookId))
         })
-        user.bookingBooks = new Array;
+        user.bookingBooks = new Array();
       }
       user.save()
     })
     .then(() => res.sendStatus(200))
-    .catch(err => console.log(err))
+    .catch(err => logger.err(err.message))
 }
 
 
