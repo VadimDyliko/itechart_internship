@@ -10,14 +10,22 @@ const messages = {
   userLoginMessage: 'User has singin',
   deletedByModer: "This comment deleted by moderator"
 };
+const emailParams = {
+  service: 'gmail',
+  auth: {
+    user: 'libraryappitechart@gmail.com',
+    pass: 'supersecret'
+  }
+}
 const maxBookingTime = 1000 * 60 * 60 * 48;
 const maxOnHandTime = 1000 * 60 * 60 * 24 * 30;
-const loopTimeout = 1000 * 60 * 60;
+const loopTimeout = 1000 * 60 *60;
 module.exports = {
   dbUrl,
   secretKey,
   messages,
   maxBookingTime,
   maxOnHandTime,
-  loopTimeout
+  loopTimeout,
+  emailParams
 }

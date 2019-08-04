@@ -1,29 +1,29 @@
-
 const nodemailer = require('nodemailer');
+const { emailParams } = require('../config/constants');
+const { User } = require('./mongo');
+const transporter = nodemailer.createTransport(emailParams);
+const logger = require('./winston');
 
-async function main() {
-    let transporter = nodemailer.createTransport({
-        sendmail: true,
-        newline: 'windows',
-        logger: false
-    });
+function sendMail(userId, title, athour, year) {
+  console.log(userId, title, athour, year);
+  User.findById(userId)
+    .then(user=>user.email)
+    .then(email=>{
+      let mailOptions = {
+        from: emailParams.auth.user,
+        to: email,
+        subject: 'return the book',
+        text: `You must return the book, ${title} ${athour} ${year} to the library, your on hands time is over.`
+      };
+      transporter.sendMail(mailOptions)
+        .then((data)=>logger.info(`mail sended to ${userId} about book ${title} ${athour} ${year}`))
+    })
+    .catch(err=>logger.err(err.message))
 
-    let message = {
-        from: 'Andris <andris@kreata.ee>',
-        to: 'Andris Reinman <vadimdyliko@gmail.com>',
-        bcc: 'andris@ethereal.email',
-        subject: 'Nodemailer is unicode friendly ✔',
-        text: 'Hello to myself!',
-        html:
-            '<p><b>Hello</b> to myself <img src="cid:note@example.com"/></p>' +
-            '<p>Here\'s a nyan cat for you as an embedded attachment:<br/><img src="cid:nyan@example.com"/></p>',
-    };
 
-    let info = await transporter.sendMail(message);
-    console.log('Message sent successfully as %s', info.messageId);
 }
 
-main().catch(err => {
-    console.error(err.message);
-    process.exit(1);
-});
+
+module.exports = {
+  sendMail
+}

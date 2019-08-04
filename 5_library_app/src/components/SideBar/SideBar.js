@@ -4,7 +4,6 @@ import NavigationLink from '../NavigationLink/NavigationLink'
 import './SideBar.css'
 import logo from '../../images/logo.png'
 import homeIcon from '../../images/home.png'
-import bookIcon from '../../images/book.png'
 import searchIcon from '../../images/search.png'
 import MenuTogleBtn from '../MenuTogleBtn'
 
@@ -33,7 +32,7 @@ class SideBar extends React.PureComponent {
       <div onClick={this.clickHandler}>
         <NavigationLink toPath='/home' linkText='Home' icon={homeIcon}/>
         <NavigationLink toPath='/search' linkText='Search' icon={searchIcon}/>
-        <NavigationLink toPath='/yourlibrary' linkText='Your Library' icon={bookIcon}/> {this.props.children}
+        {this.props.children}
       </div>
     </nav>);
   }

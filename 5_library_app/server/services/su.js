@@ -73,7 +73,7 @@ const suCancelBook = (userId, bookId) => {
 const suReturnToBookStatus = (userId, bookId) => {
   return suReturnBookFromHands(userId, bookId)
     .then(() => {
-      bookingBook(bookId, userId)
+      return bookingBook(bookId, userId)
     })
     .catch((err)=>logger.err(err.message))
 }

@@ -166,6 +166,11 @@ export const bookingBook = (bookId, bookingTime) => dispatch => {
     .then(res => {
       if (res.status === 200) {
         dispatch(fetchUser())
+        dispatch(setModal({
+          isShow: true,
+          modalTitle: "Booking book",
+          modalText: `Book has booked for ${bookingTime/1000/60/60} hours`
+        }))
       } else {
         dispatch(setModal({
           isShow: true,

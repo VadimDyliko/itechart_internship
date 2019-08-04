@@ -2,7 +2,7 @@ const { maxOnHandTime, loopTimeout } = require('../config/constants');
 const { Book, User } = require('./mongo');
 const { removeBookFromUser } = require('./books');
 const logger = require('./winston');
-//require('./mailer');
+const { sendMail } = require('./mailer');
 
 const checkExpiredOnHands = () => {
   return Book.find({ bookOnHandAt: { $gt: [] } })
@@ -10,7 +10,7 @@ const checkExpiredOnHands = () => {
       books.forEach(book => {
         book.bookOnHandAt.forEach(atUser => {
           if (atUser.dateToReturn < Date.now()) {
-            console.log('need to send email');
+            sendMail(atUser.userId, book.title, book.bookAthour, book.year);
           }
         })
       })

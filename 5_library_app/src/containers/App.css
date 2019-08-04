@@ -8,6 +8,7 @@
   height: 100vh;
   display: flex;
   font-family: 'Nunito', sans-serif;
+  background: black;
 }
 
 .btn {

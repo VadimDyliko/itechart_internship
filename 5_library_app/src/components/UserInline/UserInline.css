@@ -19,7 +19,7 @@
 
 .user-inline__about {
   flex-grow: 1;
-  min-width: 220px;
+  min-width: 150px;
 }
 
 .user-inline-link {
@@ -35,4 +35,11 @@
 
 .user-inline:hover {
   transform: scale(1.02);
+}
+
+@media screen and (max-width: 1110px) {
+  .manage-users__users {
+    grid-template-columns: 1fr;
+    ;
+  }
 }

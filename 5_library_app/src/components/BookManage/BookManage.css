@@ -25,3 +25,15 @@
 .book-manage_btn {
   align-self: flex-start;
 }
+
+@media screen and (max-width: 680px) {
+  .book-manage__lists {
+    flex-direction: column;
+  }
+
+  .book-manage__list {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 5px 0;
+  }
+}

@@ -25,13 +25,12 @@
 
 @media screen and (max-width: 680px) {
   .book-detail__about {
-    text-align: center;
+    text-align: justify;
     flex-direction: column;
     align-items: center;
   }
   .book-detail__details {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 }

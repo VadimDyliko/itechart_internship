@@ -10,12 +10,16 @@ import AddNewBookContainer from "./AddNewBookContainer";
 import ManageBooksContainer from "./ManageBooksContainer";
 import ManageUsersContainer from "./ManageUsersContainer";
 import UserManageContainer from "./UserManageContainer";
+import YourLibraryContainer from "./YourLibraryContainer";
 
 class ContentContainer extends React.PureComponent {
-  
+
   render() {
     let route = (this.props.userLogin !== "Guest")
-      ? (<Route path="/profile" component={ ProfileContainer }/>)
+      ? (<>
+          <Route path="/profile" component={ ProfileContainer }/>
+          <Route path="/yourlibrary" component={ YourLibraryContainer }/>
+        </>)
       : (<>
           <Route path = "/login" component = { LogInFormContainer }/>
           <Route path="/singup" component={ SingUpFormContainer }/>

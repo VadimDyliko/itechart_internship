@@ -13,7 +13,10 @@ class SideBarContainer extends React.PureComponent {
         `/user/avatar/${this.props.userId}` :
         personIcon
       let links = (this.props.userLogin !== 'Guest') ?
-        (<NavigationLink toPath='/profile/' linkText='Profile' icon={profileIcon}/>) :
+        (<>
+          <NavigationLink toPath='/yourlibrary' linkText='Your Library' icon={bookIcon}/>
+          <NavigationLink toPath='/profile/' linkText='Profile' icon={profileIcon}/>
+        </>) :
         (<>
           <NavigationLink toPath = '/login/' linkText = 'Login' icon = {personIcon}/>
           <NavigationLink toPath='/singup/' linkText='SingUp' icon={personAddIcon}/>

@@ -19,7 +19,7 @@ class BookDetailContainer extends React.PureComponent {
     comments: [],
     count: 0,
     availableCount: 0,
-    bookingTime: 1000 * 60 * 60 * 24,
+    bookingTime: 1000 * 60 * 60 * 48,
     showSpiner: true
   }
 
@@ -72,6 +72,10 @@ class BookDetailContainer extends React.PureComponent {
   }
 
   bookingHandler = e => {
+    if (!this.props.userId) {
+      this.props.history.push('/login')
+      return
+    }
     if (this.banCheck()) return
     this.props.onBookingBook(this.state.bookId, this.state.bookingTime)
   }

@@ -2,8 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
-  border: 2px solid rgb(55, 27, 106);
-  border-radius: 25px;
 }
 
 @media screen and (max-width: 680px) {
