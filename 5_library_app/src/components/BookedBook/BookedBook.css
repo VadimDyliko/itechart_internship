@@ -1,0 +1,13 @@
+.booked-book {
+  margin: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  font-size: 10px;
+}
+
+.booked-book__cover-image {
+  margin: 25px;
+  height: 80px;
+  border-radius: 5px;
+}

@@ -1,7 +1,7 @@
 import React from "react";
-import {connect} from 'react-redux'
-import Profile from '../components/Profile/Profile'
-import {logOutUser} from '../actions'
+import { connect } from 'react-redux';
+import Profile from '../components/Profile/Profile';
+import { logOutUser } from '../actions';
 
 class ProfileContainer extends React.PureComponent {
 
@@ -10,21 +10,21 @@ class ProfileContainer extends React.PureComponent {
   }
 
   render() {
-    let {login, email, userId} = this.props
-    return (<Profile login={login} email={email} userId={userId} LogOutHandler={this.LogOutHandler}/>);
+    let { login, email, userId, isBan } = this.props
+    return <Profile login={login} email={email} userId={userId} isBan={isBan} LogOutHandler={this.LogOutHandler}/>
   }
 }
-
 const mapStateToProps = state => {
-  return {login: state.user.login, email: state.user.email, userId: state.user._id}
+  return {
+    login: state.user.login,
+    email: state.user.email,
+    userId: state.user._id,
+    isBan: state.user.isBan
+  }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
-    onLogOutUser: () => {
-      return dispatch(logOutUser())
-    }
+    onLogOutUser: () => dispatch(logOutUser())
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

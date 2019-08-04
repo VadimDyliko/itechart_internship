@@ -26,7 +26,6 @@ export const loginUser = (data) => (dispatch) => {
   })
 }
 
-
 export const logOutUser = () => dispatch => {
   return fetch("/logout")
     .then(() => dispatch(setUser({
@@ -54,7 +53,6 @@ export const fetchUser = () => dispatch => {
       console.log(err);
     });
 }
-
 
 const setUser = data => {
   return {
@@ -126,8 +124,8 @@ const setBooks = (books) => {
 
 export const getSingleBook = (bookId) => (dispatch) => {
   fetch(`/book/${bookId}`)
-    .then(res=>res.json())
-    .then(data=>{
+    .then(res => res.json())
+    .then(data => {
       dispatch(setSingleBook(data))
     })
 }
@@ -139,7 +137,8 @@ const setSingleBook = data => {
   }
 }
 
-export const addComment = (commentText, bookId) => (dispatch) => {
+
+export const addComment = (commentText, bookId) => dispatch => {
   fetch("/addcomment", {
     method: "POST",
     headers: {
@@ -150,6 +149,83 @@ export const addComment = (commentText, bookId) => (dispatch) => {
       commentText
     })
   })
+}
+
+
+export const bookingBook = (bookId, bookingTime) => dispatch => {
+  return fetch("/bookingBook", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        bookId: bookId,
+        bookingTime: bookingTime
+      })
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch(fetchUser())
+        dispatch(setModal({
+          isShow: true,
+          modalTitle: "Booking book",
+          modalText: `Book has booked for ${bookingTime/1000/60/60} hours`
+        }))
+      } else {
+        dispatch(setModal({
+          isShow: true,
+          modalTitle: "Booking book faild",
+          modalText: "There are no available books or you alredy have one of it"
+        }))
+      }
+    })
+}
+
+
+export const cancelBook = bookId => dispatch => {
+  return fetch("/cancelBook", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        bookId: bookId
+      })
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch(fetchUser())
+      } else {
+        dispatch(setModal({
+          isShow: true,
+          modalTitle: "Something happend",
+          modalText: ""
+        }))
+      }
+    })
+}
+
+
+export const searchRequest = searchExp => dispatch => {
+  return fetch('/search', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        searchExp: searchExp
+      })
+    })
+    .then(res => res.json())
+    .then(data => dispatch(setSearchResult(data)))
+}
+
+
+const setSearchResult = data => {
+  return {
+    type: "SET_SEARCH_RESULT",
+    data
+  };
 }
 
 

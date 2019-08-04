@@ -1,0 +1,11 @@
+.books-on-hand {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 680px) {
+  .books-on-hand {
+    padding: 0;
+  }
+}

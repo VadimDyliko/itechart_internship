@@ -1,4 +1,4 @@
-.book{
+.book {
   overflow: hidden;
   width: 200px;
   height: 400px;
@@ -6,19 +6,23 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.book__cover-image{
+
+.book__cover-image {
   width: 200px;
   height: 300px;
 }
-.book__about{
+
+.book__about {
   text-align: center;
   padding: 5px;
   width: 200px;
   height: 100px;
 }
-.book__title{
+
+.book__title {
   font-size: 12px;
 }
-.book:hover{
+
+.book:hover {
   transform: scale(1.05);
 }

@@ -1,0 +1,29 @@
+.manage-books {
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manage-books__select {
+  cursor: pointer;
+  background: rgb(0, 0, 0);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.manage-books__books {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+@media screen and (max-width: 1110px) {
+  .manage-books__books {
+    grid-template-columns: 1fr;
+    ;
+  }
+}

@@ -1,21 +1,20 @@
 import React from "react";
-import {connect} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import SideBarContainer from './SideBarContainer'
 import ContentContainer from './ContentContainer'
 import ModalMessage from '../components/ModalMessage/ModalMessage'
-
-import {fetchUser, setModal} from "../actions";
+import { fetchUser, setModal } from "../actions";
 import "./App.css";
 
 class App extends React.PureComponent {
 
   componentDidMount() {
-    this.props.dispatch(fetchUser())
+    this.props.onFetchUser()
   }
 
   closeModalMessage = () => {
-    this.props.dispatch(setModal())
+    this.props.onSetModal()
   }
 
   render() {
@@ -30,7 +29,14 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  return {isModalShow: state.modalMessage.isShow, modalTitle: state.modalMessage.modalTitle, modalText: state.modalMessage.modalText}
+  return { isModalShow: state.modalMessage.isShow, modalTitle: state.modalMessage.modalTitle, modalText: state.modalMessage.modalText }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUser: () => dispatch(fetchUser()),
+    onSetModal: () => dispatch(setModal())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

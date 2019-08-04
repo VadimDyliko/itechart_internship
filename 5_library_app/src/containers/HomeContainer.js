@@ -1,8 +1,8 @@
-import React, {Suspense} from "react";
-import {connect} from 'react-redux'
-import {fetchBooks} from "../actions"
-import Spiner from "../components/Spiner/Spiner"
-const Home = React.lazy(() => import ('../components/Home/Home'));
+import React, { Suspense } from "react";
+import { connect } from 'react-redux';
+import { fetchBooks } from "../actions";
+import Spiner from "../components/Spiner/Spiner";
+const Home = React.lazy(() => import('../components/Home/Home'));
 
 class HomeContainer extends React.PureComponent {
 
@@ -22,7 +22,7 @@ class HomeContainer extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  return {books: state.books}
+  return { books: state.books }
 }
 
 const mapDispatchToProps = dispatch => {

@@ -1,4 +1,4 @@
-.navigation-link{
+.navigation-link {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -6,17 +6,22 @@
   color: white;
   margin: 5px 0;
 }
-.navigation-link:hover{
+
+.navigation-link:hover {
   color: white;
   text-decoration: none;
 }
-.navigation-link__link-text{
+
+.navigation-link__link-text {
   margin: 0;
 }
-.navigation-link__link-text:hover{
+
+.navigation-link__link-text:hover {
   border-bottom: 1px solid white;
+  transform: scale(1.05);
 }
-.navigation-link__icon{
+
+.navigation-link__icon {
   margin: 0 10px;
   width: 30px;
   height: 30px;

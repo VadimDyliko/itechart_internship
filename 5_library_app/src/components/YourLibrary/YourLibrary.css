@@ -1,0 +1,12 @@
+.your-library {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+@media screen and (max-width: 680px) {
+  .your-library {
+    grid-template-columns: 1fr;
+    border: none;
+  }
+}

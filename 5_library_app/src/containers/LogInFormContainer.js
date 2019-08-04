@@ -1,7 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import LogInForm from '../components/LogInForm/LogInForm';
-import {loginUser} from '../actions'
+import { loginUser } from '../actions';
 
 class LogInFormContainer extends React.PureComponent {
 
@@ -15,7 +15,7 @@ class LogInFormContainer extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  return {user: state.user}
+  return { user: state.user }
 }
 
 const mapDispatchToProps = (dispatch) => {

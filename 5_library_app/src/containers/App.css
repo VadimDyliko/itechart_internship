@@ -2,23 +2,42 @@
   margin: 0;
   padding: 0;
 }
+
 .App {
   width: 100vw;
   height: 100vh;
   display: flex;
   font-family: 'Nunito', sans-serif;
+  background: black;
 }
-.btn{
-  margin: 10px 0;
+
+.btn {
+  margin: 10px 5px;
   min-width: 150px;
   color: white;
-  padding: 10px 15px;
+  padding: 5px 10px;
   background: none;
   border: 1px white solid;
   border-radius: 15px;
   cursor: pointer;
 }
-.btn:hover{
+
+.btn:hover {
+  color: black;
+  background: rgba(255, 255, 255);
+}
+
+.close-btn {
+  align-self: flex-end;
+  color: white;
+  padding: 10px 15px;
+  background: none;
+  border: 1px white solid;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close-btn:hover {
   color: black;
   background: rgba(255, 255, 255);
 }

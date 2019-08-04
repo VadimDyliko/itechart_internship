@@ -1,0 +1,12 @@
+.booking-books {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 680px) {
+  .booking-books {
+    padding: 0;
+  }
+}

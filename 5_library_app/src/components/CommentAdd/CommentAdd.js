@@ -1,6 +1,6 @@
 import React from "react";
 import "./CommentAdd.css"
-import personIcon from '../../png/person.png'
+import personIcon from '../../images/person.png'
 
 class CommentAdd extends React.PureComponent {
 
@@ -9,20 +9,18 @@ class CommentAdd extends React.PureComponent {
   }
 
   commentTextHandler = e => {
-    this.setState({commentText: e.target.value})
+    this.setState({ commentText: e.target.value })
   }
 
   submitHandler = e => {
     e.preventDefault();
     this.props.commentAddHandler(this.state.commentText)
-    this.setState({commentText:''})
+    this.setState({ commentText: '' })
   }
 
   render() {
-    let {commentAuthorId} = this.props
-    let authorAvatar = commentAuthorId
-      ? `/user/avatar/${commentAuthorId}`
-      : personIcon
+    let { commentAuthorId } = this.props;
+    let authorAvatar = commentAuthorId ? `/user/avatar/${commentAuthorId}` : personIcon;
     return (<form className="comment-add" onSubmit={this.submitHandler}>
       <img src={authorAvatar} className="comment__author-avatar" alt="avatar"/>
       <div className="comment-input__details">

@@ -1,12 +1,68 @@
-.nav-bar{
+.nav-bar {
   padding: 20px 0;
   background: rgb(0, 0, 0);
   width: 230px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  z-index: 100;
 }
-.nav-bar__logo{
+
+.nav-bar__logo {
   margin: 30px 0;
   width: 230px;
+}
+
+.nav-bar__btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.btn__line {
+  display: none;
+}
+
+@media screen and (max-width: 680px) {
+  .btn__line {
+    border: 2px solid white;
+    margin: 5px;
+    width: 30px;
+    transition: 0.5s;
+    background: white;
+    display: block;
+  }
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+    transition: 0.5s;
+    font-size: 1.5em;
+  }
+  .nav-bar_open{
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+  }
+  .hide {
+    display: none
+  }
+
+  .btn__line_first {
+    display: block;
+    top: 4px;
+    position: relative;
+    transform: rotate(45deg);
+  }
+
+  .btn__line_second {
+    display: block;
+    top: -5px;
+    position: relative;
+    transform: rotate(-45deg);
+  }
 }

@@ -36,4 +36,4 @@ class LogInForm extends React.PureComponent {
   }
 }
 
-export default(LogInForm);
+export default (LogInForm);
