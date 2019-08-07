@@ -1,7 +1,7 @@
 import React from 'react';
 import './Log.css'
 
-class Log extends React.Component {
+class Log extends React.PureComponent {
 
   selectHandler = e => {
     this.props.suGetLog(e.target.value)

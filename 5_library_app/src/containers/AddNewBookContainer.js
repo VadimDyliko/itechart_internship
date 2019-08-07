@@ -4,7 +4,7 @@ import AddNewBook from '../components/AddNewBook/AddNewBook';
 import { setModal } from '../actions'
 import { suAddNewBook } from '../actions/su'
 
-class AddNewBookContainer extends React.Component {
+class AddNewBookContainer extends React.PureComponent {
 
   submitHandler = (data) => {
     if (data.title && data.year && data.bookAthour && data.bookDiscription && data.coverImage) {

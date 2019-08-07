@@ -1,5 +1,6 @@
 .log {
   padding: 25px;
+  width: 100%;
 }
 .log__select {
   cursor: pointer;

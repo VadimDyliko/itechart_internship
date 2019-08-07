@@ -3,7 +3,7 @@ import BookingBooks from '../BookingBooks/BookingBooks'
 import BooksOnHand from '../BooksOnHand/BooksOnHand'
 import './YourLibrary.css'
 
-class YourLibrary extends React.Component {
+class YourLibrary extends React.PureComponent {
   render () {
     return(
       <div className="your-library">
