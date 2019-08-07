@@ -45,6 +45,6 @@ app.use('/su', su);
 
 server.listen(4000, err => {
   if (!err) {
-    logger.info(`server started`)
+    logger.info(`Server started`)
   }
 });

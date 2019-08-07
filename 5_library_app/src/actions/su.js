@@ -255,6 +255,21 @@ export const suBanUser = (userId, reason, ban) => dispatch => {
 }
 
 
+export const suGetLog = value => dispatch => {
+  return fetch(`/su/log/${value}`)
+    .then(res=>res.json())
+    .then(log=>dispatch(setLog(log)))
+}
+
+
+const setLog = data => {
+  return {
+    type: "SET_LOG",
+    data
+  }
+}
+
+
 const setManagedUser = data => {
   return {
     type: "SET_MANAGED_USER",

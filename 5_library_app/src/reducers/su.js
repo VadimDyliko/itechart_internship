@@ -9,6 +9,10 @@ const su = handleActions( {
     ...state,
     ...action.data
   } ),
+  SET_LOG: ( state, action ) => ( {
+    ...state,
+    ...action.data
+  } ),
 }, {} );
 
 

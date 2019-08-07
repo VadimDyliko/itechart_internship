@@ -23,8 +23,9 @@ class SideBarContainer extends React.PureComponent {
         </>)
       let suLinks = this.props.su ?
         <>
-          <NavigationLink toPath = '/addbook/' linkText = 'Add new book' icon = { bookIcon}/>
-          <NavigationLink toPath='/managebooks/' linkText='Manage books' icon={bookIcon}/>
+          <NavigationLink toPath = '/log/' linkText = 'Log' icon = { bookIcon }/>
+          <NavigationLink toPath = '/addbook/' linkText = 'Add new book' icon = { bookIcon }/>
+          <NavigationLink toPath='/managebooks/' linkText='Manage books' icon={ bookIcon }/>
           <NavigationLink toPath = '/manageusers/' linkText = 'Manage users' icon = { personIcon }/>
         </>: null
         return (
