@@ -1,7 +1,7 @@
 import React from 'react';
 import "./BookManageItem.css";
 
-class BookManageBookedItem extends React.Component {
+class BookManageBookedItem extends React.PureComponent {
 
   handOutHandler = () => {
     this.props.handOutHandler(this.props.book.userId)

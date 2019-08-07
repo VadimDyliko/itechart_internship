@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import "./BookedBook.css";
 
-class BookedBook extends React.Component {
+class BookedBook extends React.PureComponent {
 
   cancelBook = () => {
     this.props.cancelBook(this.props.book.bookId);

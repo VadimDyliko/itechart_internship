@@ -16,7 +16,8 @@ const {
   fetchBooksForManage,
   fetchUsersForManage,
   banUser,
-  fetchUserData
+  fetchUserData,
+  getLog
 } = require("../services/su");
 const {
   decrementAvailableCount,
@@ -51,7 +52,7 @@ router.post("/cancelBook", passport.authenticate("jwtSU", {
     .then(() => logger.info(`moderator cancel book of book ${req.body.bookId} user ${req.body.userId}`))
     .catch((err) => logger.err(err.message))
 })
- 
+
 
 router.post("/returntobookstatus", passport.authenticate("jwtSU", {
   session: false
@@ -105,6 +106,14 @@ router.get("/fetchUserData/:userId", passport.authenticate("jwtSU", {
   session: false
 }), (req, res) => {
   fetchUserData(req, res)
+})
+
+
+router.get("/log/:value", passport.authenticate("jwtSU", {
+  session: false
+}), (req, res) => {
+  getLog(req.params.value)
+    .then(log=>res.json(log))
 })
 
 module.exports = router

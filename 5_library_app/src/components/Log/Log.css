@@ -1,0 +1,15 @@
+.log {
+  padding: 25px;
+  width: 100%;
+}
+.log__select {
+  cursor: pointer;
+  background: rgb(0, 0, 0);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+.log__item{
+  font-size: 12px;
+}

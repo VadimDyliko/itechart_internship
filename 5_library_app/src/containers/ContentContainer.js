@@ -11,6 +11,7 @@ import ManageBooksContainer from "./ManageBooksContainer";
 import ManageUsersContainer from "./ManageUsersContainer";
 import UserManageContainer from "./UserManageContainer";
 import YourLibraryContainer from "./YourLibraryContainer";
+import LogContainer from "./LogContainer";
 
 class ContentContainer extends React.PureComponent {
 
@@ -31,6 +32,7 @@ class ContentContainer extends React.PureComponent {
           <Route path="/managebooks" component={ ManageBooksContainer }/>
           <Route path="/manageusers" component={ ManageUsersContainer }/>
           <Route path="/manageusers/:userId" component={ UserManageContainer }/>
+          <Route path="/log/" component={ LogContainer }/>
         </>): null
     return (
       <Content>

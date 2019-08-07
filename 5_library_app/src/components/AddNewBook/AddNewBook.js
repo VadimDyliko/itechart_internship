@@ -1,7 +1,7 @@
 import React from 'react';
 import './AddNewBook.css'
 
-class AddNewBook extends React.Component {
+class AddNewBook extends React.PureComponent {
 
   state = {
     title: '',

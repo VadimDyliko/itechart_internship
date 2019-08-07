@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import "./BookOnHand.css";
 
-class BookOnHand extends React.Component {
+class BookOnHand extends React.PureComponent {
 
   render() {
     let { bookId, title, dateOfHandOut, dateToReturn } = this.props.book;

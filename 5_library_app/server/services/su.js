@@ -2,6 +2,8 @@ const { User, Book } = require("./mongo");
 const { cancelBook, bookingBook, decrementAvailableCount, incrementAvailableCount, removeUserFromBook } = require('./books');
 const { maxOnHandTime, messages} = require('../config/constants');
 const { io } = require('../server');
+const logger = require('./winston');
+
 
 const suFetchBookData = (req, res) => {
   Book.findById(req.params.bookId)
@@ -245,6 +247,24 @@ const fetchUserData = (req, res) => {
 }
 
 
+const getLog = value => {
+  return new Promise((res,rej) => {
+    const options = {
+      limit: value,
+      start: 0,
+      order: 'desc',
+      fields: ['message', 'date']
+    };
+    logger.query(options, function (err, results) {
+      if (err) {
+        rej(err)
+      }
+      res(results)
+    });
+  })
+}
+
+
 module.exports = {
   suFetchBookData,
   suHandOutBook,
@@ -256,5 +276,6 @@ module.exports = {
   fetchBooksForManage,
   fetchUsersForManage,
   banUser,
-  fetchUserData
+  fetchUserData,
+  getLog
 }
