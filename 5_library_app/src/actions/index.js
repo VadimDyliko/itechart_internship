@@ -95,7 +95,6 @@ export const singUpUser = data => dispatch => {
 
 
 export const fetchBooks = filter => (dispatch, getState) => {
-  if (getState().books.length > 0) {} else {
     return fetch("/books")
       .then((res) => {
         if (res.status === 200) {
@@ -110,7 +109,6 @@ export const fetchBooks = filter => (dispatch, getState) => {
         modalTitle: "Something happend",
         modalText: err
       })))
-  }
 }
 
 
