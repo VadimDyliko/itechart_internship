@@ -51,7 +51,6 @@ class BookDetailContainer extends React.PureComponent {
         if (book.bookId === this.state.bookId) return true
         return false
       })
-      console.log(compainBook);
       if (compainBook.length > 0) {
         this.setState({ haveUserThisBook: true })
       }
