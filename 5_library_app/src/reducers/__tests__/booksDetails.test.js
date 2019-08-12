@@ -3,9 +3,9 @@ import { setSingleBook } from '../../actions'
 
 describe('SET_SINGLE_BOOK', () => {
   test('Should return initial state', () => {
-    expect(booksDetails(undefined, {type:null})).toEqual({})
+    expect(booksDetails(undefined, { type: null })).toEqual({})
   })
   test('Should return state with action data', () => {
-    expect(booksDetails({}, setSingleBook({bookId:1}))).toEqual({bookId: 1})
+    expect(booksDetails({}, setSingleBook({ bookId: 1 }))).toEqual({ bookId: 1 })
   })
 })

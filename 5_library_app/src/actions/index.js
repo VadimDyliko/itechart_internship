@@ -94,7 +94,7 @@ export const singUpUser = data => dispatch => {
 }
 
 
-export const fetchBooks = filter => (dispatch, getState) => {
+export const fetchBooks = filter => (dispatch) => {
     return fetch("/books")
       .then((res) => {
         if (res.status === 200) {
