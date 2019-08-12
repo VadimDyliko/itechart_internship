@@ -65,7 +65,11 @@ class BookDetailContainer extends React.PureComponent {
     }
 
     commentAddHandler = commentText => {
-      if (this.banCheck() || !commentText) return
+      if (this.banCheck()) return
+      if (!commentText) {
+        this.props.onSetModal({ isShow: true, modalTitle: "Faild", modalText: "You must write something" })
+        return
+      }
       let newComment = {
         commentAuthorId: this.props.userId,
         commentAuthor: this.props.userLogin,

@@ -32,6 +32,7 @@ export const logOutUser = () => dispatch => {
       _id: '',
       login: "Guest",
       email: null,
+      bookingBooks: [],
       booksOnHand: [],
     })))
 }
