@@ -94,7 +94,7 @@ export const singUpUser = data => dispatch => {
 }
 
 
-export const fetchBooks = filter => (dispatch, getState) => {
+export const fetchBooks = filter => (dispatch) => {
     return fetch("/books")
       .then((res) => {
         if (res.status === 200) {
@@ -112,7 +112,7 @@ export const fetchBooks = filter => (dispatch, getState) => {
 }
 
 
-const setBooks = (books) => {
+export const setBooks = (books) => {
   return {
     type: "SET_BOOKS",
     books
@@ -128,7 +128,7 @@ export const getSingleBook = (bookId) => (dispatch) => {
     })
 }
 
-const setSingleBook = data => {
+export const setSingleBook = data => {
   return {
     type: "SET_SINGLE_BOOK",
     data

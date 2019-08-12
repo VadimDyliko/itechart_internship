@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuTogleBtn render while SideBar is close renders properly 1`] = `ShallowWrapper {}`;
+
+exports[`MenuTogleBtn render while SideBar is open renders properly 1`] = `ShallowWrapper {}`;

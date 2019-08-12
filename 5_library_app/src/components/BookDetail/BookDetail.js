@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames"
 import "./BookDetail.css";
 import Comment from '../Comment/Comment';
 import CommentAdd from '../CommentAdd/CommentAdd';
@@ -24,8 +25,13 @@ class BookDetail extends React.PureComponent {
       count,
       availableCount,
       su,
-      suBtnHandler
+      suBtnHandler,
+      haveUserThisBook
     } = this.props
+    let bookBtn = classnames({
+      "btn btn_disable": this.props.haveUserThisBook,
+      "btn": !this.props.haveUserThisBook
+    })
     let suContent = su ? (
       <div>
         <Link to={`/book/${bookId}/manage`} className="navigation-link">
@@ -33,7 +39,7 @@ class BookDetail extends React.PureComponent {
         </Link>
       </div>
     ) : null;
-    let commentAdd = userId?<CommentAdd bookId={bookId} commentAuthorId={userId} commentAddHandler={commentAddHandler}/>:null
+    let commentAdd = userId ? <CommentAdd bookId={bookId} commentAuthorId={userId} commentAddHandler={commentAddHandler}/> : null
     return (<div className="book-detail">
       <div className="book-detail__about">
         <img className="book-detail__cover-image" src={`/book/cover/${this.props.bookId}`} alt="cover"/>
@@ -49,7 +55,7 @@ class BookDetail extends React.PureComponent {
             <option>8 hours</option>
             <option>1 hour</option>
           </select>
-          <button className="btn" onClick={this.props.bookingHandler}>Book</button>
+          <button className={bookBtn} onClick={this.props.bookingHandler} disabled={haveUserThisBook?true:false}>Book</button>
           <p className="book-detail__discription-text">{bookDiscription}</p>
         </div>
       </div>

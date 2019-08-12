@@ -37,7 +37,7 @@ const getSingleBookData = (id) => {
 
 
 const addComment = (req, res) => {
-  if (!req.body.bookId) {
+  if (!req.body.bookId || !req.body.commentText) {
     res.sendStatus(400)
     return
   }
