@@ -27,6 +27,16 @@
   background: rgba(255, 255, 255);
 }
 
+.btn_disable {
+  opacity: 0.2;
+  cursor: auto;
+}
+
+.btn_disable:hover {
+  color: white;
+  background: none;
+}
+
 .close-btn {
   align-self: flex-end;
   color: white;
